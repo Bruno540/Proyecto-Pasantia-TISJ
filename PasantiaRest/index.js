@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const rutasEmpresa = require("./src/routes/Empresa");
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ const rutasLogin = require('./src/routes/Login');
 app.use('/api/login', rutasLogin);
 
 app.use('/api/usuarios', rutasUsuario);
+
+app.use('/api/empresas', rutasEmpresa);
 
 app.get('/test', (req,res)=>{
     res.json({message:"Bienvenido a la terminal de omnibus!"});
