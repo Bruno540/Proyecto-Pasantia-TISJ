@@ -18,7 +18,8 @@ const Empresa = sequelize.define('Empresa', {
     }
 }, {
     tableName: "empresas",
-    timestamps: true
+    timestamps: true,
+    paranoid: true,
 });
 
 module.exports = Empresa;

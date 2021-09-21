@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const rutasEmpresa = require("./src/routes/Empresa");
 
 dotenv.config();
 
@@ -14,6 +13,8 @@ app.use(morgan('dev'));
 const rutasUsuario = require("./src/routes/Usuario");
 
 const rutasLogin = require('./src/routes/Login');
+
+const rutasEmpresa = require("./src/routes/Empresa");
 
 app.use('/api/login', rutasLogin);
 
