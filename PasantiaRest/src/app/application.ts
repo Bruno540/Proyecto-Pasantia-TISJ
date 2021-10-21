@@ -1,0 +1,33 @@
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import routes from "./routes/index.routes";
+import { connect } from "../config/connection.config";
+
+/* ---------------------------------------< APP CONFIGURATION >--------------------------------------- */
+
+const app = express();
+
+// Se almacena le valor del puerto a utilizar.
+app.set("port", process.env.PORT || 3000);
+
+// Connexion a la base de datos.
+connect();
+
+/* ------------------------------------------< MIDDLEWARES >------------------------------------------ */
+
+// Permite que la aplicación se comunique con otros servidores.
+app.use(cors());
+
+// Provee un logger de peticiones.
+app.use(morgan("dev"));
+
+// Permite que la aplicación entienda el formato json.
+app.use(express.json());
+
+/* ---------------------------------------------< ROUTES >--------------------------------------------- */
+
+// Rutas de la aplicacion.
+app.use("/api", routes);
+
+export default app;
