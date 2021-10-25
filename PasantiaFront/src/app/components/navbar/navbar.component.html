@@ -1,0 +1,18 @@
+<mat-toolbar class="navbar" color="primary">
+    <mat-toolbar-row fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="center">
+            <button mat-icon-button (click)="showSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <button class="home" [routerLink]="['/']" mat-button>Nombre</button>
+        </div>
+
+        <div *ngIf="!mobile">
+            <app-navbar-buttons></app-navbar-buttons>
+        </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row *ngIf="mobile" fxLayout="row" fxLayoutAlign="space-around center">
+        <app-navbar-buttons></app-navbar-buttons>
+    </mat-toolbar-row>
+</mat-toolbar>
