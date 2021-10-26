@@ -1,0 +1,31 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [ngStyle.xs]="{'width': '90%'}">
+
+        <mat-toolbar>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="block">
+                <button class="home" mat-button [routerLink]="['/']" (click)="sidenav.toggle()">
+                    Nombre
+                </button>
+                <button mat-icon-button (click)="sidenav.toggle()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <mat-list-item routerLink="/empresas" (click)="sidenav.toggle()">
+                Empresas
+            </mat-list-item>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-navbar [mobile]="isMobile.getMobile()" (showSidenavEvent)="sidenav.toggle()"></app-navbar>
+
+        <div class="container">
+            <ng-content></ng-content>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
