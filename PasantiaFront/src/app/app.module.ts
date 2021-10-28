@@ -14,6 +14,9 @@ import { NavbarButtonsComponent } from './components/navbar/navbar-buttons/navba
 import { EmpresasComponent } from './components/empresas/empresas.component';
 import { CreateEmpresaComponent } from './components/empresas/create-empresa/create-empresa.component';
 import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dialog-empresa.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
+import { DialogUsuarioComponent } from './components/usuarios/dialog-usuario/dialog-usuario.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dia
     NavbarButtonsComponent,
     EmpresasComponent,
     CreateEmpresaComponent,
-    DialogEmpresaComponent
+    DialogEmpresaComponent,
+    UsuariosComponent,
+    CreateUsuarioComponent,
+    DialogUsuarioComponent
   ],
   imports: [
     BrowserModule,
