@@ -14,6 +14,7 @@ import { NavbarButtonsComponent } from './components/navbar/navbar-buttons/navba
 import { EmpresasComponent } from './components/empresas/empresas.component';
 import { CreateEmpresaComponent } from './components/empresas/create-empresa/create-empresa.component';
 import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dialog-empresa.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dia
     NavbarButtonsComponent,
     EmpresasComponent,
     CreateEmpresaComponent,
-    DialogEmpresaComponent
+    DialogEmpresaComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +35,11 @@ import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dia
     FlexLayoutModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'LOCALSTORAGE', useValue: window.localStorage }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
