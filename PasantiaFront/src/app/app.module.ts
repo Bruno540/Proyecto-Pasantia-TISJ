@@ -15,6 +15,9 @@ import { EmpresasComponent } from './components/empresas/empresas.component';
 import { CreateEmpresaComponent } from './components/empresas/create-empresa/create-empresa.component';
 import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dialog-empresa.component';
 import { LoginComponent } from './components/login/login.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
+import { DialogUsuarioComponent } from './components/usuarios/dialog-usuario/dialog-usuario.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { LoginComponent } from './components/login/login.component';
     EmpresasComponent,
     CreateEmpresaComponent,
     DialogEmpresaComponent,
-    LoginComponent
+    LoginComponent,
+    UsuariosComponent,
+    CreateUsuarioComponent,
+    DialogUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,8 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule
   ],
   providers: [
-    { provide: 'LOCALSTORAGE', useValue: window.localStorage }
+    { provide: 'LOCALSTORAGE', useValue: window.localStorage },
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent]
 })
