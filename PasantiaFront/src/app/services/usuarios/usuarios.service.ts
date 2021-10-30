@@ -21,6 +21,7 @@ export class UsuariosService {
   }
 
   create(usuario: Usuario) {
+    console.log("El usuario es: ", usuario);
     return this.Http.post(this.Url, usuario);
   }
 

@@ -11,7 +11,7 @@ import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.componen
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'email','actions'];
+  displayedColumns: string[] = ['id', 'email','nombre','apellido','actions'];
   dataSource: Usuario[] = [];
 
   constructor(private UsuariosService: UsuariosService,
@@ -20,6 +20,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.UsuariosService.getAll().subscribe(
       ok => {
+        console.log(ok);
         this.dataSource = ok;
       }
     );

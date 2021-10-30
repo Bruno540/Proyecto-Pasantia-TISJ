@@ -19,7 +19,9 @@ export class CreateUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioForm = this.FormBuilder.group({
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
 
     const routeParams = this.route.snapshot.paramMap;
