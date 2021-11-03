@@ -27,6 +27,7 @@ export const create = async (request: Request, response: Response): Promise<Resp
 
     //console.log(request.body.empresaId);
     //tendria que chequear si en la empresa ya existe un coche con ese numero
+    //Number.parseInt(request.params.id) mejor usar esto ahi en el findOne
     var idEmp: number = +request.body.empresaId
     const empresa = await getCustomRepository(EmpresaRepository).findOne(idEmp);
     if(!empresa) throw ApiError.badRequestError("No exite la empresa ingresada");
