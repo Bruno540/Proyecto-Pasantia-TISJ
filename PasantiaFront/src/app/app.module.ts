@@ -18,6 +18,10 @@ import { LoginComponent } from './components/login/login.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
 import { DialogUsuarioComponent } from './components/usuarios/dialog-usuario/dialog-usuario.component';
+import { CochesComponent } from './components/coches/coches.component';
+import { DialogCocheComponent } from './components/coches/dialog-coche/dialog-coche.component';
+import { CreateCocheComponent } from './components/coches/create-coche/create-coche.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { DialogUsuarioComponent } from './components/usuarios/dialog-usuario/dia
     LoginComponent,
     UsuariosComponent,
     CreateUsuarioComponent,
-    DialogUsuarioComponent
+    DialogUsuarioComponent,
+    CochesComponent,
+    DialogCocheComponent,
+    CreateCocheComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +53,7 @@ import { DialogUsuarioComponent } from './components/usuarios/dialog-usuario/dia
   providers: [
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
     ReactiveFormsModule,
+    MatSelectModule
   ],
   bootstrap: [AppComponent]
 })
