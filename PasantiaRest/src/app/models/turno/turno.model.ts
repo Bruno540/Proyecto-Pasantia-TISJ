@@ -4,16 +4,18 @@ import { Dia } from "./dia.model";
 
 @Entity('turnos')
 @TableInheritance({ pattern: 'STI', column: { type: 'varchar', name: 'type' } })
-export class Turno extends ApiBaseEntity {
+export abstract class Turno extends ApiBaseEntity {
 
     @Column()
     hora: string;
 
     @Column()
-    activa: boolean;
+    activo: boolean;
 
     @ManyToMany(() => Dia)
     @JoinTable()
     dias: Dia[];
 
+    @Column()
+    type: string;
 }

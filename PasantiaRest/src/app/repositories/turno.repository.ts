@@ -5,9 +5,10 @@ import { Turno } from "../models/turno/turno.model";
 export class TurnoRepository extends Repository<Turno> {
     
     async findAll(query: any) {
-        return await this.find({
+        return await this.findAndCount({
             skip: query.skip ?? "",
-            take: query.take ?? ""
+            take: query.take ?? "",
+            relations: ["dias"]
         })
     }
 }
