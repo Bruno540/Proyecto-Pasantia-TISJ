@@ -22,6 +22,8 @@ import { CochesComponent } from './components/coches/coches.component';
 import { DialogCocheComponent } from './components/coches/dialog-coche/dialog-coche.component';
 import { CreateCocheComponent } from './components/coches/create-coche/create-coche.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { MatSelectModule } from '@angular/material/select';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
+
   ],
   providers: [
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
