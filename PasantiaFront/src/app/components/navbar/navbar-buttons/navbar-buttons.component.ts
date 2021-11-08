@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { LoginService } from 'src/app/services/auth/login.service';
+import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
 
 @Component({
   selector: 'app-navbar-buttons',
@@ -11,13 +13,16 @@ export class NavbarButtonsComponent implements OnInit {
   @Input() logeado: boolean = false;
   @Input() usuario: undefined;
 
-  constructor() { }
+  constructor(private service: TokenStorageService, private loginService: LoginService) {
+  }
 
   ngOnInit(): void {
+    this.logeado = !!this.service.getToken();
   }
 
   cerrarSesion(): void {
-    this.cerrarSesionEvent.emit();
+    this.service.logout();
+    window.location.reload();
   }
 
 }

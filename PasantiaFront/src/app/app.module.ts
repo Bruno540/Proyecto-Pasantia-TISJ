@@ -14,6 +14,7 @@ import { NavbarButtonsComponent } from './components/navbar/navbar-buttons/navba
 import { EmpresasComponent } from './components/empresas/empresas.component';
 import { CreateEmpresaComponent } from './components/empresas/create-empresa/create-empresa.component';
 import { DialogEmpresaComponent } from './components/empresas/dialog-empresa/dialog-empresa.component';
+import { LoginComponent } from './components/login/login.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
 import { DialogUsuarioComponent } from './components/usuarios/dialog-usuario/dialog-usuario.component';
@@ -21,6 +22,8 @@ import { CochesComponent } from './components/coches/coches.component';
 import { DialogCocheComponent } from './components/coches/dialog-coche/dialog-coche.component';
 import { CreateCocheComponent } from './components/coches/create-coche/create-coche.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     EmpresasComponent,
     CreateEmpresaComponent,
     DialogEmpresaComponent,
+    LoginComponent,
     UsuariosComponent,
     CreateUsuarioComponent,
     DialogUsuarioComponent,
@@ -46,10 +50,14 @@ import { MatSelectModule } from '@angular/material/select';
     FlexLayoutModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
+
+  ],
+  providers: [
+    { provide: 'LOCALSTORAGE', useValue: window.localStorage },
     ReactiveFormsModule,
     MatSelectModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

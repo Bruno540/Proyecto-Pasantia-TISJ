@@ -4,8 +4,14 @@ import { ApiBaseEntity } from "./base-entity.model";
 @Entity("usuarios")
 export class Usuario extends ApiBaseEntity {
 
-    @Column({ unique: true, nullable: true })
+    @Column()
     email: string;
+
+    @Column()
+    nombre: string
+
+    @Column()
+    apellido: string
 
     @Column({ select: false })
     password: string;

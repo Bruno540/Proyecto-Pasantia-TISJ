@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
     imports: [
@@ -20,11 +23,14 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatSidenavModule,
         MatListModule,
         MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
         MatDividerModule,
         MatTableModule,
-        MatDialogModule
+        MatDialogModule,
+        MatProgressBarModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     exports: [
         MatToolbarModule,
@@ -33,11 +39,14 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatSidenavModule,
         MatListModule,
         MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
         MatDividerModule,
         MatTableModule,
-        MatDialogModule
+        MatDialogModule,
+        MatProgressBarModule,
+        MatOptionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule
     ]
 })
 export class MaterialModule { }
