@@ -17,11 +17,8 @@ export class DialogCocheComponent implements OnInit {
   }
 
   _delete(id: string) {
-    this.CocheService._delete(id).subscribe(data=>{
-      console.log(data)
-    },err=>{
-      console.log(err);
-    });
+    this.CocheService._delete(id).subscribe();
+    window.location.reload();
   }
 
 }

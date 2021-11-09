@@ -11,7 +11,7 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de usuario");
+    if(!request.params.id ) throw new ApiError("Falta el id de usuario");
     
     const usuario = await getCustomRepository(UsuarioRepository).findOne(request.params.id);
     if(!usuario) throw new ApiError("No existe el usuario");
@@ -32,7 +32,7 @@ export const create = async (request: Request, response: Response): Promise<Resp
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del usuario");
+    if(!request.params.id ) throw new ApiError("Falta el id del usuario");
 
     const usuario = await getCustomRepository(UsuarioRepository).findOne(request.params.id);
     if(!usuario) throw new ApiError("No existe la empresa");
@@ -41,7 +41,7 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del usuario");
+    if(!request.params.id ) throw new ApiError("Falta el id del usuario");
 
     const usuario = await getCustomRepository(UsuarioRepository).findOne(request.params.id);
     if(!usuario) throw new ApiError("No existe la empresa");

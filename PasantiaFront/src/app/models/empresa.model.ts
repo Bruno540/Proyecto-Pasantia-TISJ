@@ -1,5 +1,5 @@
 export interface Empresa {
-    id: number;
+    id: string;
     rut: string;
     razonSocial: string;
 }

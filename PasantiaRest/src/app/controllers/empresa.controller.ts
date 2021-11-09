@@ -9,7 +9,7 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de la empresa");
+    if(!request.params.id ) throw new ApiError("Falta el id de la empresa");
     
     const empresa = await getCustomRepository(EmpresaRepository).findOne(request.params.id);
     if(!empresa) throw new ApiError("No existe la empresa");
@@ -25,7 +25,7 @@ export const create = async (request: Request, response: Response): Promise<Resp
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de la empresa");
+    if(!request.params.id ) throw new ApiError("Falta el id de la empresa");
 
     const empresa = await getCustomRepository(EmpresaRepository).findOne(request.params.id);
     if(!empresa) throw new ApiError("No existe la empresa");
@@ -34,7 +34,7 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de la empresa");
+    if(!request.params.id ) throw new ApiError("Falta el id de la empresa");
 
     const empresa = await getCustomRepository(EmpresaRepository).findOne(request.params.id);
     if(!empresa) throw new ApiError("No existe la empresa");

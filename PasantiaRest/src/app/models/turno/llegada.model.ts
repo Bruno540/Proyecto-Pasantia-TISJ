@@ -1,7 +1,7 @@
 import { ChildEntity, Column } from "typeorm";
 import { Turno } from "./turno.model";
 
-@ChildEntity('llegada')
+@ChildEntity('Llegada')
 export class Llegada extends Turno {
 
     @Column()
