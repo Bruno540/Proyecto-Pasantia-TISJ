@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex.lt-sm="100" fxFlex.gt-sm="40" fxFlex.gt-lg="25" class="card">
+
+        <mat-card-content>
+            <form [formGroup]="turnoForm">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora</mat-label>
+                        <input matInput formControlName="hora">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-top: 8px;">
+                        <mat-label>Salida</mat-label>
+                        <input matInput formControlName="salida">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-top: 8px;">
+                        <mat-label>Hora de Salida</mat-label>
+                        <input matInput formControlName="horaSalida">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-top: 8px;">
+                        <mat-label>Destino</mat-label>
+                        <input matInput formControlName="destino">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-top: 8px;">
+                        <mat-label>Tipo</mat-label>
+                        <input matInput formControlName="type">
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button onclick="history.back(-1)" mat-raised-button type="button" color="primary">Cancelar</button>
+            <button (click)="submit()" [disabled]="turnoForm.invalid" mat-raised-button type="submit"
+                color="primary">Confirmar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

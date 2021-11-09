@@ -15,4 +15,7 @@
     <mat-toolbar-row *ngIf="mobile" fxLayout="row" fxLayoutAlign="space-around center">
         <app-navbar-buttons></app-navbar-buttons>
     </mat-toolbar-row>
+    <mat-toolbar-row class="shadow">
+        <span>{{this.titleService.getTitle()}}</span>
+    </mat-toolbar-row>
 </mat-toolbar>

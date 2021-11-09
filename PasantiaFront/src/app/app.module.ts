@@ -24,6 +24,9 @@ import { CreateCocheComponent } from './components/coches/create-coche/create-co
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TurnosComponent } from './components/turnos/turnos.component';
+import { CreateTurnoComponent } from './components/turnos/create-turno/create-turno.component';
+import { DialogTurnoComponent } from './components/turnos/dialog-turno/dialog-turno.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { MatInputModule } from '@angular/material/input';
     DialogUsuarioComponent,
     CochesComponent,
     DialogCocheComponent,
-    CreateCocheComponent
+    CreateCocheComponent,
+    TurnosComponent,
+    CreateTurnoComponent,
+    DialogTurnoComponent,
   ],
   imports: [
     BrowserModule,

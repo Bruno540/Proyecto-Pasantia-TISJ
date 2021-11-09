@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,9 @@ export class NavbarComponent implements OnInit {
   @Output() showSidenavEvent = new EventEmitter();
   @Input() mobile: boolean = false;
 
-  constructor() { }
+  constructor(
+    public titleService: Title
+  ) { }
 
   ngOnInit(): void {
   }

@@ -7,4 +7,7 @@ export class Llegada extends Turno {
     @Column()
     salida: string;
 
+    @Column()
+    horaSalida: string;
+
 }
