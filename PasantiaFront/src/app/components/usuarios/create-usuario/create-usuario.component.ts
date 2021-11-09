@@ -25,7 +25,7 @@ export class CreateUsuarioComponent implements OnInit {
     });
 
     const routeParams = this.route.snapshot.paramMap;
-    const IdFromRoute = Number(routeParams.get('id'));
+    const IdFromRoute = routeParams.get('id');
 
     if (IdFromRoute) {
       this.UsuariosService.get(IdFromRoute).subscribe(

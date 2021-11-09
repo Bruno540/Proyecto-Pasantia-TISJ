@@ -18,7 +18,7 @@ export class DialogEmpresaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  _delete(id: number) {
+  _delete(id: string) {
     this.EmpresasService._delete(id).subscribe();
     window.location.reload();
   }

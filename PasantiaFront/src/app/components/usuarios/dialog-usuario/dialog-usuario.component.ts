@@ -16,7 +16,7 @@ export class DialogUsuarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  _delete(id: number) {
+  _delete(id: string) {
     this.UsuariosService._delete(id).subscribe();
     window.location.reload();
   }
