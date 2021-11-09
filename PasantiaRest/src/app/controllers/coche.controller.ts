@@ -8,7 +8,9 @@ import * as cocheService from "../services/coche.service";
 import { Coche } from "../models/coche.model";
 
 export const getAll = async (request: Request, response: Response): Promise<Response> => {
-    return response.json(await getCustomRepository(CocheRepository).find());
+    return response.json( await getCustomRepository(CocheRepository).find({
+        relations: ["empresa"]
+    }))
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
@@ -32,7 +34,6 @@ export const create = async (request: Request, response: Response): Promise<Resp
     const empresa = await getCustomRepository(EmpresaRepository).findOne(idEmp);
     if(!empresa) throw ApiError.badRequestError("No exite la empresa ingresada");
     if (await cocheService.getByMatricula(request.body.matricula)) throw ApiError.badRequestError("Ya existe un coche con la matricula ingresada");
-
     const coche = new Coche();
     coche.numero = request.body.numero;
     coche.matricula = request.body.matricula;

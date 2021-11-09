@@ -11,7 +11,7 @@ import { DialogCocheComponent } from './dialog-coche/dialog-coche.component';
 })
 export class CochesComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'numero', 'matricula', 'actions'];
+  displayedColumns: string[] = ['id', 'numero', 'matricula', 'empresa', 'actions'];
   dataSource: Coche[] = [];
 
   constructor(private CocheService: CocheService,
