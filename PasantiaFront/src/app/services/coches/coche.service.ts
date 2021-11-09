@@ -28,7 +28,8 @@ export class CocheService {
     return this.Http.put(this.Url + `/${id}`, coche);
   }
 
-  _delete(id: number) {
+  _delete(id: string) {
+    console.log("El id a leiminar: ", id)
     return this.Http.delete(this.Url + `/${id}`);
   }
 }

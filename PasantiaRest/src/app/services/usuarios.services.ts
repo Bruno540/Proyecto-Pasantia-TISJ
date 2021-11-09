@@ -11,7 +11,6 @@ export const getByEmailContrasenia = async (email: string, password: string): Pr
         select: userSelectValues,
         where: { email }
     });
-
     if (usuario && await verifyPassword(password, usuario.password)) return usuario;
     return undefined;
 };
