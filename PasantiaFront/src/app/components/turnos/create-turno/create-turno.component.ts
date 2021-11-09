@@ -30,7 +30,7 @@ export class CreateTurnoComponent implements OnInit {
     });
 
     const routeParams = this.route.snapshot.paramMap;
-    const IdFromRoute = routeParams.get('id');
+    const IdFromRoute = Number(routeParams.get('id'));
 
     if (IdFromRoute) {
       this.title.setTitle("Actualizar Turno");

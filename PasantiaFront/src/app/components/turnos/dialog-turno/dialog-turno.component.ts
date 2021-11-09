@@ -18,7 +18,7 @@ export class DialogTurnoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  _delete(id: string) {
+  _delete(id: number) {
     this.TurnosService._delete(id).subscribe();
     window.location.reload();
   }

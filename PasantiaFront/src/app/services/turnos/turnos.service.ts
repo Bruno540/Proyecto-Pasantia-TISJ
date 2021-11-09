@@ -18,7 +18,7 @@ export class TurnosService {
     return this.Http.get<any[]>(this.Url);
   }
 
-  get(id: string) {
+  get(id: number) {
     return this.Http.get<Turno>(this.Url + `/${id}`);
   }
 
@@ -30,7 +30,7 @@ export class TurnosService {
     return this.Http.put(this.Url + `/${id}`, turno);
   }
 
-  _delete(id: string) {
+  _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
 }
