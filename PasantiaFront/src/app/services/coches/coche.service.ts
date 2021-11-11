@@ -16,19 +16,21 @@ export class CocheService {
     return this.Http.get<Coche[]>(this.Url);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.Http.get<Coche>(this.Url + `/${id}`);
   }
 
   create(coche: Coche) {
+    console.log(coche);
     return this.Http.post(this.Url, coche);
   }
 
-  update(id: number, coche: Coche) {
+  update(id: string, coche: Coche) {
     return this.Http.put(this.Url + `/${id}`, coche);
   }
 
-  _delete(id: number) {
+  _delete(id: string) {
+    console.log(id)
     return this.Http.delete(this.Url + `/${id}`);
   }
 }

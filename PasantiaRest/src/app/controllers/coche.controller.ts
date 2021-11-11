@@ -14,7 +14,7 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de coche");
+    if(!request.params.id ) throw new ApiError("Falta el id de coche");
     
     const coche = await getCustomRepository(CocheRepository).findOne(request.params.id);
     if(!coche) throw new ApiError("No existe el coche");
@@ -27,24 +27,21 @@ export const create = async (request: Request, response: Response): Promise<Resp
     if(!request.body.matricula) throw new ApiError("Falta la matricula del coche");
     if(!request.body.empresaId) throw new ApiError("Falta el id de la empresa");
 
-    //console.log(request.body.empresaId);
     //tendria que chequear si en la empresa ya existe un coche con ese numero
-    //Number.parseInt(request.params.id) mejor usar esto ahi en el findOne
-    var idEmp: number = +request.body.empresaId
-    const empresa = await getCustomRepository(EmpresaRepository).findOne(idEmp);
+    const empresa = await getCustomRepository(EmpresaRepository).findOne(request.body.empresaId);
     if(!empresa) throw ApiError.badRequestError("No exite la empresa ingresada");
     if (await cocheService.getByMatricula(request.body.matricula)) throw ApiError.badRequestError("Ya existe un coche con la matricula ingresada");
     const coche = new Coche();
     coche.numero = request.body.numero;
     coche.matricula = request.body.matricula;
-    coche.empresa = empresa;
+    coche.empresa = request.body.empresaId;
     
     return response.status(201).json(await getCustomRepository(CocheRepository).save(coche));
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
-
+    if(!request.params.id ) throw new ApiError("Falta el id del coche");
+    console.log(request.params.id);
     const coche = await getCustomRepository(CocheRepository).findOne(request.params.id);
     if(!coche) throw new ApiError("No existe el coche");
 
@@ -52,7 +49,7 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
+    if(!request.params.id ) throw new ApiError("Falta el id del coche");
 
     const coche = await getCustomRepository(CocheRepository).findOne(request.params.id);
     if(!coche) throw new ApiError("No existe el coche");

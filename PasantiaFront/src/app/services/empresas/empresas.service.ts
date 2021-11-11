@@ -18,7 +18,7 @@ export class EmpresasService {
     return this.Http.get<Empresa[]>(this.Url);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.Http.get<Empresa>(this.Url + `/${id}`);
   }
 
@@ -26,11 +26,11 @@ export class EmpresasService {
     return this.Http.post(this.Url, empresa);
   }
 
-  update(id: number, empresa: Empresa) {
+  update(id: string, empresa: Empresa) {
     return this.Http.put(this.Url + `/${id}`, empresa);
   }
 
-  _delete(id: number) {
+  _delete(id: string) {
     return this.Http.delete(this.Url + `/${id}`);
   }
 
