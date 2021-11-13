@@ -10,6 +10,8 @@ import { CreateUsuarioComponent } from './components/usuarios/create-usuario/cre
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { TurnosComponent } from './components/turnos/turnos.component';
 import { CreateTurnoComponent } from './components/turnos/create-turno/create-turno.component';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
 
 const routes: Routes = [
   { path: "empresas", component: EmpresasComponent },
@@ -29,6 +31,10 @@ const routes: Routes = [
   { path: "turnos", component: TurnosComponent },
   { path: "turnos/create", component: CreateTurnoComponent },
   { path: "turnos/update/:id", component: CreateTurnoComponent },
+  
+  { path: "registros", component: RegistrosComponent },
+  { path: "registros/create", component: CreateRegistroComponent },
+  { path: "registros/update/:id", component: CreateRegistroComponent },
 ];
 
 @NgModule({

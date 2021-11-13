@@ -4,6 +4,7 @@ import AuthRoutes from "./usuarios.routes";
 import UsuariosRoutes from "./usuario.routes";
 import CochesRoutes from "./coche.routes";
 import TurnosRoutes from "./turno.routes";
+import RegistroRoutes from "./registro.routes";
 
 const router = Router();
 
@@ -16,5 +17,7 @@ router.use("/usuarios", UsuariosRoutes);
 router.use("/coches", CochesRoutes);
 
 router.use("/turnos", TurnosRoutes);
+
+router.use("/registros", RegistroRoutes);
 
 export default router;

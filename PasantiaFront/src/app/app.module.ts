@@ -27,6 +27,9 @@ import { MatInputModule } from '@angular/material/input';
 import { TurnosComponent } from './components/turnos/turnos.component';
 import { CreateTurnoComponent } from './components/turnos/create-turno/create-turno.component';
 import { DialogTurnoComponent } from './components/turnos/dialog-turno/dialog-turno.component';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
+import { DialogRegistroComponent } from './components/registros/dialog-registro/dialog-registro.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { DialogTurnoComponent } from './components/turnos/dialog-turno/dialog-tu
     TurnosComponent,
     CreateTurnoComponent,
     DialogTurnoComponent,
+    RegistrosComponent,
+    CreateRegistroComponent,
+    DialogRegistroComponent
   ],
   imports: [
     BrowserModule,

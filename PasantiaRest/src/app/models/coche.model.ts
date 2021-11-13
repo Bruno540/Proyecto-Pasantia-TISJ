@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { ApiBaseEntity } from "./base-entity.model";
 import { Empresa } from "./empresa.model";
+import { Registro } from "./registro.model";
 
 @Entity("coches")
 export class Coche extends ApiBaseEntity {
@@ -13,5 +14,8 @@ export class Coche extends ApiBaseEntity {
 
     @ManyToOne(() => Empresa, empresa => empresa.coches)
     empresa: Empresa;
+
+    @OneToMany(() => Registro, registro => registro.turno)
+    registros: Registro[];
 
 }
