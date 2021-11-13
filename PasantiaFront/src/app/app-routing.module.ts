@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
 
 const routes: Routes = [
   { path: "empresas", component: EmpresasComponent },
@@ -20,6 +22,9 @@ const routes: Routes = [
   { path: "coches", component: CochesComponent },
   { path: "coches/create", component: CreateCocheComponent },
   { path: "coches/update/:id", component: CreateCocheComponent },
+  { path: "registros", component: RegistrosComponent },
+  { path: "registros/create", component: CreateRegistroComponent },
+  { path: "registros/update/:id", component: CreateRegistroComponent },
 ];
 
 @NgModule({
