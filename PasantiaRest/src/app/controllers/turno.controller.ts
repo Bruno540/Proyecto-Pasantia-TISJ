@@ -23,7 +23,7 @@ export const getById = async (request: Request, response: Response): Promise<Res
 }
 
 export const post = async (request: Request, response: Response): Promise<Response> => {
-    await validateTurno(request.body);
+    request.body = await validateTurno(request.body);
     return response.status(201).json(await getRepository(Turno).save(request.body));
 }
 
@@ -35,7 +35,7 @@ export const put = async (request: Request, response: Response): Promise<Respons
 
     request.body.id = turno.id;
 
-    await validateTurno(request.body);
+    request.body = await validateTurno(request.body);
 
     return response.status(204).json(await getRepository(Turno).save(request.body));
 }

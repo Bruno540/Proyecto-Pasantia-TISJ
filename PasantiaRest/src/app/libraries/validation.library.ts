@@ -1,6 +1,7 @@
 import moment from "moment";
 import { getRepository } from "typeorm";
 import { ApiError } from "../../config/api-error";
+import { Empresa } from "../models/empresa.model";
 import { TipoTurno } from "../models/turno/tipo-turno.model";
 
 export const validateTurno = async (data: any) => {
@@ -18,6 +19,12 @@ export const validateTurno = async (data: any) => {
     if (typeof data.type != "number") throw ApiError.badRequestError("Tipo de turno no ingresado");
     const tipoTurno = await getRepository(TipoTurno).findOne(data.type);
     if (!tipoTurno) throw ApiError.badRequestError("Tipo de turno invalido");
+
+    if (typeof data.type != "number") throw ApiError.badRequestError("Empresa no ingresado");
+    const empresa = await getRepository(Empresa).findOne(data.type);
+    if (!empresa) throw ApiError.badRequestError("Empresa de turno invalido");
+
+    data.empresa = empresa;
 
     switch (tipoTurno.nombre) {
         case "Salida":
@@ -48,4 +55,5 @@ export const validateTurno = async (data: any) => {
             break;
     }
 
+    return data;
 }
