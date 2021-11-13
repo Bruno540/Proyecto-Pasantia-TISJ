@@ -8,7 +8,6 @@ export class TurnoRepository extends Repository<Turno> {
         return await this.findAndCount({
             skip: query.skip ?? "",
             take: query.take ?? "",
-            relations: ["dias"]
         })
     }
 }

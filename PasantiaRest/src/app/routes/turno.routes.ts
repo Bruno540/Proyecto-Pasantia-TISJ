@@ -4,6 +4,8 @@ import { handleRequest } from "../middlewares/error.middleware";
 
 const router = Router();
 
+router.get('/tipos', handleRequest(TurnoController.getTipos));
+
 router.get('/', handleRequest(TurnoController.get));
 
 router.get('/:id', handleRequest(TurnoController.getById));

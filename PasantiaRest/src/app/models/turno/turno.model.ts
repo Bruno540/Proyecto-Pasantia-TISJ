@@ -1,21 +1,59 @@
-import { Column, Entity, JoinTable, ManyToMany, TableInheritance } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import { ApiBaseEntity } from "../base-entity.model";
-import { Dia } from "./dia.model";
+import { TipoTurno } from "./tipo-turno.model";
 
 @Entity('turnos')
-@TableInheritance({ pattern: 'STI', column: { type: 'varchar', name: 'type' } })
-export abstract class Turno extends ApiBaseEntity {
+export class Turno extends ApiBaseEntity {
 
-    @Column()
+    @Column({ type: 'time' })
     hora: string;
 
     @Column()
     activo: boolean;
 
-    @ManyToMany(() => Dia)
-    @JoinTable()
-    dias: Dia[];
+    @Column({ default: false })
+    lunes: boolean;
+
+    @Column({ default: false })
+    martes: boolean;
+
+    @Column({ default: false })
+    miercoles: boolean;
+
+    @Column({ default: false })
+    jueves: boolean;
+
+    @Column({ default: false })
+    viernes: boolean;
+
+    @Column({ default: false })
+    sabado: boolean;
+
+    @Column({ default: false })
+    domingo: boolean;
+
+    @Column({ default: false })
+    feriados: boolean;
+
+    @Column({ default: true })
+    diaNormal: boolean;
+
+    @Column({ type: "text" })
+    descripcion: boolean;
 
     @Column()
-    type: string;
+    salidaDesde: string;
+
+    @Column({ type: "time" })
+    horaSalida: string;
+
+    @Column()
+    destino: string;
+
+    @Column({ type: "time" })
+    horaLlegada: string;
+
+    @ManyToOne(() => TipoTurno, tipo => tipo.turnos)
+    tipo: TipoTurno;
+
 }

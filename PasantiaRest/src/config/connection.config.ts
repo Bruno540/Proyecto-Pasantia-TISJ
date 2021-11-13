@@ -1,9 +1,10 @@
 import { createConnections } from "typeorm";
-import { initData } from "./init.config";
+import { Seeder } from "./init.config";
 
 export const connect = async () => {
     await createConnections().then(async () => {
-        await initData();
+        await Seeder.seed();
+
         console.log("Base de Datos Conectada");
     }).catch(error => {
         console.log(error);

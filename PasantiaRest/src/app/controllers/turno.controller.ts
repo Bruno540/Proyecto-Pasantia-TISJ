@@ -2,13 +2,18 @@ import { Request, Response } from "express";
 import { getCustomRepository, getRepository } from "typeorm";
 import { ApiError } from "../../config/api-error";
 import { validateTurno } from "../libraries/validation.library";
-import { Llegada } from "../models/turno/llegada.model";
-import { Salida } from "../models/turno/salida.model";
 import { TurnoRepository } from "../repositories/turno.repository";
 import validator from "validator";
+import { Turno } from "../models/turno/turno.model";
+import { TipoTurno } from "../models/turno/tipo-turno.model";
 
 export const get = async (request: Request, response: Response): Promise<Response> => {
     const result = await getCustomRepository(TurnoRepository).findAll(request.query);
+    return response.status(200).json(result);
+}
+
+export const getTipos = async (request: Request, response: Response): Promise<Response> => {
+    const result = await getRepository(TipoTurno).find();
     return response.status(200).json(result);
 }
 
@@ -19,19 +24,7 @@ export const getById = async (request: Request, response: Response): Promise<Res
 
 export const post = async (request: Request, response: Response): Promise<Response> => {
     await validateTurno(request.body);
-
-    if (request.body.type == "Salida") {
-        if (typeof request.body.destino != "string") throw ApiError.badRequestError("Destino de turno invalida");
-        if (typeof request.body.horaSalida != "string") throw ApiError.badRequestError("Hora de salida de turno invalida");
-
-        return response.status(201).json(await getRepository(Salida).save(request.body));
-    } else if (request.body.type == "Llegada") {
-        if (typeof request.body.salida != "string") throw ApiError.badRequestError("Salida de turno invalida");
-
-        return response.status(201).json(await getRepository(Llegada).save(request.body));
-    } else {
-        throw ApiError.badRequestError("Tipo de turno invalido");
-    }
+    return response.status(201).json(await getRepository(Turno).save(request.body));
 }
 
 export const put = async (request: Request, response: Response): Promise<Response> => {
@@ -44,19 +37,7 @@ export const put = async (request: Request, response: Response): Promise<Respons
 
     await validateTurno(request.body);
 
-    if (request.body.type == "Salida") {
-        if (typeof request.body.destino != "string") throw ApiError.badRequestError("Destino de turno invalida");
-
-        await getRepository(Salida).save(request.body);
-        return response.status(204).json();
-    } else if (request.body.type == "Llegada") {
-        if (typeof request.body.salida != "string") throw ApiError.badRequestError("Salida de turno invalida");
-
-        await getRepository(Llegada).save(request.body);
-        return response.status(204).json();
-    } else {
-        throw ApiError.badRequestError("Tipo de turno invalido");
-    }
+    return response.status(204).json(await getRepository(Turno).save(request.body));
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {

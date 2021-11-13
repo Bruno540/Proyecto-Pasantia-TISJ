@@ -6,8 +6,6 @@ export interface Turno {
 
     activo: boolean;
 
-    dias: any[];
-
     type: string;
 
     salida?: string;

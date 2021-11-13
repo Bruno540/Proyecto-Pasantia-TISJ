@@ -1,14 +1,22 @@
 import { getRepository } from "typeorm";
-import { Dia } from "../app/models/turno/dia.model";
+import { TipoTurno } from "../app/models/turno/tipo-turno.model";
 
-export const initData = async () => {
+export class Seeder {
 
-    if (await getRepository(Dia).count() <= 0) {
-        const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+    static async seed() {
+        await Seeder.seedTiposTurnos()
+    }
 
-        dias.forEach(async (dia) => {
-            await getRepository(Dia).save({ nombre: dia });
-        });
+    static async seedTiposTurnos() {
+        const repository = getRepository(TipoTurno);
+        if (await repository.count() == 0) {
+            const turnos = ["Salida", "Llegada", "Pasada"];
+
+            for await (const turno of turnos) {
+                const elem = repository.create({nombre: turno})
+                await repository.save(elem);
+            }
+        }
     }
 
 }
