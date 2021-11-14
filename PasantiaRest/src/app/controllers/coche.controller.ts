@@ -1,60 +1,30 @@
 import { Request, Response } from "express";
-import { getCustomRepository } from "typeorm";
 import { ApiError } from "../../config/api-error";
-import { CocheRepository } from "../repositories/coche.repository";
-import { EmpresaRepository } from "../repositories/empresa.repository";
-import validator from "validator";
 import * as cocheService from "../services/coche.service";
-import { Coche } from "../models/coche.model";
+
 
 export const getAll = async (request: Request, response: Response): Promise<Response> => {
-    return response.json( await getCustomRepository(CocheRepository).find({
-        relations: ["empresa"]
-    }))
+    return response.json( await cocheService.getAll());
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id ) throw new ApiError("Falta el id de coche");
-    
-    const coche = await getCustomRepository(CocheRepository).findOne(request.params.id);
-    if(!coche) throw new ApiError("No existe el coche");
-
-    return response.json(coche);
+    return response.json(await cocheService.getById(request.params.id));
 }
 
 export const create = async (request: Request, response: Response): Promise<Response> => {
     if(!request.body.numero) throw new ApiError("Falta el numero de coche");
     if(!request.body.matricula) throw new ApiError("Falta la matricula del coche");
     if(!request.body.empresaId) throw new ApiError("Falta el id de la empresa");
-
-    //tendria que chequear si en la empresa ya existe un coche con ese numero
-    const empresa = await getCustomRepository(EmpresaRepository).findOne(request.body.empresaId);
-    if(!empresa) throw ApiError.badRequestError("No exite la empresa ingresada");
-    if (await cocheService.getByMatricula(request.body.matricula)) throw ApiError.badRequestError("Ya existe un coche con la matricula ingresada");
-    const coche = new Coche();
-    coche.numero = request.body.numero;
-    coche.matricula = request.body.matricula;
-    coche.empresa = empresa;
-    
-    return response.status(201).json(await getCustomRepository(CocheRepository).save(coche));
+    return response.status(201).json(await cocheService.create(request.body.numero, request.body.matricula, request.body.empresaId));
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id ) throw new ApiError("Falta el id del coche");
-    console.log(request.params.id);
-    const coche = await getCustomRepository(CocheRepository).findOne(request.params.id);
-    if(!coche) throw new ApiError("No existe el coche");
-
-    return response.status(204).json(await getCustomRepository(CocheRepository).delete(request.params.id));
+    return response.status(204).json(await cocheService._delete(request.params.id));
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id ) throw new ApiError("Falta el id del coche");
-
-    const coche = await getCustomRepository(CocheRepository).findOne(request.params.id);
-    if(!coche) throw new ApiError("No existe el coche");
-
-    request.body.id = coche.id;
-
-    return response.status(204).json(await getCustomRepository(CocheRepository).save(request.body));
+    return response.status(204).json(await cocheService.update(request.params.id, request.body));
 }

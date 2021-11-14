@@ -9,5 +9,4 @@ export class CocheRepository extends Repository<Coche> {
             where: { matricula }
         });
     };
-
 }
