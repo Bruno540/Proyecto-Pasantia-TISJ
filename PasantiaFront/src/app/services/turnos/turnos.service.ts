@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Turno } from 'src/app/models/turno.model';
+import { TipoTurno, Turno } from 'src/app/models/turno.model';
 import { ProyecConfig } from 'src/environments/proyect-config';
 
 @Injectable({
@@ -15,7 +15,11 @@ export class TurnosService {
   ) { }
 
   getAll() {
-    return this.Http.get<any[]>(this.Url);
+    return this.Http.get<[Turno[], number]>(this.Url);
+  }
+
+  getTipos() {
+    return this.Http.get<TipoTurno[]>(this.Url + "/tipos");
   }
 
   get(id: number) {

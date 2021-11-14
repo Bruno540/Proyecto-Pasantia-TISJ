@@ -18,7 +18,9 @@ export const getTipos = async (request: Request, response: Response): Promise<Re
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
-    const result = await getCustomRepository(TurnoRepository).findOne(request.params.id);
+    const result = await getCustomRepository(TurnoRepository).findOne(request.params.id, {
+        relations: ["empresa", "tipo"]
+    });
     return response.status(200).json(result);
 }
 

@@ -1,15 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav [ngStyle.xs]="{'width': '90%'}">
+    <mat-sidenav #sidenav [ngStyle.xs]="{'width': '90%'}" [ngStyle]="{'width': '30%'}">
 
         <mat-toolbar>
-            <div fxLayout="row" fxLayoutAlign="space-between center" class="block">
-                <button class="home" mat-button [routerLink]="['/']" (click)="sidenav.toggle()">
-                    Nombre
-                </button>
-                <button mat-icon-button (click)="sidenav.toggle()">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
+            <span class="title" [routerLink]="['/']" (click)="sidenav.toggle()"> Terminal </span>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-toolbar>
 
         <mat-nav-list>

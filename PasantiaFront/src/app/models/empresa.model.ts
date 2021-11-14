@@ -1,5 +1,5 @@
-export interface Empresa {
-    id: string;
+export class Empresa {
+    id: number;
     rut: string;
     razonSocial: string;
 }

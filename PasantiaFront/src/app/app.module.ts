@@ -30,6 +30,8 @@ import { DialogTurnoComponent } from './components/turnos/dialog-turno/dialog-tu
 import { RegistrosComponent } from './components/registros/registros.component';
 import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
 import { DialogRegistroComponent } from './components/registros/dialog-registro/dialog-registro.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { DialogRegistroComponent } from './components/registros/dialog-registro/
     DialogTurnoComponent,
     RegistrosComponent,
     CreateRegistroComponent,
-    DialogRegistroComponent
+    DialogRegistroComponent,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

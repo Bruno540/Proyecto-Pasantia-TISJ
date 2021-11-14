@@ -26,7 +26,7 @@ export class TurnosComponent implements OnInit {
 
     this.TurnosService.getAll().subscribe(
       ok => {
-        this.dataSource = ok[0];        
+        this.dataSource = ok[0];
       }
     );
   }

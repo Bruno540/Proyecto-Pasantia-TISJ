@@ -12,18 +12,22 @@ import { TurnosComponent } from './components/turnos/turnos.component';
 import { CreateTurnoComponent } from './components/turnos/create-turno/create-turno.component';
 import { RegistrosComponent } from './components/registros/registros.component';
 import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  { path: "home", component: HomeComponent },
+
   { path: "empresas", component: EmpresasComponent },
   { path: "empresas/create", component: CreateEmpresaComponent },
   { path: "empresas/update/:id", component: CreateEmpresaComponent },
-  
-  { path: "login", component: LoginComponent, canActivate:[AuthGuard]},
-  
+
+  { path: "login", component: LoginComponent, canActivate: [AuthGuard] },
+
   { path: "usuarios", component: UsuariosComponent },
   { path: "usuarios/create", component: CreateUsuarioComponent },
   { path: "usuarios/update/:id", component: CreateUsuarioComponent },
-  
+
   { path: "coches", component: CochesComponent },
   { path: "coches/create", component: CreateCocheComponent },
   { path: "coches/update/:id", component: CreateCocheComponent },
@@ -31,10 +35,14 @@ const routes: Routes = [
   { path: "turnos", component: TurnosComponent },
   { path: "turnos/create", component: CreateTurnoComponent },
   { path: "turnos/update/:id", component: CreateTurnoComponent },
-  
+
   { path: "registros", component: RegistrosComponent },
   { path: "registros/create", component: CreateRegistroComponent },
   { path: "registros/update/:id", component: CreateRegistroComponent },
+
+  { path: '404', component: NotFoundComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
 
 @NgModule({

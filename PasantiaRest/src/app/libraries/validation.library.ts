@@ -16,12 +16,12 @@ export const validateTurno = async (data: any) => {
 
     if (typeof data.descripcion != "string") throw ApiError.badRequestError("Descripcion invalida");
 
-    if (typeof data.type != "number") throw ApiError.badRequestError("Tipo de turno no ingresado");
-    const tipoTurno = await getRepository(TipoTurno).findOne(data.type);
+    if (typeof data.tipo != "number") throw ApiError.badRequestError("Tipo de turno no ingresado");
+    const tipoTurno = await getRepository(TipoTurno).findOne(data.tipo);
     if (!tipoTurno) throw ApiError.badRequestError("Tipo de turno invalido");
 
-    if (typeof data.type != "number") throw ApiError.badRequestError("Empresa no ingresado");
-    const empresa = await getRepository(Empresa).findOne(data.type);
+    if (typeof data.empresa != "number") throw ApiError.badRequestError("Empresa no ingresado");
+    const empresa = await getRepository(Empresa).findOne(data.empresa);
     if (!empresa) throw ApiError.badRequestError("Empresa de turno invalido");
 
     data.empresa = empresa;

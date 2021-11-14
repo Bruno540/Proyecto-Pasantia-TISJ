@@ -1,12 +1,20 @@
-import { createConnections } from "typeorm";
+import { ConnectionOptions, createConnections, getConnection } from "typeorm";
 import { Seeder } from "./init.config";
 
-export const connect = async () => {
-    await createConnections().then(async () => {
-        await Seeder.seed();
+export class Connection {
 
-        console.log("Base de Datos Conectada");
-    }).catch(error => {
-        console.log(error);
-    });
+    static async connect(options?: ConnectionOptions[]) {
+        await createConnections(options).then(async () => {
+            await Seeder.seed();
+
+            console.log("Base de Datos Conectada");
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    static async disconnect() {
+        const connection = getConnection();
+        if (connection.isConnected) connection.close();
+    }
 }

@@ -1,29 +1,84 @@
 <div fxLayout="row" fxLayoutAlign="center">
     <mat-card fxFlex.lt-sm="100" fxFlex.gt-sm="40" fxFlex.gt-lg="25" class="card">
-
+        <mat-card-title>
+            Datos del Turno
+        </mat-card-title>
         <mat-card-content>
             <form [formGroup]="turnoForm">
-                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-around start">
+                    <mat-divider [inset]="true"></mat-divider>
                     <mat-form-field appearance="fill">
                         <mat-label>Hora</mat-label>
-                        <input matInput formControlName="hora">
+                        <input matInput name="hora" formControlName="hora">
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="margin-top: 8px;">
-                        <mat-label>Salida</mat-label>
-                        <input matInput formControlName="salida">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Descripcion</mat-label>
+                        <textarea matInput name="descripcion" formControlName="descripcion" rows="4"></textarea>
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="margin-top: 8px;">
-                        <mat-label>Hora de Salida</mat-label>
-                        <input matInput formControlName="horaSalida">
+
+
+                    <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de Turno</mat-label>
+                        <mat-select matSelect formControlName="tipo">
+                            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+                                {{tipo.nombre}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="margin-top: 8px;">
-                        <mat-label>Destino</mat-label>
-                        <input matInput formControlName="destino">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Empresa</mat-label>
+                        <mat-select matSelect formControlName="empresa">
+                            <mat-option *ngFor="let empresa of empresas" [value]="empresa.id">
+                                {{empresa.razonSocial}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="margin-top: 8px;">
-                        <mat-label>Tipo</mat-label>
-                        <input matInput formControlName="type">
+
+                    <div>
+                        <label>Dias del Turno</label>
+                        <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                            <mat-checkbox formControlName="lunes">Lunes</mat-checkbox>
+                            <mat-checkbox formControlName="martes">Martes</mat-checkbox>
+                            <mat-checkbox formControlName="miercoles">Miercoles</mat-checkbox>
+                            <mat-checkbox formControlName="jueves">Jueves</mat-checkbox>
+                            <mat-checkbox formControlName="viernes">Viernes</mat-checkbox>
+                            <mat-checkbox formControlName="sabado">Sabado</mat-checkbox>
+                            <mat-checkbox formControlName="domingo">Domingo</mat-checkbox>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Tipo de Dia</label>
+                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                            <mat-checkbox formControlName="feriados">Feriados</mat-checkbox>
+                            <mat-checkbox formControlName="diaNormal">Dia Normal</mat-checkbox>
+                        </div>
+                    </div>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora de Llegada</mat-label>
+                        <input matInput name="horaLlegada" formControlName="horaLlegada">
                     </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Lugar de Salida</mat-label>
+                        <input matInput name="salidaDesde" formControlName="salidaDesde">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora de parida</mat-label>
+                        <input matInput name="horaSalida" formControlName="horaSalida">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Lugar de Destino</mat-label>
+                        <input matInput name="destino" formControlName="destino">
+                    </mat-form-field>
+
                 </div>
             </form>
         </mat-card-content>

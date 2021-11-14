@@ -1,17 +1,53 @@
-export interface Turno {
-    
+import { Empresa } from "./empresa.model";
+import { Registro } from "./registro.model";
+
+export class TipoTurno {
+
+    id: number;
+
+    nombre: string;
+
+}
+
+export class Turno {
     id: number;
 
     hora: string;
 
     activo: boolean;
 
-    type: string;
+    lunes: boolean;
 
-    salida?: string;
+    martes: boolean;
+
+    miercoles: boolean;
+
+    jueves: boolean;
+
+    viernes: boolean;
+
+    sabado: boolean;
+
+    domingo: boolean;
+
+    feriados: boolean;
+
+    diaNormal: boolean;
+
+    descripcion: boolean;
+
+    salidaDesde?: string;
 
     horaSalida?: string;
 
     destino?: string;
+
+    horaLlegada?: string;
+
+    tipo: any;
+
+    registros: Registro[];
+
+    empresa: any;
 
 }
