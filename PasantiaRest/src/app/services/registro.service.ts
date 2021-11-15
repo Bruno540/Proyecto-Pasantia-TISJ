@@ -11,14 +11,14 @@ export const getAll = async (): Promise<Registro[] | undefined> => {
     });
 }
 
-export const getById = async (id:string): Promise<Registro | undefined> => {
+export const getById = async (id:any): Promise<Registro | undefined> => {
     let registro : Registro | undefined;
     registro = await getCustomRepository(RegistroRepository).findOne(id);
     if(!registro) throw new ApiError("No existe el registro");
     return registro;
 }
 
-export const create = async (turnoId:string, cocheId:string, observaciones:string): Promise<void>=>{
+export const create = async (turnoId:any, cocheId:any, observaciones:string): Promise<void>=>{
     const turno = await getCustomRepository(TurnoRepository).findOne(turnoId);
     if(!turno) throw new ApiError("No exite el turno ingresado");
     const coche = await getCustomRepository(CocheRepository).findOne(cocheId);
@@ -31,14 +31,14 @@ export const create = async (turnoId:string, cocheId:string, observaciones:strin
     await getCustomRepository(RegistroRepository).save(registro);
 }
 
-export const _delete = async(registroId:string):Promise<void>=>{
+export const _delete = async(registroId:any):Promise<void>=>{
     const registro = await getCustomRepository(RegistroRepository).findOne(registroId);
     if(!registro) throw new ApiError("No existe el registro");
 
     await getCustomRepository(RegistroRepository).delete(registroId);
 }
 
-export const update = async(registroId:string, datos:any): Promise<void>=>{
+export const update = async(registroId:any, datos:any): Promise<void>=>{
      const registro = await getCustomRepository(RegistroRepository).findOne(registroId);
      if(!registro) throw new ApiError("No existe el registro");
      datos.id = registro.id

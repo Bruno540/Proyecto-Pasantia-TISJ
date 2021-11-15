@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import validator from "validator";
 import { ApiError } from "../../config/api-error";
 import * as cocheService from "../services/coche.service";
 
@@ -8,7 +9,7 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id ) throw new ApiError("Falta el id de coche");
+    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de coche");
     return response.json(await cocheService.getById(request.params.id));
 }
 
@@ -20,11 +21,11 @@ export const create = async (request: Request, response: Response): Promise<Resp
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id ) throw new ApiError("Falta el id del coche");
+    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
     return response.status(204).json(await cocheService._delete(request.params.id));
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.params.id ) throw new ApiError("Falta el id del coche");
+    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
     return response.status(204).json(await cocheService.update(request.params.id, request.body));
 }

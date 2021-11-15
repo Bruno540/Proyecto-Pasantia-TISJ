@@ -1,5 +1,5 @@
 export interface Coche {
-    id: string;
+    id: number;
     numero: string;
     matricula: string;
     empresaId: string;

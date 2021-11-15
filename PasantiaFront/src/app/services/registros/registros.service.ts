@@ -16,7 +16,7 @@ export class RegistrosService {
     return this.Http.get<Registro[]>(this.Url);
   }
 
-  get(id: string) {
+  get(id: number) {
     return this.Http.get<Registro>(this.Url + `/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class RegistrosService {
     return this.Http.post(this.Url, registro);
   }
 
-  update(id: string, registro: Registro) {
+  update(id: number, registro: Registro) {
     return this.Http.put(this.Url + `/${id}`, registro);
   }
 
-  _delete(id: string) {
+  _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
 }

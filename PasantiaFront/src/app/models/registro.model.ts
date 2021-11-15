@@ -1,5 +1,5 @@
 export interface Registro {
-    id: string;
+    id: number;
     observaciones: string;
     toqueAnden: Date;
     turnoId: string;

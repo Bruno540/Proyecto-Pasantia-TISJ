@@ -10,7 +10,7 @@ export const getAll = async (): Promise<Coche[] | undefined> => {
     });
 }
 
-export const getById = async (id:string): Promise<Coche | undefined> => {
+export const getById = async (id:any): Promise<Coche | undefined> => {
     let coche : Coche | undefined;
     coche = await getCustomRepository(CocheRepository).findOne(id,{
         relations: ["empresa"]
@@ -30,13 +30,13 @@ export const create = async (numero:string, matricula:string, empresaId:string):
     await getCustomRepository(CocheRepository).save(coche);
 }
 
-export const _delete = async(cocheId:string):Promise<void>=>{
+export const _delete = async(cocheId:any):Promise<void>=>{
     const coche = await getCustomRepository(CocheRepository).findOne(cocheId);
     if(!coche) throw new ApiError("No existe el coche");
     await getCustomRepository(CocheRepository).delete(cocheId);
 }
 
-export const update = async(cocheId:string, datos:any): Promise<void>=>{
+export const update = async(cocheId:any, datos:any): Promise<void>=>{
     const coche = await getCustomRepository(CocheRepository).findOne(cocheId);
     if(!coche) throw new ApiError("No existe el coche");
     datos.id = coche.id

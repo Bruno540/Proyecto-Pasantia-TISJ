@@ -16,7 +16,7 @@ export class UsuariosService {
     return this.Http.get<Usuario[]>(this.Url);
   }
 
-  get(id: string) {
+  get(id: number) {
     return this.Http.get<Usuario>(this.Url + `/${id}`);
   }
 
@@ -25,11 +25,11 @@ export class UsuariosService {
     return this.Http.post(this.Url, usuario);
   }
 
-  update(id: string, usuario: Usuario) {
+  update(id: number, usuario: Usuario) {
     return this.Http.put(this.Url + `/${id}`, usuario);
   }
 
-  _delete(id: string) {
+  _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
 }
