@@ -22,12 +22,24 @@ export class EmpresasService {
     return this.Http.get<Empresa>(this.Url + `/${id}`);
   }
 
-  create(empresa: Empresa) {
-    return this.Http.post(this.Url, empresa);
+  create(empresa: Empresa, file:File) {
+    const formData: FormData = new FormData();
+    if(file!=null){
+      formData.append('imagen', file,file.name);
+    }
+    formData.append('razonSocial', empresa.razonSocial);
+    formData.append('rut',empresa.rut);
+    return this.Http.post(this.Url, formData);
   }
 
-  update(id: number, empresa: Empresa) {
-    return this.Http.put(this.Url + `/${id}`, empresa);
+  update(id: number, empresa: Empresa, file:File) {
+    const formData: FormData = new FormData();
+    if(file!=null){
+      formData.append('imagen', file,file.name);
+    }
+    formData.append('razonSocial', empresa.razonSocial);
+    formData.append('rut',empresa.rut);
+    return this.Http.put(this.Url + `/${id}`, formData);
   }
 
   _delete(id: number) {

@@ -21,6 +21,7 @@ export class RegistrosService {
   }
 
   create(registro: Registro) {
+    console.log(registro);
     return this.Http.post(this.Url, registro);
   }
 

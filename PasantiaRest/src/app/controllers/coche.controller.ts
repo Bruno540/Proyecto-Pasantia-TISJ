@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { request, Request, Response } from "express";
 import validator from "validator";
 import { ApiError } from "../../config/api-error";
 import * as cocheService from "../services/coche.service";
@@ -28,4 +28,9 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 export const update = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
     return response.status(204).json(await cocheService.update(request.params.id, request.body));
+}
+
+export const buscar = async(request:Request,response:Response): Promise<Response> => {
+    console.log("estoy en el controller")
+    return response.json(await cocheService.buscar(request.query.filter))
 }

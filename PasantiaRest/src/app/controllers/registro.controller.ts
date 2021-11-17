@@ -13,8 +13,8 @@ export const getById = async (request: Request, response: Response): Promise<Res
 }
 
 export const create = async (request: Request, response: Response): Promise<Response> => {
-    if(!request.body.turnoId || !validator.isInt(request.body.turnoId)) throw new ApiError("Falta el id del turno");
-    if(!request.body.cocheId || !validator.isInt(request.body.cocheId)) throw new ApiError("Falta el id del coche");
+    if(!request.body.turnoId) throw new ApiError("Falta el id del turno");
+    if(!request.body.cocheId) throw new ApiError("Falta el id del coche");
     return response.status(201).json(await registroService.create(request.body.turnoId, request.body.cocheId, request.body.observaciones));
 }
 

@@ -18,7 +18,7 @@ export const getById = async (request: Request, response: Response): Promise<Res
 export const create = async (request: Request, response: Response): Promise<Response> => {
     if(!request.body.rut) throw new ApiError("Falta el rut de la empresa");
     if(!request.body.razonSocial) throw new ApiError("Falta la razon social de la empresa");
-    return response.status(201).json(await empresaService.create(request.body));
+    return response.status(201).json(await empresaService.create(request.body,request.file));
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
@@ -28,5 +28,5 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de la empresa");
-    return response.status(204).json(await empresaService.update(request.params.id,request.body));
+    return response.status(204).json(await empresaService.update(request.params.id,request.body,request.file));
 }

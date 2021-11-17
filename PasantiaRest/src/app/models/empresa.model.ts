@@ -12,6 +12,9 @@ export class Empresa extends ApiBaseEntity {
     @Column()
     razonSocial: string;
 
+    @Column({nullable: true})
+    imagen: string;
+
     @OneToMany(() => Coche, coche => coche.empresa)
     coches: Coche[];
 

@@ -33,4 +33,9 @@ export class CocheService {
     console.log(id)
     return this.Http.delete(this.Url + `/${id}`);
   }
+
+  getCochesBusqueda(filter: string){
+    console.log("estoy en el servicio")
+    return this.Http.get<Coche[]>(this.Url + '/filtro/buscar?filter='+ filter);
+  }
 }

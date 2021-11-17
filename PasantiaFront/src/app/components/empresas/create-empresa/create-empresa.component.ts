@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
+import { ProyecConfig } from 'src/environments/proyect-config';
 
 @Component({
   selector: 'app-create-empresa',
@@ -11,6 +12,9 @@ import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 export class CreateEmpresaComponent implements OnInit {
 
   empresaForm: FormGroup;
+  currentFile!: File;
+  backendUrl = ProyecConfig.rutaImagen;
+  imagen?: any;
 
   constructor(
     private FormBuilder: FormBuilder,
@@ -21,7 +25,7 @@ export class CreateEmpresaComponent implements OnInit {
   ngOnInit(): void {
     this.empresaForm = this.FormBuilder.group({
       rut: ['', [Validators.required]],
-      razonSocial: ['', [Validators.required]]
+      razonSocial: ['', [Validators.required]],
     });
 
     const routeParams = this.route.snapshot.paramMap;
@@ -33,6 +37,7 @@ export class CreateEmpresaComponent implements OnInit {
           this.empresaForm.addControl("id", new FormControl('', [Validators.required]));
 
           this.empresaForm.patchValue(ok);
+          this.imagen = ok.imagen
         }
       );
     }
@@ -41,9 +46,15 @@ export class CreateEmpresaComponent implements OnInit {
   submit() {
     if (this.empresaForm.contains("id")) {
       const id = this.empresaForm.controls.id.value;
-      this.EmpresasService.update(id, this.empresaForm.value).subscribe();
+      this.EmpresasService.update(id, this.empresaForm.value, this.currentFile).subscribe();
     } else {
-      this.EmpresasService.create(this.empresaForm.value).subscribe();
+      this.EmpresasService.create(this.empresaForm.value, this.currentFile).subscribe();
+    }
+  }
+
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      this.currentFile = event.target.files[0];
     }
   }
 

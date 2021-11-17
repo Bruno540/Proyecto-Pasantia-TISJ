@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/index.routes";
+import path from "path";
 
 /* ---------------------------------------< APP CONFIGURATION >--------------------------------------- */
 
@@ -26,4 +27,8 @@ app.use(express.json());
 // Rutas de la aplicacion.
 app.use("/api", routes);
 
+app.use('/uploads', express.static(path.resolve('uploads')));
+
 export default app;
+
+export const baseDir = __dirname;

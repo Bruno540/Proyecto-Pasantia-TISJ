@@ -1,1 +1,13 @@
-<p>dialog-registro works!</p>
+ <mat-dialog-content>
+    <p><strong>Id: </strong> {{data.id}}</p>
+</mat-dialog-content>
+<h2 mat-dialog-title>Registro {{data.toqueAnden}}</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+    <!-- <p><strong>Matricula: </strong> {{data.matricula}}</p> -->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" class="boton" [routerLink]="'/registros/update/'+ data.id" color="accent">Editar</button>
+    <button mat-button [mat-dialog-close]="true" class="boton" color="warn" (click)="_delete(data.id)">Eliminar</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</mat-dialog-actions> 

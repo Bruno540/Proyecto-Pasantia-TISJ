@@ -11,7 +11,7 @@ import { DialogEmpresaComponent } from './dialog-empresa/dialog-empresa.componen
 })
 export class EmpresasComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'rut', 'razonSocial', 'actions'];
+  displayedColumns: string[] = ['id', 'rut', 'razonSocial','actions'];
   dataSource: Empresa[] = [];
 
   constructor(

@@ -14,4 +14,6 @@ router.put("/:id", handleRequest(CocheController.update));
 
 router.delete("/:id", handleRequest(CocheController._delete));
 
+router.get("/filtro/buscar", handleRequest(CocheController.buscar));
+
 export default router;

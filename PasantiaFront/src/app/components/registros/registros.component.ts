@@ -22,9 +22,9 @@ export class RegistrosComponent implements OnInit {
     })
   }
 
-  openDialog(coche: Registro) {
+  openDialog(registro: Registro) {
     this.dialog.open(DialogRegistroComponent, {
-      data: coche
+      data: registro
     });
   }
 
