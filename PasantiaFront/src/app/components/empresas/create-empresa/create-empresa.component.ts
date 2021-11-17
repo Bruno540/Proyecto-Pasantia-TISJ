@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { ProyecConfig } from 'src/environments/proyect-config';
 
@@ -19,7 +20,9 @@ export class CreateEmpresaComponent implements OnInit {
   constructor(
     private FormBuilder: FormBuilder,
     private EmpresasService: EmpresasService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -46,9 +49,21 @@ export class CreateEmpresaComponent implements OnInit {
   submit() {
     if (this.empresaForm.contains("id")) {
       const id = this.empresaForm.controls.id.value;
-      this.EmpresasService.update(id, this.empresaForm.value, this.currentFile).subscribe();
+      this.EmpresasService.update(id, this.empresaForm.value,this.currentFile).subscribe(
+        ok => {
+          this.snackBar.open("Empresa actualizada exitosamente", "Cerrar");
+          this.router.navigateByUrl("/empresas");
+        },
+        err => this.snackBar.open(err.error.message, "Cerrar")
+      );
     } else {
-      this.EmpresasService.create(this.empresaForm.value, this.currentFile).subscribe();
+      this.EmpresasService.create(this.empresaForm.value,this.currentFile).subscribe(
+        ok => {
+          this.snackBar.open("Empresa creada exitosamente", "Cerrar");
+          this.router.navigateByUrl("/empresas");
+        },
+        err => this.snackBar.open(err.error.message, "Cerrar")
+      );
     }
   }
 

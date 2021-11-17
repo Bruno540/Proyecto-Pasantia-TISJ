@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 import { Empresa } from 'src/app/models/empresa.model';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { DialogEmpresaComponent } from './dialog-empresa/dialog-empresa.component';
@@ -17,9 +18,12 @@ export class EmpresasComponent implements OnInit {
   constructor(
     private EmpresasService: EmpresasService,
     public dialog: MatDialog,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Empresas")
+
     this.EmpresasService.getAll().subscribe(
       ok => {
         this.dataSource = ok;
