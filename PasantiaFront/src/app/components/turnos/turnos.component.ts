@@ -12,7 +12,7 @@ import { DialogTurnoComponent } from './dialog-turno/dialog-turno.component';
 })
 export class TurnosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'hora', 'salida', 'horaSalida', 'destino', 'type', 'actions'];
+  displayedColumns: string[] = ['id', 'hora', 'activo', 'descripcion', 'tipo', 'actions'];
   dataSource: Turno[] = [];
 
   constructor(
