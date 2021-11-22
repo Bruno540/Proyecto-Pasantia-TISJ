@@ -14,6 +14,7 @@ import { RegistrosComponent } from './components/registros/registros.component';
 import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { TieneRolGuard } from './guards/tiene-rol/tiene-rol.guard';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
@@ -24,9 +25,9 @@ const routes: Routes = [
 
   { path: "login", component: LoginComponent, canActivate: [AuthGuard] },
 
-  { path: "usuarios", component: UsuariosComponent },
-  { path: "usuarios/create", component: CreateUsuarioComponent },
-  { path: "usuarios/update/:id", component: CreateUsuarioComponent },
+  { path: "usuarios", component: UsuariosComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+  { path: "usuarios/create", component: CreateUsuarioComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+  { path: "usuarios/update/:id", component: CreateUsuarioComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
 
   { path: "coches", component: CochesComponent },
   { path: "coches/create", component: CreateCocheComponent },

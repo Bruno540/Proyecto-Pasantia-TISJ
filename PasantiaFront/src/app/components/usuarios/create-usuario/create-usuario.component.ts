@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
 
 @Component({
@@ -12,9 +13,13 @@ export class CreateUsuarioComponent implements OnInit {
 
   usuarioForm: FormGroup;
 
-  constructor( private FormBuilder: FormBuilder,
+  constructor(
+    private FormBuilder: FormBuilder,
     private UsuariosService: UsuariosService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.usuarioForm = this.FormBuilder.group({
@@ -41,9 +46,21 @@ export class CreateUsuarioComponent implements OnInit {
   submit() {
     if (this.usuarioForm.contains("id")) {
       const id = this.usuarioForm.controls.id.value;
-      this.UsuariosService.update(id, this.usuarioForm.value).subscribe();
+      this.UsuariosService.update(id, this.usuarioForm.value).subscribe(
+        ok => {
+          this.snackBar.open("Usuario actualizado exitosamente", "Cerrar");
+          this.router.navigateByUrl("/usuarios");
+        },
+        err => this.snackBar.open(err.error.message, "Cerrar")
+      );
     } else {
-      this.UsuariosService.create(this.usuarioForm.value).subscribe();
+      this.UsuariosService.create(this.usuarioForm.value).subscribe(
+        ok => {
+          this.snackBar.open("Usuario creado exitosamente", "Cerrar");
+          this.router.navigateByUrl("/usuarios");
+        },
+        err => this.snackBar.open(err.error.message, "Cerrar")
+      );
     }
   }
 }

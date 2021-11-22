@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 import { Coche } from 'src/app/models/coche.model';
 import { CocheService } from 'src/app/services/coches/coche.service';
 import { DialogCocheComponent } from './dialog-coche/dialog-coche.component';
@@ -14,10 +15,15 @@ export class CochesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'numero', 'matricula', 'empresa', 'actions'];
   dataSource: Coche[] = [];
 
-  constructor(private CocheService: CocheService,
-    public dialog: MatDialog,) { }
+  constructor(
+    private CocheService: CocheService,
+    public dialog: MatDialog,
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Coches");
+
     this.CocheService.getAll().subscribe(
       ok => {
         this.dataSource = ok;

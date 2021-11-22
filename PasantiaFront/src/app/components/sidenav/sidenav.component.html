@@ -9,16 +9,18 @@
             </button>
         </mat-toolbar>
 
-        <mat-nav-list>
+        <mat-nav-list *ngIf="tokenService.getToken()">
             <mat-list-item routerLink="/empresas" (click)="sidenav.toggle()">
                 Empresas
             </mat-list-item>
             <mat-list-item routerLink="/coches" (click)="sidenav.toggle()">
                 Coches
             </mat-list-item>
-            <mat-list-item routerLink="/usuarios" (click)="sidenav.toggle()">
-                Usuarios
-            </mat-list-item>
+            <ng-container *ngIf="tokenService.getRoleName() == 'Administrador'">
+                <mat-list-item routerLink="/usuarios" (click)="sidenav.toggle()">
+                    Usuarios
+                </mat-list-item>
+            </ng-container>
             <mat-list-item routerLink="/turnos" (click)="sidenav.toggle()">
                 Turnos
             </mat-list-item>

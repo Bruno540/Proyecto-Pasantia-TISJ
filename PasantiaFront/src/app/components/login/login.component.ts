@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 
 import { LoginService } from 'src/app/services/auth/login.service';
 import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-login',
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router,
         private titleService: Title,
         private authenticationService: LoginService,
-        private tokenService: TokenStorageService) {
-    }
+        private tokenService: TokenStorageService,
+        private snackBar: MatSnackBar
+    ) { }
 
     ngOnInit() {
         this.titleService.setTitle('Proyecto .NET Login');
@@ -43,16 +45,16 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         this.authenticationService.login(email.toLowerCase(), password).subscribe(data => {
-            console.log("LOS DATOS DE LOGIN SON: ",data);
             this.tokenService.saveToken(data.token);
-            this.tokenService.saveUserName(data.email);
-            this.tokenService.saveRoleName(data.role);
-            //this.router.navigate(['/']);
-            window.location.reload();
+            this.tokenService.saveUserEmail(data.usuario.email);
+            this.tokenService.saveRoleName(data.usuario.rol);
+            this.snackBar.open("Login exitoso", "Cerrar")
+            this.router.navigateByUrl('/');
         },
-        error => {
-            this.loading = false;
-        });
+            error => {
+                this.loading = false;
+                this.snackBar.open(error.error.message, "Cerrar")
+            });
     }
 
     resetPassword() {
