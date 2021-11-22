@@ -11,9 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { MatOptionModule } from "@angular/material/core";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 @NgModule({
     imports: [
@@ -30,7 +35,11 @@ import { MatSelectModule } from "@angular/material/select";
         MatSelectModule,
         MatOptionModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule,
     ],
     exports: [
         MatToolbarModule,
@@ -46,7 +55,14 @@ import { MatSelectModule } from "@angular/material/select";
         MatOptionModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule,
+    ],
+    providers: [
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } }
     ]
 })
 export class MaterialModule { }

@@ -16,7 +16,7 @@ export class DialogCocheComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  _delete(id: string) {
+  _delete(id: number) {
     this.CocheService._delete(id).subscribe();
     window.location.reload();
   }

@@ -2,8 +2,8 @@ import { BaseEntity, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn,
 
 export abstract class ApiBaseEntity extends BaseEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @CreateDateColumn()
     createdDate: Date;

@@ -24,6 +24,14 @@ import { CreateCocheComponent } from './components/coches/create-coche/create-co
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TurnosComponent } from './components/turnos/turnos.component';
+import { CreateTurnoComponent } from './components/turnos/create-turno/create-turno.component';
+import { DialogTurnoComponent } from './components/turnos/dialog-turno/dialog-turno.component';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
+import { DialogRegistroComponent } from './components/registros/dialog-registro/dialog-registro.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +48,15 @@ import { MatInputModule } from '@angular/material/input';
     DialogUsuarioComponent,
     CochesComponent,
     DialogCocheComponent,
-    CreateCocheComponent
+    CreateCocheComponent,
+    TurnosComponent,
+    CreateTurnoComponent,
+    DialogTurnoComponent,
+    RegistrosComponent,
+    CreateRegistroComponent,
+    DialogRegistroComponent,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/index.routes";
-import { connect } from "../config/connection.config";
+import path from "path";
 
 /* ---------------------------------------< APP CONFIGURATION >--------------------------------------- */
 
@@ -10,9 +10,6 @@ const app = express();
 
 // Se almacena le valor del puerto a utilizar.
 app.set("port", process.env.PORT || 3000);
-
-// Connexion a la base de datos.
-connect();
 
 /* ------------------------------------------< MIDDLEWARES >------------------------------------------ */
 
@@ -30,4 +27,8 @@ app.use(express.json());
 // Rutas de la aplicacion.
 app.use("/api", routes);
 
+app.use('/uploads', express.static(path.resolve('uploads')));
+
 export default app;
+
+export const baseDir = __dirname;

@@ -1,0 +1,35 @@
+<mat-dialog-content>
+    <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+        <h2>Turno</h2>
+        <mat-divider [inset]="true"></mat-divider>
+        <p><strong>Hora: </strong> {{data.hora}}</p>
+        <p><strong>Activo: </strong> {{data.activo ? "Si" : "No"}}</p>
+        <p><strong>Dias del Turno: </strong>
+            <mat-list>
+                <mat-list-item *ngIf="data.lunes"> Lunes </mat-list-item>
+                <mat-list-item *ngIf="data.martes"> Martes </mat-list-item>
+                <mat-list-item *ngIf="data.miercoles"> Miercoles </mat-list-item>
+                <mat-list-item *ngIf="data.jueves"> Jueves </mat-list-item>
+                <mat-list-item *ngIf="data.viernes"> Viernes </mat-list-item>
+                <mat-list-item *ngIf="data.sabado"> Sabado </mat-list-item>
+                <mat-list-item *ngIf="data.domingo"> Domingo </mat-list-item>
+            </mat-list>
+        </p>
+        <p><strong>Feriados: </strong> {{data.feriados ? "Si" : "No"}}</p>
+        <p><strong>Dia Normal: </strong> {{data.diaNormal ? "Si" : "No"}}</p>
+        <p><strong>Descripcion: </strong>
+            {{data.descripcion}}
+        </p>
+        <p *ngIf="data.salidaDesde"><strong>Salida Desde: </strong> {{data.salidaDesde}}</p>
+        <p *ngIf="data.horaSalida"><strong>Hora Salida: </strong> {{data.horaSalida}}</p>
+        <p *ngIf="data.destino"><strong>Destino: </strong> {{data.destino}}</p>
+        <p *ngIf="data.horaLlegada"><strong>Hora Llegada: </strong> {{data.horaLlegada}}</p>
+        <p><strong>Tipo: </strong> {{data.tipo?.nombre}}</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" class="boton" [routerLink]="'/turnos/update/'+ data.id"
+        color="accent">Editar</button>
+    <button mat-button [mat-dialog-close]="true" class="boton" color="warn" (click)="_delete(data.id)">Eliminar</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</mat-dialog-actions>

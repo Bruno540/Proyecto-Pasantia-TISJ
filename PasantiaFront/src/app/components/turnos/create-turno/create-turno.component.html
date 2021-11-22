@@ -1,0 +1,92 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex.lt-sm="100" fxFlex.gt-sm="40" fxFlex.gt-lg="25" class="card">
+        <mat-card-content>
+            <form [formGroup]="turnoForm">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                    <h1 color>Datos del Turno</h1>
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora</mat-label>
+                        <input matInput name="hora" formControlName="hora">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Descripcion</mat-label>
+                        <textarea matInput name="descripcion" formControlName="descripcion" rows="4"></textarea>
+                    </mat-form-field>
+
+
+                    <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de Turno</mat-label>
+                        <mat-select matSelect formControlName="tipo">
+                            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+                                {{tipo.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Empresa</mat-label>
+                        <mat-select matSelect formControlName="empresa">
+                            <mat-option *ngFor="let empresa of empresas" [value]="empresa.id">
+                                {{empresa.razonSocial}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div>
+                        <label>Dias del Turno</label>
+                        <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                            <mat-checkbox formControlName="lunes">Lunes</mat-checkbox>
+                            <mat-checkbox formControlName="martes">Martes</mat-checkbox>
+                            <mat-checkbox formControlName="miercoles">Miercoles</mat-checkbox>
+                            <mat-checkbox formControlName="jueves">Jueves</mat-checkbox>
+                            <mat-checkbox formControlName="viernes">Viernes</mat-checkbox>
+                            <mat-checkbox formControlName="sabado">Sabado</mat-checkbox>
+                            <mat-checkbox formControlName="domingo">Domingo</mat-checkbox>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Tipo de Dia</label>
+                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                            <mat-checkbox formControlName="feriados">Feriados</mat-checkbox>
+                            <mat-checkbox formControlName="diaNormal">Dia Normal</mat-checkbox>
+                        </div>
+                    </div>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora de Llegada</mat-label>
+                        <input matInput name="horaLlegada" formControlName="horaLlegada">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Lugar de Salida</mat-label>
+                        <input matInput name="salidaDesde" formControlName="salidaDesde">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora de parida</mat-label>
+                        <input matInput name="horaSalida" formControlName="horaSalida">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Lugar de Destino</mat-label>
+                        <input matInput name="destino" formControlName="destino">
+                    </mat-form-field>
+
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button onclick="history.back(-1)" mat-raised-button type="button" color="primary">Cancelar</button>
+            <button (click)="submit()" [disabled]="turnoForm.invalid" mat-raised-button type="submit"
+                color="primary">Confirmar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>
