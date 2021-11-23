@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/index.routes";
 import path from "path";
+const bodyParser = require('body-parser');
 
 /* ---------------------------------------< APP CONFIGURATION >--------------------------------------- */
 
@@ -14,8 +15,7 @@ app.set("port", process.env.PORT || 3000);
 /* ------------------------------------------< MIDDLEWARES >------------------------------------------ */
 
 // Permite que la aplicación se comunique con otros servidores.
-app.use(cors());
-
+app.use(cors())
 // Provee un logger de peticiones.
 app.use(morgan("dev"));
 
@@ -26,6 +26,7 @@ app.use(express.json());
 
 // Rutas de la aplicacion.
 app.use("/api", routes);
+
 
 app.use('/uploads', express.static(path.resolve('uploads')));
 

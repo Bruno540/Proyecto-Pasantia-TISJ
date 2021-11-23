@@ -14,6 +14,7 @@ import { RegistrosComponent } from './components/registros/registros.component';
 import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: "registros", component: RegistrosComponent },
   { path: "registros/create", component: CreateRegistroComponent },
   { path: "registros/update/:id", component: CreateRegistroComponent },
+  { path: "registros/live", component: RegistroLiveComponent },
 
   { path: '404', component: NotFoundComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

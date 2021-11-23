@@ -1,9 +1,10 @@
-import { getCustomRepository } from "typeorm";
-import { ApiError } from "../../config/api-error";
-import { Registro } from "../models/registro.model";
-import { RegistroRepository } from "../repositories/registro.repository";
-import { CocheRepository } from "../repositories/coche.repository";
-import { TurnoRepository } from "../repositories/turno.repository";
+import {getCustomRepository} from "typeorm";
+import {ApiError} from "../../config/api-error";
+import {EstadoRegistro, Registro} from "../models/registro.model";
+import {RegistroRepository} from "../repositories/registro.repository";
+import {CocheRepository} from "../repositories/coche.repository";
+import {TurnoRepository} from "../repositories/turno.repository";
+import moment from "moment";
 
 export const getAll = async (): Promise<Registro[] | undefined> => {
     return await getCustomRepository(RegistroRepository).find({
@@ -19,11 +20,30 @@ export const getById = async (id:any): Promise<Registro | undefined> => {
 }
 
 export const create = async (turnoId:any, cocheId:any, observaciones:string): Promise<void>=>{
-    const turno = await getCustomRepository(TurnoRepository).findOne(turnoId);
-    if(!turno) throw new ApiError("No exite el turno ingresado");
+    const turno = await getCustomRepository(TurnoRepository).findOne(turnoId,{
+        relations:["tipo"]
+    });
+    var time = "15:30:00";
+    var formatted = moment(time, "HH:mm:ss");
+    console.log(formatted); 
+    if(!turno) throw new ApiError("No existe el turno ingresado");
     const coche = await getCustomRepository(CocheRepository).findOne(cocheId);
-    if(!coche) throw new ApiError("No exite el coche ingresado");
+    if(!coche) throw new ApiError("No existe el coche ingresado");
     const registro = new Registro();
+    switch (turno.tipo.nombre){
+        case "Salida":{
+            registro.estado = EstadoRegistro.PARTIO;
+            break;
+        }
+        case "Llegada":{
+            registro.estado = EstadoRegistro.ARRIBO;
+            break;
+        }
+        case "Pasada":{
+            registro.estado = EstadoRegistro.ARRIBO;
+            break;
+        }
+    }
     registro.toqueAnden = new Date();
     registro.observaciones = observaciones;
     registro.turno = turno;
