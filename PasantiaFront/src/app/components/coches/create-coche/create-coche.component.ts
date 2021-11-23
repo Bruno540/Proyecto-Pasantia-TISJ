@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Empresa } from 'src/app/models/empresa.model';
 import { CocheService } from 'src/app/services/coches/coche.service';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
@@ -18,7 +19,9 @@ export class CreateCocheComponent implements OnInit {
   constructor(private FormBuilder: FormBuilder,
     private CocheService: CocheService,
     private EmpresasService: EmpresasService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getEmpresas();
@@ -53,9 +56,19 @@ export class CreateCocheComponent implements OnInit {
   submit() {
     if (this.cocheForm.contains("id")) {
       const id = this.cocheForm.controls.id.value;
-      this.CocheService.update(id, this.cocheForm.value).subscribe();
+      this.CocheService.update(id, this.cocheForm.value).subscribe(data=>{
+          this.snackBar.open("Coche actualizado exitosamente", "Cerrar");
+          this.router.navigateByUrl("/coches");
+      },err=>{
+        this.snackBar.open(err.error.message, "Cerrar")
+      });
     } else {
-      this.CocheService.create(this.cocheForm.value).subscribe();
+      this.CocheService.create(this.cocheForm.value).subscribe(data=>{
+        this.snackBar.open("Coche creado exitosamente", "Cerrar");
+        this.router.navigateByUrl("/coches");
+      },err=>{
+        this.snackBar.open(err.error.message, "Cerrar")
+      });
     }
   }
 

@@ -33,6 +33,9 @@ import { DialogRegistroComponent } from './components/registros/dialog-registro/
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthInterceptor } from './middlewares/auth.interceptor';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
+//const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { AuthInterceptor } from './middlewares/auth.interceptor';
     CreateRegistroComponent,
     DialogRegistroComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegistroLiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,8 @@ import { AuthInterceptor } from './middlewares/auth.interceptor';
     FlexLayoutModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    //SocketIoModule.forRoot(config)
 
   ],
   providers: [

@@ -65,3 +65,5 @@ export class Turno extends ApiBaseEntity {
     empresa: Empresa;
     
 }
+
+

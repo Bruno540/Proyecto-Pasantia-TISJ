@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Coche } from 'src/app/models/coche.model';
 import { Turno } from 'src/app/models/turno.model';
 import { CocheService } from 'src/app/services/coches/coche.service';
@@ -22,7 +23,9 @@ export class CreateRegistroComponent implements OnInit {
     private RegistroService: RegistrosService,
     private CocheService: CocheService,
     private TurnoService: TurnosService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getCoches();
@@ -63,14 +66,23 @@ export class CreateRegistroComponent implements OnInit {
   submit() {
     if (this.registrosForm.contains("id")) {
       const id = this.registrosForm.controls.id.value;
-      this.RegistroService.update(id, this.registrosForm.value).subscribe();
+      this.RegistroService.update(id, this.registrosForm.value).subscribe(data=>{
+        this.snackBar.open("Registro actualizado exitosamente", "Cerrar");
+        this.router.navigateByUrl("/registros");
+    },err=>{
+      this.snackBar.open(err.error.message, "Cerrar")
+    });
     } else {
-      this.RegistroService.create(this.registrosForm.value).subscribe();
+      this.RegistroService.create(this.registrosForm.value).subscribe(data=>{
+        this.snackBar.open("Registro actualizado exitosamente", "Cerrar");
+        this.router.navigateByUrl("/registros");
+    },err=>{
+      this.snackBar.open(err.error.message, "Cerrar")
+    });
     }
   }
 
   busqueda(event: any): void{
-    console.log('Estoy buuscando', event.target.value);
     this.getCochesBusqueda(event.target.value);
   }
 
