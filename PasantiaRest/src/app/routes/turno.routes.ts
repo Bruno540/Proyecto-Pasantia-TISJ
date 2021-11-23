@@ -10,6 +10,8 @@ router.get('/', handleRequest(TurnoController.get));
 
 router.get('/:id', handleRequest(TurnoController.getById));
 
+router.get('/tools/proximos', handleRequest(TurnoController.getProximos));
+
 router.post('/', handleRequest(TurnoController.post));
 
 router.put('/:id', handleRequest(TurnoController.put));

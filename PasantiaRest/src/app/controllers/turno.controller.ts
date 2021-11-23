@@ -52,3 +52,8 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 
     return response.status(204).json();
 }
+
+export const getProximos = async (request: Request, response: Response): Promise<Response> => {
+    const result = await getCustomRepository(TurnoRepository).findProximos();
+    return response.status(200).json(result);
+}
