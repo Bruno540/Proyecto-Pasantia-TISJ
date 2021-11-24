@@ -16,6 +16,10 @@ export class RegistrosService {
     return this.Http.get<Registro[]>(this.Url);
   }
 
+  findUltimos() {
+    return this.Http.get<Registro[]>(this.Url+'/tools/ultimos');
+  }
+
   get(id: number) {
     return this.Http.get<Registro>(this.Url + `/${id}`);
   }

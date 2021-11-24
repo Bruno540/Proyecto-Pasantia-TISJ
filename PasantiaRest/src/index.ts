@@ -2,7 +2,6 @@ import { EventEmitter } from "stream";
 import app from "./app/application";
 import { Connection } from "./config/connection.config";
 const cors = require('cors');
-const Stream = new EventEmitter();
 /* ---------------------------------------< APP DEPLOY >--------------------------------------- */
 
 // Connexion a la base de datos.
@@ -15,7 +14,7 @@ Connection.connect().then(() => {
         console.log("Aplicacion escuchando en el puerto:", 3000);
     });
 
-    app.get('/sse',(req,res)=>{
+    /*app.get('/sse',(req,res)=>{
         res.writeHead(200,{
             'Content-Type':'text/event-stream',
             'Cache-Control':'no-cache',
@@ -24,10 +23,11 @@ Connection.connect().then(() => {
         Stream.on('push',(event,data)=>{
             res.write('event: '+String(event) +'\n'+ 'data: ' + JSON.stringify(data) + '\n\n')
         })
-    });
+    });*/
 
-    setInterval(()=>{
-        Stream.emit('push','message',{'message':'it-works!'})
-    },1000)
+    /*setInterval(async ()=>{
+        const registros = await getAllOrderByToqueAnden();
+        //Stream.emit('push','message',registros);
+    },2000)*/
 
 });

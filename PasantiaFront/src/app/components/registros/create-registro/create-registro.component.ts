@@ -74,7 +74,7 @@ export class CreateRegistroComponent implements OnInit {
     });
     } else {
       this.RegistroService.create(this.registrosForm.value).subscribe(data=>{
-        this.snackBar.open("Registro actualizado exitosamente", "Cerrar");
+        this.snackBar.open("Registro creado exitosamente", "Cerrar");
         this.router.navigateByUrl("/registros");
     },err=>{
       this.snackBar.open(err.error.message, "Cerrar")
