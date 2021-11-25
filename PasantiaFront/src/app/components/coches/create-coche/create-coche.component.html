@@ -16,9 +16,9 @@
                         <input matInput formControlName="matricula">
                     </mat-form-field>
 
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" *ngIf="tokenService.getRoleName() == 'Administrador'">
                         <mat-label>Empresa</mat-label>
-                        <mat-select matSelect formControlName="empresaId">
+                        <mat-select matSelect formControlName="empresa">
                           <mat-option *ngFor="let empresa of dataSource" [value]="empresa.id">
                             {{empresa.razonSocial}}
                           </mat-option>

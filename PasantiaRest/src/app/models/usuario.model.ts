@@ -1,10 +1,12 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { ApiBaseEntity } from "./base-entity.model";
+import { Empresa } from "./empresa.model";
+import { Rol } from "./rol.model";
 
 @Entity("usuarios")
 export class Usuario extends ApiBaseEntity {
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
     @Column()
@@ -15,5 +17,12 @@ export class Usuario extends ApiBaseEntity {
 
     @Column({ select: false })
     password: string;
+
+    @ManyToOne(() => Rol)
+    rol: Rol;
+
+    @OneToOne(() => Empresa)
+    @JoinColumn()
+    empresa: Empresa;
 
 }

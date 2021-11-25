@@ -28,7 +28,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" *ngIf="tokenService.getRoleName() == 'Administrador'">
                         <mat-label>Empresa</mat-label>
                         <mat-select matSelect formControlName="empresa">
                             <mat-option *ngFor="let empresa of empresas" [value]="empresa.id">

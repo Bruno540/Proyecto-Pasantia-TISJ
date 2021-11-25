@@ -10,19 +10,17 @@ import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokensto
 export class NavbarButtonsComponent implements OnInit {
 
   @Output() cerrarSesionEvent: EventEmitter<any> = new EventEmitter();
-  @Input() logeado: boolean = false;
   @Input() usuario: undefined;
 
-  constructor(private service: TokenStorageService, private loginService: LoginService) {
-  }
+  constructor(
+    public service: TokenStorageService,
+  ) { }
 
   ngOnInit(): void {
-    this.logeado = !!this.service.getToken();
   }
 
   cerrarSesion(): void {
     this.service.logout();
-    window.location.reload();
   }
 
 }
