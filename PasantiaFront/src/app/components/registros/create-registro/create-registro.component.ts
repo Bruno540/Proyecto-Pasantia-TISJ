@@ -16,7 +16,7 @@ export class CreateRegistroComponent implements OnInit {
 
   registrosForm: FormGroup;
   coches: any;
-  turnos: Turno[]=[];
+  turnos: any;
 
   constructor(private FormBuilder: FormBuilder,
     private RegistroService: RegistrosService,
@@ -54,9 +54,9 @@ export class CreateRegistroComponent implements OnInit {
   }
 
   getTurnos():void{
-    this.TurnoService.getAll().subscribe(data=>{
+    this.TurnoService.getProximos().subscribe(data=>{
       console.log(data);
-      this.turnos = data[0]
+      this.turnos = data
     })
   }
 
