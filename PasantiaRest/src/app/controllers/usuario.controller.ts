@@ -26,22 +26,18 @@ export const create = async (request: Request, response: Response): Promise<Resp
     if (typeof request.body.password != "string") throw ApiError.badRequestError("Falta la contraseña del usuario");
     if (typeof request.body.nombre != "string") throw ApiError.badRequestError("Falta el nombre del usuario");
     if (typeof request.body.apellido != "string") throw ApiError.badRequestError("Falta el apellido del usuario");
-    if (typeof request.body.rol != "number") throw ApiError.badRequestError("Falta el rol del usuario");
     if (!validator.isEmail(request.body.email)) throw ApiError.badRequestError("El email ingresado no es valido");
+
+    console.log(request.body);
 
     if (await usuariosService.getByEmail(request.body.email)) throw ApiError.badRequestError("Ya existe un usuario con el email ingresado");
 
-    await empresasService.getById(request.body.empresa);
-
-    const rol = await (getRepository(Rol).findOne(request.body.rol));
+    const rol = await (getRepository(Rol).findOne({ where: { nombre: "Empresa" } }));
     if (!rol) throw ApiError.badRequestError("El rol ingresado no existe");
-    request.body.rol = rol;
 
-    if (rol.nombre == "Empresa") {
-        if (typeof request.body.empresa != "number") throw ApiError.badRequestError("Falta la empresa del usuario");
-        const empresa = await empresasService.getById(request.body.empresa);
-        request.body.empresa = empresa;
-    }
+    if (typeof request.body.empresa != "number") throw ApiError.badRequestError("Falta la empresa del usuario");
+    const empresa = await empresasService.getById(request.body.empresa);
+    request.body.empresa = empresa;
 
     request.body.password = await encryptPassword(request.body.password);
 

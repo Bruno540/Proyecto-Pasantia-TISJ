@@ -1,6 +1,5 @@
 <div *ngIf="!this.service.getToken(); else sesioniniciada">
     <button mat-button [routerLink]="['/login']">Iniciar Sesion</button>
-    <button mat-button [routerLink]="['/signup']">Registrarse</button>
 </div>
 
 <ng-template #sesioniniciada>

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Proyecto .NET Login');
+        this.titleService.setTitle('Iniciar Sesion');
         this.createForm();
     }
 

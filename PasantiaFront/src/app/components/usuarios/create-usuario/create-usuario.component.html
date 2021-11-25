@@ -21,8 +21,18 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" style="margin-top: 8px;">
                         <mat-label>Password</mat-label>
-                        <input matInput formControlName="password">
+                        <input type="password" matInput formControlName="password">
                     </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Empresa</mat-label>
+                        <mat-select matSelect formControlName="empresa">
+                          <mat-option *ngFor="let empresa of dataSource" [value]="empresa.id">
+                            {{empresa.razonSocial}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
                 </div>
             </form>
         </mat-card-content>

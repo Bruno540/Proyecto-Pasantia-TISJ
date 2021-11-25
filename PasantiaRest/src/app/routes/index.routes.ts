@@ -10,15 +10,15 @@ import { tieneRol } from "../middlewares/tieneRol";
 
 const router = Router();
 
-router.use("/empresas", EmpresasRoutes);
+router.use("/empresas", [isLoggedIn, tieneRol(["Administrador"])], EmpresasRoutes);
 
 router.use("/authentication", AuthRoutes);
 
 router.use("/usuarios", [isLoggedIn, tieneRol(["Administrador"])], UsuariosRoutes);
 
-router.use("/coches", CochesRoutes);
+router.use("/coches", [isLoggedIn, tieneRol(["Administrador", "Empresa"])], CochesRoutes);
 
-router.use("/turnos", TurnosRoutes);
+router.use("/turnos", [isLoggedIn, tieneRol(["Administrador", "Empresa"])], TurnosRoutes);
 
 router.use("/registros", RegistroRoutes);
 

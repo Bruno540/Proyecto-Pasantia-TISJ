@@ -1,6 +1,8 @@
+import { Empresa } from "./empresa.model";
+
 export interface Coche {
     id: number;
     numero: string;
     matricula: string;
-    empresaId: string;
+    empresa: Empresa | number;
 }

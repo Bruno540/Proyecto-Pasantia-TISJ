@@ -20,27 +20,27 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
 const routes: Routes = [
   { path: "home", component: HomeComponent },
 
-  { path: "empresas", component: EmpresasComponent },
-  { path: "empresas/create", component: CreateEmpresaComponent },
-  { path: "empresas/update/:id", component: CreateEmpresaComponent },
+  { path: "empresas", component: EmpresasComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+  { path: "empresas/create", component: CreateEmpresaComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+  { path: "empresas/update/:id", component: CreateEmpresaComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
 
-  { path: "login", component: LoginComponent, canActivate: [AuthGuard] },
+  { path: "login", component: LoginComponent},
 
   { path: "usuarios", component: UsuariosComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
   { path: "usuarios/create", component: CreateUsuarioComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
   { path: "usuarios/update/:id", component: CreateUsuarioComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
 
-  { path: "coches", component: CochesComponent },
-  { path: "coches/create", component: CreateCocheComponent },
-  { path: "coches/update/:id", component: CreateCocheComponent },
+  { path: "coches", component: CochesComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador', 'Empresa'] } },
+  { path: "coches/create", component: CreateCocheComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador', 'Empresa'] } },
+  { path: "coches/update/:id", component: CreateCocheComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador', 'Empresa'] } },
 
-  { path: "turnos", component: TurnosComponent },
-  { path: "turnos/create", component: CreateTurnoComponent },
-  { path: "turnos/update/:id", component: CreateTurnoComponent },
+  { path: "turnos", component: TurnosComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador', 'Empresa'] } },
+  { path: "turnos/create", component: CreateTurnoComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador', 'Empresa'] } },
+  { path: "turnos/update/:id", component: CreateTurnoComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador', 'Empresa'] } },
 
-  { path: "registros", component: RegistrosComponent },
-  { path: "registros/create", component: CreateRegistroComponent },
-  { path: "registros/update/:id", component: CreateRegistroComponent },
+  { path: "registros", component: RegistrosComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+  { path: "registros/create", component: CreateRegistroComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+  { path: "registros/update/:id", component: CreateRegistroComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
   { path: "registros/live", component: RegistroLiveComponent },
 
   { path: '404', component: NotFoundComponent },
