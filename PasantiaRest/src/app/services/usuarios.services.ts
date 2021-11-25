@@ -6,17 +6,12 @@ import { UsuarioRepository } from "../repositories/usuarios.repository";
 /* ---------------------------------------< EMPRESAS SERVICE >--------------------------------------- */
 
 export const getByEmailContrasenia = async (email: string, password: string): Promise<Usuario | undefined> => {
-    const userSelectValues: (keyof Usuario)[] = ["id", "email", "nombre", "apellido", "password", "rol"]
+    const userSelectValues: (keyof Usuario)[] = ["email","nombre", "apellido", "password"]
     const usuario = await getCustomRepository(UsuarioRepository).findOne({
         select: userSelectValues,
-        where: { email },
-        relations: ["rol"]
+        where: { email }
     });
     if (usuario && await verifyPassword(password, usuario.password)) return usuario;
     return undefined;
 };
 
-export const getByEmail = async (email: string): Promise<Usuario | undefined> => {
-    const usuario = await getCustomRepository(UsuarioRepository).findByEmail(email);
-    return usuario;
-}

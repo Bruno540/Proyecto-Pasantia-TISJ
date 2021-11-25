@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Title } from '@angular/platform-browser';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
 import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.component';
@@ -12,16 +11,13 @@ import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.componen
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'email', 'nombre', 'apellido', 'actions'];
+  displayedColumns: string[] = ['id', 'email','nombre','apellido','actions'];
   dataSource: Usuario[] = [];
 
   constructor(private UsuariosService: UsuariosService,
-    public dialog: MatDialog,
-    private titleService: Title
-  ) { }
+    public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Usuarios");
     this.UsuariosService.getAll().subscribe(
       ok => {
         console.log(ok);

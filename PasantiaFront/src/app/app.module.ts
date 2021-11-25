@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,7 +32,6 @@ import { CreateRegistroComponent } from './components/registros/create-registro/
 import { DialogRegistroComponent } from './components/registros/dialog-registro/dialog-registro.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AuthInterceptor } from './middlewares/auth.interceptor';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -76,7 +75,6 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
     ReactiveFormsModule,
     MatSelectModule

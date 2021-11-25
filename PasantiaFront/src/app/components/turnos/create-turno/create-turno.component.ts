@@ -5,7 +5,6 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empresa } from 'src/app/models/empresa.model';
 import { TipoTurno } from 'src/app/models/turno.model';
-import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { TurnosService } from 'src/app/services/turnos/turnos.service';
 
@@ -27,11 +26,11 @@ export class CreateTurnoComponent implements OnInit {
     private route: ActivatedRoute,
     private empresasService: EmpresasService,
     private router: Router,
-    private snackBar: MatSnackBar,
-    public tokenService: TokenStorageService
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
+    this.getEmpresas();
     this.getTipos();
 
     this.turnoForm = this.FormBuilder.group({
@@ -55,12 +54,6 @@ export class CreateTurnoComponent implements OnInit {
       empresa: ['', [Validators.required]]
     });
 
-    if (this.tokenService.getRoleName() == 'Empresa') {
-      this.turnoForm.removeControl("empresaId");
-    } else {
-      this.getEmpresas();
-    }
-
     const routeParams = this.route.snapshot.paramMap;
     const IdFromRoute = Number(routeParams.get('id'));
 
@@ -71,9 +64,11 @@ export class CreateTurnoComponent implements OnInit {
         ok => {
           this.turnoForm.addControl("id", new FormControl('', [Validators.required]));
 
-          if (typeof ok.tipo != "number" ) ok.tipo = ok.tipo.id;
+          ok.tipo = ok.tipo.id;
 
-          if (typeof ok.empresa != "number" ) ok.empresa = ok.empresa.id;
+          ok.empresa = ok.empresa.id;
+
+          console.log(ok);
 
           this.turnoForm.patchValue(ok);
         }
