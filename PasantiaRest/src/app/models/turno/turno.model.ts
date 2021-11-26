@@ -7,7 +7,7 @@ import { TipoTurno } from "./tipo-turno.model";
 @Entity('turnos')
 export class Turno extends ApiBaseEntity {
 
-    @Column()
+    @Column({ type: 'time' })
     hora: string;
 
     @Column()
@@ -43,16 +43,16 @@ export class Turno extends ApiBaseEntity {
     @Column({ type: "text" })
     descripcion: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     salidaDesde: string;
 
-    @Column()
+    @Column({ type: 'time', nullable: true })
     horaSalida: string;
 
-    @Column()
+    @Column({ nullable: true })
     destino: string;
 
-    @Column()
+    @Column({ type: 'time', nullable: true })
     horaLlegada: string;
 
     @ManyToOne(() => TipoTurno, tipo => tipo.turnos)
@@ -63,7 +63,7 @@ export class Turno extends ApiBaseEntity {
 
     @ManyToOne(() => Empresa, empresa => empresa.turnos)
     empresa: Empresa;
-    
+
 }
 
 
