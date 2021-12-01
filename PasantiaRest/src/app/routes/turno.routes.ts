@@ -12,6 +12,8 @@ router.get('/:id', handleRequest(TurnoController.getById));
 
 router.get('/tools/proximos', handleRequest(TurnoController.getProximos));
 
+router.get('/tools/live', handleRequest(TurnoController.getTurnosLive));
+
 router.post('/', handleRequest(TurnoController.post));
 
 router.put('/:id', handleRequest(TurnoController.put));

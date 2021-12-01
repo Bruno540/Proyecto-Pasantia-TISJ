@@ -22,6 +22,10 @@ export class TurnosService {
     return this.Http.get(this.Url + "/tools/proximos");
   }
 
+  getLive(){
+    return this.Http.get<Turno[]>(this.Url + "/tools/live");
+  }
+
   getTipos() {
     return this.Http.get<TipoTurno[]>(this.Url + "/tipos");
   }

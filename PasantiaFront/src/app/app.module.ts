@@ -34,6 +34,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
+
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -71,6 +72,7 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+
     //SocketIoModule.forRoot(config)
 
   ],

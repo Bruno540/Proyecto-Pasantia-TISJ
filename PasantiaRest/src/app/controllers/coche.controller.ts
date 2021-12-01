@@ -32,5 +32,5 @@ export const update = async (request: Request, response: Response): Promise<Resp
 
 export const buscar = async(request:Request,response:Response): Promise<Response> => {
     console.log("estoy en el controller")
-    return response.json(await cocheService.buscar(request.query.filter))
+    return response.json(await cocheService.buscar(request.query.filter, request.query.empresaId))
 }

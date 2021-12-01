@@ -14,7 +14,7 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Buscar coche</mat-label>
-                        <input matInput (keyup)="busqueda($event)">
+                        <input matInput (keyup)="busqueda($event)" [disabled]="selectorCoches" >
                      </mat-form-field>
 
                     <mat-form-field appearance="fill">
@@ -25,11 +25,11 @@
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
-
+                    
                     <mat-form-field appearance="fill">
                         <mat-label>Turno</mat-label>
                         <mat-select matSelect formControlName="turnoId">
-                          <mat-option *ngFor="let turno of turnos" [value]="turno.id">
+                          <mat-option *ngFor="let turno of turnos" [value]="turno.id" (click)="obtenerCochesEmpresa(turno)">
                             {{turno.hora}} a {{turno.destino}} desde {{turno.salidaDesde}}
                           </mat-option>
                         </mat-select>
@@ -37,6 +37,7 @@
 
                 </div>
             </form>
+            <mat-slide-toggle  (click)="cambiarTurnos()">Turnos: {{cantTurnos}}</mat-slide-toggle>
         </mat-card-content>
 
         <mat-card-actions align="end">

@@ -5,33 +5,27 @@
         <ng-container matColumnDef="fotoEmpresa">
             <th mat-header-cell *matHeaderCellDef> Foto </th>
             
-            <td mat-cell *matCellDef="let element"> <img  mat-card-lg-image [src]='backendUrl + element.turno.empresa.imagen' alt=""> </td>
+            <td mat-cell *matCellDef="let element"> <img  mat-card-lg-image [src]='backendUrl + element.empresa.imagen' alt=""> </td>
         </ng-container>
 
         <ng-container matColumnDef="empresa">
             <th mat-header-cell *matHeaderCellDef> Empresa</th>
-            <td mat-cell *matCellDef="let element"> {{element.turno.empresa.razonSocial}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.empresa.razonSocial  | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="origen">
             <th mat-header-cell *matHeaderCellDef> Origen</th>
-            <td mat-cell *matCellDef="let element"> {{element.turno.salidaDesde}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.salidaDesde  | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="destino">
             <th mat-header-cell *matHeaderCellDef> Destino</th>
-            <td mat-cell *matCellDef="let element"> {{element.turno.destino}} </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="cocheNro">
-            <th mat-header-cell *matHeaderCellDef> Nro coche </th>
-            <td mat-cell *matCellDef="let element"> {{element.coche.numero}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.destino  | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="horaTurno">
             <th mat-header-cell *matHeaderCellDef> Hora </th>
-            <td mat-cell *matCellDef="let element"> {{element.turno.hora}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
         </ng-container>
 
 

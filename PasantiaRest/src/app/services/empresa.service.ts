@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { ApiError } from "../../config/api-error";
+import { Coche } from "../models/coche.model";
 import { Empresa } from "../models/empresa.model";
 import { EmpresaRepository } from "../repositories/empresa.repository";
 
@@ -7,10 +8,17 @@ export const getAll = async (): Promise<Empresa[] | undefined> => {
     return await getCustomRepository(EmpresaRepository).find();
 }
 
+export const getCoches = async (id:any): Promise<Coche[] | undefined> => {
+    const empresa = await getCustomRepository(EmpresaRepository).findOne(id,{
+        relations: ["coches"],
+    });
+    return empresa?.coches;
+}
+
 export const getById = async (id:any): Promise<Empresa | undefined> => {
     let empresa : Empresa | undefined;
     empresa = await getCustomRepository(EmpresaRepository).findOne(id);
-    if(!empresa) throw new ApiError("No existe la empresa coche");
+    if(!empresa) throw new ApiError("No existe la empresa");
     return empresa;
 }
 
