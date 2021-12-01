@@ -3,7 +3,7 @@ import { getRepository } from "typeorm";
 import { ApiError } from "../../config/api-error";
 import { createToken } from "../libraries/tokens.library";
 import { Rol } from "../models/rol.model";
-import * as usuariosService from "../services/usuarios.services";
+import * as usuariosService from "../services/usuarios.service";
 
 export const login = async (request: Request, response: Response): Promise<Response> => {
     if (!request.body.email) throw ApiError.badRequestError("No se ingreso el email");

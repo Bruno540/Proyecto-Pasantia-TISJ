@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "../libraries/tokens.library";
-import * as usuariosService from "../services/usuarios.services";
+import * as usuariosService from "../services/usuarios.service";
 
 /* ---------------------------------------< LOGGED IN MIDDLEWARE >--------------------------------------- */
 

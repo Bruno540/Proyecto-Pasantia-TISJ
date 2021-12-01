@@ -8,14 +8,13 @@
 
                     <mat-form-field appearance="fill">
                         <mat-label>Hora</mat-label>
-                        <input matInput name="hora" formControlName="hora">
+                        <input matInput type="time" name="hora" formControlName="hora">
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Descripcion</mat-label>
                         <textarea matInput name="descripcion" formControlName="descripcion" rows="4"></textarea>
                     </mat-form-field>
-
 
                     <mat-checkbox formControlName="activo">Activo</mat-checkbox>
 
@@ -58,25 +57,28 @@
                         </div>
                     </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Hora de Llegada</mat-label>
-                        <input matInput name="horaLlegada" formControlName="horaLlegada">
-                    </mat-form-field>
+                    <ng-container >
+                        <mat-form-field appearance="fill">
+                            <mat-label>Hora de Llegada</mat-label>
+                            <input matInput name="horaLlegada" formControlName="horaLlegada" type="time">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Lugar de Destino</mat-label>
+                            <input matInput name="destino" formControlName="destino">
+                        </mat-form-field>
+                    </ng-container>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Lugar de Salida</mat-label>
-                        <input matInput name="salidaDesde" formControlName="salidaDesde">
-                    </mat-form-field>
+                    <ng-container>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Hora de parida</mat-label>
+                            <input matInput name="horaSalida" formControlName="horaSalida" type="time">
+                        </mat-form-field>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Hora de parida</mat-label>
-                        <input matInput name="horaSalida" formControlName="horaSalida">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                        <mat-label>Lugar de Destino</mat-label>
-                        <input matInput name="destino" formControlName="destino">
-                    </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Lugar de Salida</mat-label>
+                            <input matInput name="salidaDesde" formControlName="salidaDesde">
+                        </mat-form-field>
+                    </ng-container>
 
                 </div>
             </form>

@@ -16,7 +16,7 @@ import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
@@ -40,6 +40,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatDatepickerModule,
         MatNativeDateModule,
         MatCheckboxModule,
+        MatSlideToggleModule,
     ],
     exports: [
         MatToolbarModule,
@@ -60,6 +61,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatDatepickerModule,
         MatNativeDateModule,
         MatCheckboxModule,
+        MatSlideToggleModule,
     ],
     providers: [
         { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } }

@@ -5,12 +5,30 @@ import * as cocheService from "../services/coche.service";
 
 
 export const getAll = async (request: Request, response: Response): Promise<Response> => {
-    return response.json(await cocheService.getAll());
+    let coches;
+    
+    if (request.user.rol.nombre == "Administrador") {
+        coches = await cocheService.getAll();    
+    } else {
+        if(!request.user.empresa.id) throw ApiError.badRequestError("No se ingreso el usuario")
+
+        coches = await cocheService.getAllByEmpresa(request.user.empresa.id);
+    }
+    
+    return response.json(coches);
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
     if (!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de coche");
-    return response.json(await cocheService.getById(request.params.id));
+    
+    const coche = await cocheService.getById(request.params.id);
+    if(!coche) throw new ApiError("No se encontro el coche", 404);
+
+    if (request.user.rol.nombre == "Empresa") {
+        if(coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
+    }
+
+    return response.json(coche);
 }
 
 export const create = async (request: Request, response: Response): Promise<Response> => {
@@ -28,11 +46,27 @@ export const create = async (request: Request, response: Response): Promise<Resp
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
     if (!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
+    
+    const coche = await cocheService.getById(request.params.id);
+    if(!coche) throw new ApiError("No se encontro el coche", 404);
+
+    if (request.user.rol.nombre == "Empresa") {
+        if(coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
+    }
+
     return response.status(204).json(await cocheService._delete(request.params.id));
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
     if (!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
+
+    const coche = await cocheService.getById(request.params.id);
+    if(!coche) throw new ApiError("No se encontro el coche", 404);
+
+    if (request.user.rol.nombre == "Empresa") {
+        if(coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
+    }
+
     return response.status(204).json(await cocheService.update(request.params.id, request.body));
 }
 

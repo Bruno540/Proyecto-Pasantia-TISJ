@@ -25,7 +25,7 @@
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
-
+                    
                     <mat-form-field appearance="fill">
                         <mat-label>Turno</mat-label>
                         <mat-select matSelect formControlName="turnoId">
@@ -37,6 +37,7 @@
 
                 </div>
             </form>
+            <mat-slide-toggle  (click)="cambiarTurnos()">Turnos: {{cantTurnos}}</mat-slide-toggle>
         </mat-card-content>
 
         <mat-card-actions align="end">

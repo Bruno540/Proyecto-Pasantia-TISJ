@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { getCustomRepository, getRepository } from "typeorm";
 import { ApiError } from "../../config/api-error";
-import { UsuarioRepository } from "../repositories/usuario.repository";
+import { UsuarioRepository } from "../repositories/usuarios.repository";
 import validator from "validator";
-import * as usuariosService from "../services/usuario.service";
+import * as usuariosService from "../services/usuarios.service";
 import * as empresasService from "../services/empresa.service";
 import { encryptPassword } from "../libraries/encryptation.library";
 import { Rol } from "../models/rol.model";

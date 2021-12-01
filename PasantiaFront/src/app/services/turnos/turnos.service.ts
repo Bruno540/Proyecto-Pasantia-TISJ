@@ -37,4 +37,8 @@ export class TurnosService {
   _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
+  
+  getProximos() {
+    return this.Http.get(this.Url + "/tools/proximos");
+  }
 }

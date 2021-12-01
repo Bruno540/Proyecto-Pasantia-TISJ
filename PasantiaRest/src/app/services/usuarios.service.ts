@@ -10,7 +10,7 @@ export const getByEmailContrasenia = async (email: string, password: string): Pr
     const usuario = await getCustomRepository(UsuarioRepository).findOne({
         select: userSelectValues,
         where: { email },
-        relations: ["rol"]
+        relations: ["rol", "empresa"]
     });
     if (usuario && await verifyPassword(password, usuario.password)) return usuario;
     return undefined;

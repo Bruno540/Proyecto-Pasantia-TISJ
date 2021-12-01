@@ -17,7 +17,9 @@ export class CreateRegistroComponent implements OnInit {
 
   registrosForm: FormGroup;
   coches: any;
-  turnos: Turno[]=[];
+  turnos: any;
+  selectorTurnos = true;
+  cantTurnos: string = 'Todos'
 
   constructor(private FormBuilder: FormBuilder,
     private RegistroService: RegistrosService,
@@ -56,11 +58,28 @@ export class CreateRegistroComponent implements OnInit {
     })
   }
 
+  cambiarTurnos():void{
+    this.selectorTurnos = !this.selectorTurnos;
+    if(this.selectorTurnos){
+      this.cantTurnos = 'Todos'
+    }else{
+      this.cantTurnos = 'Proximos'
+    }
+    this.getTurnos();
+  }
+
   getTurnos():void{
-    this.TurnoService.getAll().subscribe(data=>{
-      console.log(data);
-      this.turnos = data[0]
-    })
+    if(this.selectorTurnos){
+      this.TurnoService.getAll().subscribe(data=>{
+        console.log(data);
+        this.turnos = data[0]
+      })
+    }else{
+      this.TurnoService.getProximos().subscribe(data=>{
+        console.log('proximos', data);
+        this.turnos = data
+      })
+    }
   }
 
   submit() {

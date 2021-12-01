@@ -36,6 +36,8 @@ import { AuthInterceptor } from './middlewares/auth.interceptor';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { IndexComponent } from './components/index/index.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
     HomeComponent,
     NotFoundComponent,
     RegistroLiveComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,8 +75,8 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxMatTimepickerModule,
     //SocketIoModule.forRoot(config)
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

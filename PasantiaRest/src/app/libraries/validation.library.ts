@@ -6,7 +6,7 @@ import { TipoTurno } from "../models/turno/tipo-turno.model";
 
 export const validateTurno = async (data: any) => {
     if (typeof data.hora != "string") throw ApiError.badRequestError("Hora de turno invalida");
-    if (!moment(data.hora, 'HH:mm:ss', true).isValid()) throw ApiError.badRequestError("Hora de turno invalida");
+    if (!moment(data.hora, 'HH:mm', true).isValid()) throw ApiError.badRequestError("Hora de turno invalida");
 
     if (!data.lunes && !data.martes && !data.miercoles && !data.jueves && !data.viernes && !data.sabado && !data.domingo) throw ApiError.badRequestError("Se debe seleccionar al menos un dia");
 
@@ -26,34 +26,36 @@ export const validateTurno = async (data: any) => {
 
     data.empresa = empresa;
 
+    console.log(data);
+    
     switch (tipoTurno.nombre) {
         case "Salida":
-            if (typeof data.horaSalida != "string") throw ApiError.badRequestError("Hora de Salida de turno invalida");
-            if (!moment(data.horaSalida, 'HH:mm:ss', true).isValid()) throw ApiError.badRequestError("Hora de Salida de turno invalida");
-            if (typeof data.salidaDesde != "string" || data.destino == "") throw ApiError.badRequestError("lugar de salida de turno invalida");
+            if (typeof data.horaLlegada != "string") throw ApiError.badRequestError("Hora de Llegada de turno invalida");
+            if (!moment(data.horaLlegada, 'HH:mm', true).isValid()) throw ApiError.badRequestError("Hora de Llegada de turno invalida");
+            if (typeof data.destino != "string") throw ApiError.badRequestError("Destino de llegada de turno invalida");
 
-            data.horaLlegada = null;
-            data.destino = null;
+            // data.horaSalida = null;
+            // data.salidaDesde = null;
 
             break;
 
         case "Llegada":
-            if (typeof data.horaLlegada != "string") throw ApiError.badRequestError("Hora de Llegada de turno invalida");
-            if (!moment(data.horaLlegada, 'HH:mm:ss', true).isValid()) throw ApiError.badRequestError("Hora de Llegada de turno invalida");
-            if (typeof data.destino != "string" || data.destino == "") throw ApiError.badRequestError("destino de llegada de turno invalida");
+            if (typeof data.horaSalida != "string") throw ApiError.badRequestError("Hora de Salida de turno invalida");
+            if (!moment(data.horaSalida, 'HH:mm', true).isValid()) throw ApiError.badRequestError("Hora de Salida de turno invalida");
+            if (typeof data.salidaDesde != "string") throw ApiError.badRequestError("Lugar de salida de turno invalida");
 
-            data.horaSalida = null;
-            data.salidaDesde = null;
+            // data.horaLlegada = null;
+            // data.destino = null;
 
             break;
 
         case "Pasada":
             if (typeof data.horaSalida != "string") throw ApiError.badRequestError("Hora de Salida de turno invalida");
-            if (!moment(data.horaSalida, 'HH:mm:ss', true).isValid()) throw ApiError.badRequestError("Hora de Salida de turno invalida");
-            if (typeof data.salidaDesde != "string" || data.destino == "") throw ApiError.badRequestError("lugar de salida de turno invalida");
+            if (!moment(data.horaSalida, 'HH:mm', true).isValid()) throw ApiError.badRequestError("Hora de Salida de turno invalida");
+            if (typeof data.salidaDesde != "string") throw ApiError.badRequestError("Lugar de salida de turno invalida");
             if (typeof data.horaLlegada != "string") throw ApiError.badRequestError("Hora de Llegada de turno invalida");
-            if (!moment(data.horaLlegada, 'HH:mm:ss', true).isValid()) throw ApiError.badRequestError("Hora de Llegada de turno invalida");
-            if (typeof data.destino != "string" || data.destino == "") throw ApiError.badRequestError("destino de llegada de turno invalida");
+            if (!moment(data.horaLlegada, 'HH:mm', true).isValid()) throw ApiError.badRequestError("Hora de Llegada de turno invalida");
+            if (typeof data.destino != "string") throw ApiError.badRequestError("Destino de llegada de turno invalida");
             
             break;
 

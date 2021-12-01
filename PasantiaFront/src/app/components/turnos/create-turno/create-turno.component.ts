@@ -47,7 +47,7 @@ export class CreateTurnoComponent implements OnInit {
       sabado: [false, [Validators.required]],
       domingo: [false, [Validators.required]],
       feriados: [false, [Validators.required]],
-      diaNormal: [false, [Validators.required]],
+      diaNormal: [true, [Validators.required]],
       horaLlegada: [''],
       salidaDesde: [''],
       horaSalida: [''],
@@ -70,10 +70,11 @@ export class CreateTurnoComponent implements OnInit {
       this.TurnosService.get(IdFromRoute).subscribe(
         ok => {
           this.turnoForm.addControl("id", new FormControl('', [Validators.required]));
+          console.log(ok);
 
-          if (typeof ok.tipo != "number" ) ok.tipo = ok.tipo.id;
+          if (typeof ok.tipo != "number") ok.tipo = ok.tipo.id;
 
-          if (typeof ok.empresa != "number" ) ok.empresa = ok.empresa.id;
+          if (typeof ok.empresa != "number") ok.empresa = ok.empresa.id;
 
           this.turnoForm.patchValue(ok);
         }
@@ -120,4 +121,38 @@ export class CreateTurnoComponent implements OnInit {
     }
   }
 
+  // onChangeTipoTurno() {
+  //   const tipo = this.turnoForm.controls.tipo.value;
+
+  //   console.log(tipo);
+
+  //   this.turnoForm.removeControl("horaLlegada");
+  //   this.turnoForm.removeControl("destino");
+  //   this.turnoForm.removeControl("salidaDesde");
+  //   this.turnoForm.removeControl("horaSalida");
+
+  //   switch (tipo) {
+  //     case 3:
+  //       this.turnoForm.addControl("horaLlegada", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("destino", new FormControl("", [Validators.required]));
+  //       break;
+
+  //     case 1:
+  //       this.turnoForm.addControl("salidaDesde", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("horaSalida", new FormControl("", [Validators.required]));
+
+  //       break;
+
+  //     case 2:
+  //       this.turnoForm.addControl("horaLlegada", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("destino", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("salidaDesde", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("horaSalida", new FormControl("", [Validators.required]));
+
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // }
 }
