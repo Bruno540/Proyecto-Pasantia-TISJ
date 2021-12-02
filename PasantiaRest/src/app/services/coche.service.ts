@@ -26,15 +26,22 @@ export const getById = async (id: any): Promise<Coche | undefined> => {
     return coche;
 }
 
-export const create = async (numero: string, matricula: string, empresaId: string): Promise<void> => {
-    const empresa = await getCustomRepository(EmpresaRepository).findOne(empresaId);
-    if (!empresa) throw ApiError.badRequestError("No exite la empresa ingresada");
-    if (await getCustomRepository(CocheRepository).findByMatricula(matricula)) throw ApiError.badRequestError("Ya existe un coche con la matricula ingresada");
-    const coche = new Coche();
-    coche.numero = numero;
-    coche.matricula = matricula;
-    coche.empresa = empresa;
-    await getCustomRepository(CocheRepository).save(coche);
+export const getByNumero = async (numero: any, empresa: number): Promise<Coche | undefined> => {
+    return await getCustomRepository(CocheRepository).findOne({
+        where: { numero, empresa },
+        relations: ["empresa"]
+    });
+}
+
+export const getByMatricula = async (matricula: any): Promise<Coche | undefined> => {
+    return await getCustomRepository(CocheRepository).findOne({
+        where: { matricula },
+        relations: ["empresa"]
+    });
+}
+
+export const create = async (data: any): Promise<void> => {
+    await getCustomRepository(CocheRepository).save(data);
 }
 
 export const _delete = async (cocheId: any): Promise<void> => {
