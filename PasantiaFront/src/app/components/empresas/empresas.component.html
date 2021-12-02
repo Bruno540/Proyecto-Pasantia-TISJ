@@ -1,7 +1,8 @@
 <mat-card>
     <button mat-flat-button routerLink="create" color="primary">Agregar</button>
+    <mat-divider class="divider" [inset]="true"></mat-divider>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length > 0; else elseBlock">
 
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -30,5 +31,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <ng-template #elseBlock>
+        <mat-card>No hay empresas</mat-card>
+    </ng-template>
 
 </mat-card>

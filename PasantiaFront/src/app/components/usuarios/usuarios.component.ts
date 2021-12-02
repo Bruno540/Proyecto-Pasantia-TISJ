@@ -12,7 +12,7 @@ import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.componen
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'email', 'nombre', 'apellido', 'actions'];
+  displayedColumns: string[] = ['id', 'email', 'nombre', 'apellido', 'rol', 'empresa', 'actions'];
   dataSource: Usuario[] = [];
 
   constructor(private UsuariosService: UsuariosService,
@@ -24,7 +24,6 @@ export class UsuariosComponent implements OnInit {
     this.titleService.setTitle("Usuarios");
     this.UsuariosService.getAll().subscribe(
       ok => {
-        console.log(ok);
         this.dataSource = ok;
       }
     );

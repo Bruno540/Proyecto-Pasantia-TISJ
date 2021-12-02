@@ -2,30 +2,32 @@ import { request, Request, Response } from "express";
 import validator from "validator";
 import { ApiError } from "../../config/api-error";
 import * as cocheService from "../services/coche.service";
-
+import * as empresaService from "../services/empresa.service";
 
 export const getAll = async (request: Request, response: Response): Promise<Response> => {
     let coches;
-    
+
     if (request.user.rol.nombre == "Administrador") {
-        coches = await cocheService.getAll();    
+        coches = await cocheService.getAll();
     } else {
-        if(!request.user.empresa.id) throw ApiError.badRequestError("No se ingreso el usuario")
+        if (!request.user?.empresa?.id) throw ApiError.badRequestError("No se ingreso el usuario")
 
         coches = await cocheService.getAllByEmpresa(request.user.empresa.id);
     }
-    
+
     return response.json(coches);
 }
 
 export const getById = async (request: Request, response: Response): Promise<Response> => {
     if (!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de coche");
-    
+
     const coche = await cocheService.getById(request.params.id);
-    if(!coche) throw new ApiError("No se encontro el coche", 404);
+    if (!coche) throw new ApiError("No se encontro el coche", 404);
 
     if (request.user.rol.nombre == "Empresa") {
-        if(coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
+        if (!request.user?.empresa?.id) throw ApiError.badRequestError("No se ingreso el usuario");
+
+        if (coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
     }
 
     return response.json(coche);
@@ -38,20 +40,24 @@ export const create = async (request: Request, response: Response): Promise<Resp
     if (request.user.rol.nombre == "Administrador") {
         if (!request.body.empresa) throw new ApiError("Falta el id de la empresa");
     } else {
+        if (!request.user?.empresa?.id) throw ApiError.badRequestError("No se ingreso el usuario");
         request.body.empresa = request.user.empresa.id
     }
 
-    return response.status(201).json(await cocheService.create(request.body.numero, request.body.matricula, request.body.empresaId));
+    if(request.body.empresa && typeof request.body.empresa != "number" || !await empresaService.getById(request.body.empresa)) throw ApiError.badRequestError("Empresa invalida");
+
+    return response.status(201).json(await cocheService.create(request.body.numero, request.body.matricula, request.body.empresa));
 }
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
     if (!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
-    
+
     const coche = await cocheService.getById(request.params.id);
-    if(!coche) throw new ApiError("No se encontro el coche", 404);
+    if (!coche) throw new ApiError("No se encontro el coche", 404);
 
     if (request.user.rol.nombre == "Empresa") {
-        if(coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
+        if (!request.user?.empresa?.id) throw ApiError.badRequestError("No se ingreso el usuario");
+        if (coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
     }
 
     return response.status(204).json(await cocheService._delete(request.params.id));
@@ -61,11 +67,14 @@ export const update = async (request: Request, response: Response): Promise<Resp
     if (!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del coche");
 
     const coche = await cocheService.getById(request.params.id);
-    if(!coche) throw new ApiError("No se encontro el coche", 404);
+    if (!coche) throw new ApiError("No se encontro el coche", 404);
 
     if (request.user.rol.nombre == "Empresa") {
-        if(coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
+        if (!request.user?.empresa?.id) throw ApiError.badRequestError("No se ingreso el usuario");
+        if (coche.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El coche no le pertenece");
     }
+
+    if(request.body.empresa && typeof request.body.empresa != "number" || !await empresaService.getById(request.body.empresa)) throw ApiError.badRequestError("Empresa invalida");
 
     return response.status(204).json(await cocheService.update(request.params.id, request.body));
 }

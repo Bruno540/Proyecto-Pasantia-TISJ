@@ -1,6 +1,6 @@
 <mat-card>
     <button mat-flat-button routerLink="create" color="primary">Agregar</button>
-    <mat-divider [inset]="true"></mat-divider>
+    <mat-divider class="divider" [inset]="true"></mat-divider>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length > 0; else elseBlock">
 

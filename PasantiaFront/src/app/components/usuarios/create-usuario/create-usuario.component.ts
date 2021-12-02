@@ -3,6 +3,7 @@ import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empresa } from 'src/app/models/empresa.model';
+import { Usuario } from 'src/app/models/usuario.model';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service';
 
@@ -43,6 +44,10 @@ export class CreateUsuarioComponent implements OnInit {
       this.UsuariosService.get(IdFromRoute).subscribe(
         ok => {
           this.usuarioForm.addControl("id", new FormControl('', [Validators.required]));
+
+          if(typeof ok.empresa != "number"){
+            ok.empresa = ok.empresa.id;
+          }
 
           this.usuarioForm.patchValue(ok);
         }
