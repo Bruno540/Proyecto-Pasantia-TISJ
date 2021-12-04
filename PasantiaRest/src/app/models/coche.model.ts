@@ -12,7 +12,7 @@ export class Coche extends ApiBaseEntity {
     @Column({ unique: true })
     matricula: string;
 
-    @ManyToOne(() => Empresa, empresa => empresa.coches)
+    @ManyToOne(() => Empresa, empresa => empresa.coches, { onDelete: 'CASCADE' })
     empresa: Empresa;
 
     @OneToMany(() => Registro, registro => registro.turno)

@@ -61,7 +61,7 @@ export class Turno extends ApiBaseEntity {
     @OneToMany(() => Registro, registro => registro.turno)
     registros: Registro[];
 
-    @ManyToOne(() => Empresa, empresa => empresa.turnos)
+    @ManyToOne(() => Empresa, empresa => empresa.turnos, { onDelete: 'CASCADE' })
     empresa: Empresa;
 
 }

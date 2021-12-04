@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { ProyecConfig } from 'src/environments/proyect-config';
@@ -22,7 +23,8 @@ export class CreateEmpresaComponent implements OnInit {
     private EmpresasService: EmpresasService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private readonly sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class CreateEmpresaComponent implements OnInit {
           this.empresaForm.addControl("id", new FormControl('', [Validators.required]));
 
           this.empresaForm.patchValue(ok);
-          this.imagen = ok.imagen
+          this.imagen = this.backendUrl + ok.imagen
         }
       );
     }
@@ -49,7 +51,7 @@ export class CreateEmpresaComponent implements OnInit {
   submit() {
     if (this.empresaForm.contains("id")) {
       const id = this.empresaForm.controls.id.value;
-      this.EmpresasService.update(id, this.empresaForm.value,this.currentFile).subscribe(
+      this.EmpresasService.update(id, this.empresaForm.value, this.currentFile).subscribe(
         ok => {
           this.snackBar.open("Empresa actualizada exitosamente", "Cerrar");
           this.router.navigateByUrl("/empresas");
@@ -57,7 +59,7 @@ export class CreateEmpresaComponent implements OnInit {
         err => this.snackBar.open(err.error.message, "Cerrar")
       );
     } else {
-      this.EmpresasService.create(this.empresaForm.value,this.currentFile).subscribe(
+      this.EmpresasService.create(this.empresaForm.value, this.currentFile).subscribe(
         ok => {
           this.snackBar.open("Empresa creada exitosamente", "Cerrar");
           this.router.navigateByUrl("/empresas");
@@ -70,6 +72,7 @@ export class CreateEmpresaComponent implements OnInit {
   onFileSelect(event: any) {
     if (event.target.files.length > 0) {
       this.currentFile = event.target.files[0];
+      this.imagen = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(this.currentFile));
     }
   }
 

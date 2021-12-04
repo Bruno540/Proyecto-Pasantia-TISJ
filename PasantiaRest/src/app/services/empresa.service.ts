@@ -17,7 +17,7 @@ export const getById = async (id: any): Promise<Empresa> => {
 export const create = async (datos: any, file: any): Promise<void> => {
     if (await getCustomRepository(EmpresaRepository).findByRazonSocial(datos.razonSocial)) throw ApiError.badRequestError("Ya existe una empresa con esa nombre");
     if (await getCustomRepository(EmpresaRepository).findByRut(datos.rut)) throw ApiError.badRequestError("Ya existe una empresa con ese numero de rut");
-    datos.imagen = 'default.png'
+    
     if (file) {
         datos.imagen = file.filename;
     }

@@ -62,5 +62,5 @@ export const update = async (id: number, body: DeepPartial<Usuario>): Promise<Us
 }
 
 export const _delete = async (id: number): Promise<void> => {
-    await getRepository(Usuario).softDelete(id);
+    await getRepository(Usuario).delete(id);
 }

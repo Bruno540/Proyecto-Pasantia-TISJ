@@ -21,7 +21,7 @@ export class Usuario extends ApiBaseEntity {
     @ManyToOne(() => Rol)
     rol: Rol;
 
-    @OneToOne(() => Empresa)
+    @OneToOne(() => Empresa, empresa => empresa.usuario, { onDelete: 'CASCADE' })
     @JoinColumn()
     empresa: Empresa;
 
