@@ -35,7 +35,7 @@ export class Turno extends ApiBaseEntity {
     domingo: boolean;
 
     @Column({ default: false })
-    feriados: boolean;
+    diasEspeciales: boolean;
 
     @Column({ default: true })
     diaNormal: boolean;
@@ -43,13 +43,13 @@ export class Turno extends ApiBaseEntity {
     @Column({ type: "text" })
     descripcion: boolean;
 
-    @Column({ nullable: true })
+    @Column({ default: "San José" })
     salidaDesde: string;
 
     @Column({ type: 'time', nullable: true })
     horaSalida: string;
 
-    @Column({ nullable: true })
+    @Column({ default: "San José" })
     destino: string;
 
     @Column({ type: 'time', nullable: true })

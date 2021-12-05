@@ -42,7 +42,7 @@ export class CreateEmpresaComponent implements OnInit {
           this.empresaForm.addControl("id", new FormControl('', [Validators.required]));
 
           this.empresaForm.patchValue(ok);
-          this.imagen = this.backendUrl + ok.imagen
+          if (ok.imagen) this.imagen = this.backendUrl + ok.imagen;
         }
       );
     }

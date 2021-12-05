@@ -3,8 +3,6 @@
         <mat-card-content>
             <form [formGroup]="turnoForm">
                 <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
-                    <h1 color>Datos del Turno</h1>
-                    <mat-divider [inset]="true"></mat-divider>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Hora</mat-label>
@@ -52,7 +50,7 @@
                     <div>
                         <label>Tipo de Dia</label>
                         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between start">
-                            <mat-checkbox formControlName="feriados">Feriados</mat-checkbox>
+                            <mat-checkbox formControlName="diasEspeciales">Dias Especiales</mat-checkbox>
                             <mat-checkbox formControlName="diaNormal">Dia Normal</mat-checkbox>
                         </div>
                     </div>
@@ -70,7 +68,7 @@
 
                     <ng-container>
                         <mat-form-field appearance="fill">
-                            <mat-label>Hora de parida</mat-label>
+                            <mat-label>Hora de Partida</mat-label>
                             <input matInput name="horaSalida" formControlName="horaSalida" type="time">
                         </mat-form-field>
 

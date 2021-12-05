@@ -46,7 +46,7 @@ export class CreateTurnoComponent implements OnInit {
       viernes: [false, [Validators.required]],
       sabado: [false, [Validators.required]],
       domingo: [false, [Validators.required]],
-      feriados: [false, [Validators.required]],
+      diasEspeciales: [false, [Validators.required]],
       diaNormal: [true, [Validators.required]],
       horaLlegada: [''],
       salidaDesde: [''],
@@ -56,7 +56,7 @@ export class CreateTurnoComponent implements OnInit {
     });
 
     if (this.tokenService.getRoleName() == 'Empresa') {
-      this.turnoForm.removeControl("empresaId");
+      this.turnoForm.removeControl("empresa");
     } else {
       this.getEmpresas();
     }

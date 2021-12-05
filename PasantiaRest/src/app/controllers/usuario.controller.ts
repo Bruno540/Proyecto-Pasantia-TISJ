@@ -36,6 +36,7 @@ export const create = async (request: Request, response: Response): Promise<Resp
     request.body.rol = rol.id;
 
     if (typeof request.body.empresa != "number") throw ApiError.badRequestError("Falta la empresa del usuario");
+    if (await usuariosService.getByEmpresa(request.body.empresa)) throw ApiError.badRequestError("Ya existe un usuario con la empresa seleccionada");
     const empresa = await empresasService.getById(request.body.empresa);
     if (!empresa) throw ApiError.badRequestError("Empresa no encontrada");
     request.body.empresa = empresa;

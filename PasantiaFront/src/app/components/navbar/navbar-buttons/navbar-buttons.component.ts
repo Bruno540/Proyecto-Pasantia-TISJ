@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LoginService } from 'src/app/services/auth/login.service';
+import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class NavbarButtonsComponent implements OnInit {
 
   constructor(
     public service: TokenStorageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -21,6 +22,7 @@ export class NavbarButtonsComponent implements OnInit {
 
   cerrarSesion(): void {
     this.service.logout();
+    this.router.navigateByUrl("/")
   }
 
 }

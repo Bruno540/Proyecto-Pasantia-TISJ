@@ -15,7 +15,7 @@ export class TurnosService {
   ) { }
 
   getAll() {
-    return this.Http.get<[Turno[], number]>(this.Url);
+    return this.Http.get<Turno[]>(this.Url);
   }
 
   getTipos() {

@@ -4,8 +4,6 @@
         <mat-card-content>
             <form [formGroup]="usuarioForm">
                 <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
-                    <h1 color>Usuario</h1>
-                    <mat-divider [inset]="true"></mat-divider>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
@@ -24,7 +22,7 @@
                         <input type="password" matInput formControlName="password">
                     </mat-form-field>
 
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" *ngIf="!admin">
                         <mat-label>Empresa</mat-label>
                         <mat-select matSelect formControlName="empresa">
                           <mat-option *ngFor="let empresa of dataSource" [value]="empresa.id">
