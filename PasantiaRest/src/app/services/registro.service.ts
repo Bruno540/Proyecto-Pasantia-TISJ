@@ -75,3 +75,7 @@ export const update = async(registroId:any, datos:any): Promise<void>=>{
      datos.id = registro.id
      await getCustomRepository(RegistroRepository).save(datos);
 }
+
+export const verReportes = async (fechaDesde: any, fechaHasta: any): Promise<Registro[] | undefined> =>{
+    return await getCustomRepository(RegistroRepository).filtrarRegistros(fechaDesde, fechaHasta);
+}

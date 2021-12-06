@@ -71,3 +71,11 @@ export const validateTurno = async (data: any, user: any) => {
 
     return data;
 }
+
+export const validateFechas = async (data: any) => {
+    if (typeof data.fechaDesde != "string") throw ApiError.badRequestError("Hora invalida");
+    if (typeof data.fechaHasta != "string") throw ApiError.badRequestError("Hora invalida");
+    if (!moment(data.fechaDesde, true).isValid()) throw ApiError.badRequestError("Hora invalida");
+    if (!moment(data.fechaHasta, true).isValid()) throw ApiError.badRequestError("Hora invalida");
+    if(moment(data.fechaDesde).isAfter(data.fechaHasta)) throw ApiError.badRequestError("La fecha desde no puede ser mayor a la fecha hasta");
+}

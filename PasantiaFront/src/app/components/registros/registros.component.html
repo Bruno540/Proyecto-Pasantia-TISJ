@@ -1,6 +1,8 @@
 <mat-card>
-    <button mat-flat-button routerLink="create" color="primary">Agregar</button>
-
+    <div class="tittle-button-row">
+        <button mat-flat-button routerLink="create" color="primary">Agregar</button>
+        <button mat-flat-button color="accent" (click)="openDialogReportes()">Reporte</button>
+    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">

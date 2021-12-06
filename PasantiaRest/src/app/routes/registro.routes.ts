@@ -18,4 +18,6 @@ router.delete("/:id", handleRequest(RegistroController._delete));
 
 router.get('/sse/stablish',handleRequest(RegistroController.sseStablish));
 
+router.get("/tools/reportes", handleRequest(RegistroController.verReportes));
+
 export default router;

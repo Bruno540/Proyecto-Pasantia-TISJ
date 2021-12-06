@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Registro } from 'src/app/models/registro.model';
 import { RegistrosService } from 'src/app/services/registros/registros.service';
 import { DialogRegistroComponent } from './dialog-registro/dialog-registro.component';
+import { DialogReporteComponent } from './dialog-reporte/dialog-reporte.component';
 
 @Component({
   selector: 'app-registros',
@@ -26,6 +27,10 @@ export class RegistrosComponent implements OnInit {
     this.dialog.open(DialogRegistroComponent, {
       data: registro
     });
+  }
+
+  openDialogReportes() {
+    this.dialog.open(DialogReporteComponent);
   }
 
 }

@@ -36,4 +36,8 @@ export class RegistrosService {
   _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
+
+  reportes(fechaDesde: any, fechaHasta:any) {
+    return this.Http.get<Registro[]>(this.Url + `/tools/reportes?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}` );
+  }
 }
