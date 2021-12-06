@@ -18,8 +18,7 @@ export class CreateRegistroComponent implements OnInit {
   registrosForm: FormGroup;
   coches: any;
   turnos: Turno[]=[];
-  userProfileForm: FormGroup;
-
+  hora?: any;
   constructor(private FormBuilder: FormBuilder,
     private RegistroService: RegistrosService,
     private CocheService: CocheService,
@@ -49,6 +48,10 @@ export class CreateRegistroComponent implements OnInit {
         }
       );
     }
+  }
+
+  test(){
+    console.log("Hora: ", this.hora);
   }
 
   getCoches():void{

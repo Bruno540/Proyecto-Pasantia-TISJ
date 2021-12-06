@@ -18,6 +18,7 @@ import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/mater
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from "@angular-material-components/datetime-picker";
 
 
 @NgModule({
@@ -40,6 +41,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatDatepickerModule,
         MatNativeDateModule,
         MatCheckboxModule,
+        NgxMatTimepickerModule,
+        MatDatepickerModule,
+        MatInputModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule
     ],
     exports: [
         MatToolbarModule,
@@ -60,9 +67,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatDatepickerModule,
         MatNativeDateModule,
         MatCheckboxModule,
+        NgxMatTimepickerModule,
+        MatDatepickerModule,
+        MatInputModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule
     ],
     providers: [
-        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } }
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
     ]
 })
 export class MaterialModule { }

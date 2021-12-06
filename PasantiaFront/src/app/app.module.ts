@@ -34,6 +34,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
+import { NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -77,7 +78,9 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
   providers: [
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMatNativeDateModule
+
   ],
   bootstrap: [AppComponent]
 })
