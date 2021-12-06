@@ -1,5 +1,7 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { ApiBaseEntity } from "./base-entity.model";
+import { Empresa } from "./empresa.model";
+import { Rol } from "./rol.model";
 
 @Entity("usuarios")
 export class Usuario extends ApiBaseEntity {

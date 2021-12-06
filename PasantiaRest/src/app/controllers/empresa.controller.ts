@@ -24,7 +24,9 @@ export const create = async (request: Request, response: Response): Promise<Resp
     if(!request.body.rut) throw ApiError.badRequestError("Falta el rut de la empresa");
     if(!request.body.razonSocial) throw ApiError.badRequestError("Falta la razon social de la empresa");
     
-    if(request.file && request.file.mimetype && request.file.mimetype.indexOf("image") !== -1) throw ApiError.badRequestError("Imagen invalida");
+    console.log(request.file?.mimetype);
+    
+    // if(request.file && request.file.mimetype && request.file.mimetype.indexOf("image") !== -1) throw ApiError.badRequestError("Imagen invalida");
 
     return response.status(201).json(await empresaService.create(request.body,request.file));
 }

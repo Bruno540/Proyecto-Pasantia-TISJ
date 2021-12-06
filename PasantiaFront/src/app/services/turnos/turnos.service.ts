@@ -18,10 +18,6 @@ export class TurnosService {
     return this.Http.get<Turno[]>(this.Url);
   }
 
-  getProximos() {
-    return this.Http.get(this.Url + "/tools/proximos");
-  }
-
   getLive(){
     return this.Http.get<Turno[]>(this.Url + "/tools/live");
   }
@@ -47,6 +43,6 @@ export class TurnosService {
   }
   
   getProximos() {
-    return this.Http.get(this.Url + "/tools/proximos");
+    return this.Http.get<Turno[]>(this.Url + "/tools/proximos");
   }
 }

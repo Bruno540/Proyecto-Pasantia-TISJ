@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +42,7 @@ import { DiasEspecialesComponent } from './components/dias-especiales/dias-espec
 import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import { AuthInterceptor } from './middlewares/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     //SocketIoModule.forRoot(config)
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
     {
       provide: MAT_DATE_FORMATS,

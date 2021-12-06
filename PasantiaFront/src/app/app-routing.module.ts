@@ -18,6 +18,7 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
 import { IndexComponent } from './components/index/index.component';
 import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
 import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
+import { TieneRolGuard } from './guards/tiene-rol/tiene-rol.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },

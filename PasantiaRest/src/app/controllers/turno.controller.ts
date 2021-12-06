@@ -31,7 +31,7 @@ export const getById = async (request: Request, response: Response): Promise<Res
     const result = await TurnosService.getById(Number(request.params.id));
     if(!result) throw ApiError.badRequestError("No existe el turno");
 
-    if(result.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El turno no le pretenece");
+    if(request.user.rol.nombre != "Administrador" && result.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El turno no le pretenece");
 
     return response.status(200).json(result);
 }
@@ -48,7 +48,7 @@ export const put = async (request: Request, response: Response): Promise<Respons
     const turno = await TurnosService.getById(Number(request.params.id));
     if (!turno) throw ApiError.badRequestError("No existe el turno");
 
-    if(turno.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El turno no le pretenece");
+    if(request.user.rol.nombre != "Administrador" && turno.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El turno no le pretenece");
 
     request.body = await validateTurno(request.body, request.user);
 
@@ -61,7 +61,7 @@ export const _delete = async (request: Request, response: Response): Promise<Res
     const turno = await TurnosService.getById(Number(request.params.id));
     if (!turno) throw ApiError.badRequestError("No existe el turno");
 
-    if(turno.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El turno no le pretenece");
+    if(request.user.rol.nombre != "Administrador" && turno.empresa.id != request.user.empresa.id) throw ApiError.badRequestError("El turno no le pretenece");
 
     await TurnosService._delete(turno.id);
 

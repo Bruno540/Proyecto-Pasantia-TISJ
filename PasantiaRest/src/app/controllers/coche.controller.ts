@@ -1,4 +1,4 @@
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
 import validator from "validator";
 import { ApiError } from "../../config/api-error";
 import * as cocheService from "../services/coche.service";
@@ -91,7 +91,6 @@ export const update = async (request: Request, response: Response): Promise<Resp
 
     return response.status(204).json(await cocheService.update(request.params.id, request.body));
 }
-
 export const buscar = async(request:Request,response:Response): Promise<Response> => {
     console.log("estoy en el controller")
     return response.json(await cocheService.buscar(request.query.filter, request.query.empresaId))

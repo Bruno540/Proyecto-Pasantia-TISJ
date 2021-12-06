@@ -18,9 +18,10 @@ export class CreateUsuarioComponent implements OnInit {
 
   admin: boolean = false;
   usuarioForm: FormGroup;
-  dataSource: Empresa[];
+  dataSource: Empresa[] = [];
 
-  constructor( private FormBuilder: FormBuilder,
+  constructor(
+    private FormBuilder: FormBuilder,
     private UsuariosService: UsuariosService,
     private route: ActivatedRoute,
     private router: Router,
@@ -76,9 +77,21 @@ export class CreateUsuarioComponent implements OnInit {
   submit() {
     if (this.usuarioForm.contains("id")) {
       const id = this.usuarioForm.controls.id.value;
-      this.UsuariosService.update(id, this.usuarioForm.value).subscribe();
+      this.UsuariosService.update(id, this.usuarioForm.value).subscribe(
+        ok => {
+          this.snackBar.open("Usuario actualizado exitosamente", "Cerrar");
+          this.router.navigateByUrl("/usuarios");
+        },
+        err => this.snackBar.open(err.error.message, "Cerrar")
+      );
     } else {
-      this.UsuariosService.create(this.usuarioForm.value).subscribe();
+      this.UsuariosService.create(this.usuarioForm.value).subscribe(
+        ok => {
+          this.snackBar.open("Usuario creado exitosamente", "Cerrar");
+          this.router.navigateByUrl("/usuarios");
+        },
+        err => this.snackBar.open(err.error.message, "Cerrar")
+      );
     }
   }
 }

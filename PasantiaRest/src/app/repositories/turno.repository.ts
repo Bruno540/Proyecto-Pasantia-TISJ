@@ -52,8 +52,8 @@ export class TurnoRepository extends Repository<Turno> {
         const dia = moment().day();
         const diaSemana = DiaSemana.obtenerDia(dia);
         if(!diaSemana) throw new ApiError("No existe el dia de la semana"); 
-        const arriba = moment().add(2,'hours').format("HH:mm:ss");
-        const abajo = moment().subtract(12,'hours').format('HH:mm:ss');
+        const arriba = moment().add(2,'hours').format("HH:mm");
+        const abajo = moment().subtract(12,'hours').format('HH:mm');
         const turnos = await getRepository(Turno).find({
             where: 
                 {
@@ -65,12 +65,10 @@ export class TurnoRepository extends Repository<Turno> {
             order:{'hora':'DESC'}
         });
 
-
-
         for(const turno of turnos){
             const horaTurno = moment(turno.hora, ['H:m']);
-            const toqueArriba = horaTurno.add(10,'hours').toDate();
-            const toqueAbajo = horaTurno.subtract(10,'hours').toDate();
+            const toqueArriba = moment(turno.hora, ['H:m']).add(10,'hours').toDate();
+            const toqueAbajo = moment(turno.hora, ['H:m']).subtract(10,'hours').toDate();
             const registro = await getRepository(Registro).find({
                 where: {
                     turno: turno.id,
