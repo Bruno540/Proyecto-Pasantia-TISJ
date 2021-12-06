@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'auth-token';
-const ROLE_NAME = 'role';
-const USER_NAME = '';
-const USER_ID = '';
+const ROLE_NAME = 'rol';
+const USER_EMAIL = 'email';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +22,12 @@ export class TokenStorageService {
   public deleteToken(): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.removeItem(ROLE_NAME);
-    window.sessionStorage.removeItem(USER_NAME);
+    window.sessionStorage.removeItem(USER_EMAIL);
   }
 
 
   public getToken(): string | null {
     return window.sessionStorage.getItem(TOKEN_KEY);
-
   }
 
   public saveRoleName(rol: string): void {
@@ -38,33 +36,20 @@ export class TokenStorageService {
   }
 
   public getRoleName(): string | null {
-    var tipo = window.sessionStorage.getItem(ROLE_NAME);
-    if(!tipo){
-      tipo='VISITANTE';
-    }
-    return tipo;
+    return window.sessionStorage.getItem(ROLE_NAME);
   }
 
-  public saveUserName(username: string): void {
-    window.sessionStorage.removeItem(USER_NAME);
-    window.sessionStorage.setItem(USER_NAME, username);
+  public saveUserEmail(email: string): void {
+    window.sessionStorage.removeItem(USER_EMAIL);
+    window.sessionStorage.setItem(USER_EMAIL, email);
   }
 
-  public getUserName(): string | null {
-    return window.sessionStorage.getItem(USER_NAME);
-  }
-
-  public saveUserId(id: string): void {
-    window.sessionStorage.removeItem(USER_ID);
-    window.sessionStorage.setItem(USER_ID, id);
-  }
-
-  public getUserId(): string | null {
-    return window.sessionStorage.getItem(USER_ID);
+  public getUserEmail(): string | null {
+    return window.sessionStorage.getItem(USER_EMAIL);
   }
 
   public logout(): void {
     // clear token remove user from local storage to log user out
-    window.sessionStorage.removeItem(TOKEN_KEY);
+    this.deleteToken()
   }
 }

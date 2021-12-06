@@ -6,4 +6,6 @@ const router = Router();
 
 router.post("/login", handleRequest(AuthController.login));
 
+router.get("/roles", handleRequest(AuthController.getRoles));
+
 export default router;

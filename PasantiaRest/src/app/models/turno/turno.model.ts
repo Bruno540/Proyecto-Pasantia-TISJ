@@ -44,7 +44,7 @@ export class Turno extends ApiBaseEntity {
     domingo: boolean;
 
     @Column({ default: false })
-    feriados: boolean;
+    diasEspeciales: boolean;
 
     @Column({ default: true })
     diaNormal: boolean;
@@ -52,16 +52,16 @@ export class Turno extends ApiBaseEntity {
     @Column({ type: "text" })
     descripcion: boolean;
 
-    @Column()
+    @Column({ default: "San José" })
     salidaDesde: string;
 
-    @Column({ type: 'time' })
+    @Column({ type: 'time', nullable: true })
     horaSalida: string;
 
-    @Column()
+    @Column({ default: "San José" })
     destino: string;
 
-    @Column({ type: 'time' })
+    @Column({ type: 'time', nullable: true })
     horaLlegada: string;
 
     @ManyToOne(() => TipoTurno, tipo => tipo.turnos)
@@ -70,7 +70,7 @@ export class Turno extends ApiBaseEntity {
     @OneToMany(() => Registro, registro => registro.turno)
     registros: Registro[];
 
-    @ManyToOne(() => Empresa, empresa => empresa.turnos)
+    @ManyToOne(() => Empresa, empresa => empresa.turnos, { onDelete: 'CASCADE' })
     empresa: Empresa;
 
     estado?: EstadoRegistro;

@@ -65,12 +65,10 @@ export class TurnoRepository extends Repository<Turno> {
             order:{'hora':'DESC'}
         });
 
-
-
         for(const turno of turnos){
             const horaTurno = moment(turno.hora, ['H:m']);
-            const toqueArriba = horaTurno.add(10,'hours').toDate();
-            const toqueAbajo = horaTurno.subtract(10,'hours').toDate();
+            const toqueArriba = moment(turno.hora, ['H:m']).add(10,'hours').toDate();
+            const toqueAbajo = moment(turno.hora, ['H:m']).subtract(10,'hours').toDate();
             const registro = await getRepository(Registro).find({
                 where: {
                     turno: turno.id,

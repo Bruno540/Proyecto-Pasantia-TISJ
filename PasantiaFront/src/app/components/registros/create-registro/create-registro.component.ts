@@ -17,8 +17,8 @@ import { TurnosService } from 'src/app/services/turnos/turnos.service';
 export class CreateRegistroComponent implements OnInit {
 
   registrosForm: FormGroup;
-  coches: any;
-  turnos: any;
+  coches: Coche[];
+  turnos: Turno[];
   selectorTurnos = true;
   cantTurnos: string = 'Todos'
   selectorCoches = true;
@@ -80,7 +80,7 @@ export class CreateRegistroComponent implements OnInit {
     if(this.selectorTurnos){
       this.TurnoService.getAll().subscribe(data=>{
         console.log(data);
-        this.turnos = data[0]
+        this.turnos = data
       })
     }else{
       this.TurnoService.getProximos().subscribe(data=>{
@@ -95,7 +95,7 @@ export class CreateRegistroComponent implements OnInit {
     const coche = this.registrosForm.get('cocheId');
     coche?.enable();
     coche?.setValue('');
-    this.empresaId = turno.empresa.id;
+    if (typeof turno.empresa != "number" ) this.empresaId = turno.empresa.id;
     this.EmpresaService.getCoches(this.empresaId).subscribe(data=>{
       //console.log(data);
       this.coches = data;

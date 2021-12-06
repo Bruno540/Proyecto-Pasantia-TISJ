@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empresa } from 'src/app/models/empresa.model';
 import { TipoTurno } from 'src/app/models/turno.model';
+import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { TurnosService } from 'src/app/services/turnos/turnos.service';
 
@@ -26,11 +27,11 @@ export class CreateTurnoComponent implements OnInit {
     private route: ActivatedRoute,
     private empresasService: EmpresasService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public tokenService: TokenStorageService
   ) { }
 
   ngOnInit(): void {
-    this.getEmpresas();
     this.getTipos();
 
     this.turnoForm = this.FormBuilder.group({
@@ -45,14 +46,20 @@ export class CreateTurnoComponent implements OnInit {
       viernes: [false, [Validators.required]],
       sabado: [false, [Validators.required]],
       domingo: [false, [Validators.required]],
-      feriados: [false, [Validators.required]],
-      diaNormal: [false, [Validators.required]],
+      diasEspeciales: [false, [Validators.required]],
+      diaNormal: [true, [Validators.required]],
       horaLlegada: [''],
       salidaDesde: [''],
       horaSalida: [''],
       destino: [''],
       empresa: ['', [Validators.required]]
     });
+
+    if (this.tokenService.getRoleName() == 'Empresa') {
+      this.turnoForm.removeControl("empresa");
+    } else {
+      this.getEmpresas();
+    }
 
     const routeParams = this.route.snapshot.paramMap;
     const IdFromRoute = Number(routeParams.get('id'));
@@ -64,11 +71,13 @@ export class CreateTurnoComponent implements OnInit {
         ok => {
           this.turnoForm.addControl("id", new FormControl('', [Validators.required]));
 
-          ok.tipo = ok.tipo.id;
+          ok.hora = ok.hora.slice(0, ok.hora.length - 3);
+          if (ok.horaLlegada) ok.horaLlegada = ok.horaLlegada.slice(0, ok.horaLlegada.length - 3);
+          if (ok.horaSalida) ok.horaSalida = ok.horaSalida.slice(0, ok.horaSalida.length - 3);
 
-          ok.empresa = ok.empresa.id;
+          if (typeof ok.tipo != "number") ok.tipo = ok.tipo.id;
 
-          console.log(ok);
+          if (typeof ok.empresa != "number") ok.empresa = ok.empresa.id;
 
           this.turnoForm.patchValue(ok);
         }
@@ -115,4 +124,38 @@ export class CreateTurnoComponent implements OnInit {
     }
   }
 
+  // onChangeTipoTurno() {
+  //   const tipo = this.turnoForm.controls.tipo.value;
+
+  //   console.log(tipo);
+
+  //   this.turnoForm.removeControl("horaLlegada");
+  //   this.turnoForm.removeControl("destino");
+  //   this.turnoForm.removeControl("salidaDesde");
+  //   this.turnoForm.removeControl("horaSalida");
+
+  //   switch (tipo) {
+  //     case 3:
+  //       this.turnoForm.addControl("horaLlegada", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("destino", new FormControl("", [Validators.required]));
+  //       break;
+
+  //     case 1:
+  //       this.turnoForm.addControl("salidaDesde", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("horaSalida", new FormControl("", [Validators.required]));
+
+  //       break;
+
+  //     case 2:
+  //       this.turnoForm.addControl("horaLlegada", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("destino", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("salidaDesde", new FormControl("", [Validators.required]));
+  //       this.turnoForm.addControl("horaSalida", new FormControl("", [Validators.required]));
+
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // }
 }
