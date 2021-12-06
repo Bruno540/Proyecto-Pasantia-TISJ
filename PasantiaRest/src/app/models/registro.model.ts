@@ -3,10 +3,10 @@ import { ApiBaseEntity } from "./base-entity.model";
 import { Coche } from "./coche.model";
 import { Turno } from "./turno/turno.model";
 
-export enum EstadoRegistro {
-    ARRIBO = "arribo",
-    PARTIO = "partio"
-}
+// export enum EstadoRegistro {
+//     ARRIBO = "arribo",
+//     PARTIO = "partio"
+// }
 
 @Entity("registros")
 export class Registro extends ApiBaseEntity {
@@ -17,11 +17,11 @@ export class Registro extends ApiBaseEntity {
     @Column()
     toqueAnden: Date;
 
-    @Column({
-        type: "enum",
-        enum: EstadoRegistro
-    })
-    estado: EstadoRegistro;
+    // @Column({
+    //     type: "enum",
+    //     enum: EstadoRegistro
+    // })
+    // estado: EstadoRegistro;
 
     @ManyToOne(() => Turno, turno => turno.registros, { onDelete: 'CASCADE' })
     turno: Turno;

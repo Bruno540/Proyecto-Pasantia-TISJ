@@ -10,6 +10,11 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
     return response.json(await empresaService.getAll());
 }
 
+export const getCoches = async (request: Request, response: Response): Promise<Response> => {
+    if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id de la empresa");
+    return response.json(await empresaService.getCoches(request.params.id));
+}
+
 export const getById = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id || !validator.isInt(request.params.id)) throw ApiError.badRequestError("Falta el id de la empresa");
     return response.json(await empresaService.getById(request.params.id));

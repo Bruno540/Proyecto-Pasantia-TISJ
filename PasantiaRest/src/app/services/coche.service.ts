@@ -57,6 +57,6 @@ export const update = async (cocheId: any, datos: any): Promise<void> => {
     await getCustomRepository(CocheRepository).save(datos);
 }
 
-export const buscar = async (filter: any): Promise<Coche[] | undefined> => {
-    return await getCustomRepository(CocheRepository).busqueda(filter);
+export const buscar = async (filter:any, empresaId:any): Promise<Coche[] | undefined> => {
+    return await getCustomRepository(CocheRepository).busqueda(filter,empresaId);
 }

@@ -1,11 +1,12 @@
-import {getCustomRepository} from "typeorm";
+import {getCustomRepository, getRepository} from "typeorm";
 import {ApiError} from "../../config/api-error";
-import {EstadoRegistro, Registro} from "../models/registro.model";
+import {Registro} from "../models/registro.model";
 import {RegistroRepository} from "../repositories/registro.repository";
 import {CocheRepository} from "../repositories/coche.repository";
 import {TurnoRepository} from "../repositories/turno.repository";
 import moment from "moment";
 import { EventEmitter } from "stream";
+import { Turno } from "../models/turno/turno.model";
 
 export const getAll = async (): Promise<Registro[] | undefined> => {
     return await getCustomRepository(RegistroRepository).find({
@@ -39,26 +40,26 @@ export const create = async (turnoId:any, cocheId:any, observaciones:string, Str
     const coche = await getCustomRepository(CocheRepository).findOne(cocheId);
     if(!coche) throw new ApiError("No existe el coche ingresado");
     const registro = new Registro();
-    switch (turno.tipo.nombre){
-        case "Salida":{
-            registro.estado = EstadoRegistro.PARTIO;
-            break;
-        }
-        case "Llegada":{
-            registro.estado = EstadoRegistro.ARRIBO;
-            break;
-        }
-        case "Pasada":{
-            registro.estado = EstadoRegistro.ARRIBO;
-            break;
-        }
-    }
+    // switch (turno.tipo.nombre){
+    //     case "Salida":{
+    //         registro.estado = EstadoRegistro.PARTIO;
+    //         break;
+    //     }
+    //     case "Llegada":{
+    //         registro.estado = EstadoRegistro.ARRIBO;
+    //         break;
+    //     }
+    //     case "Pasada":{
+    //         registro.estado = EstadoRegistro.ARRIBO;
+    //         break;
+    //     }
+    // }
     registro.toqueAnden = new Date();
     registro.observaciones = observaciones;
     registro.turno = turno;
     registro.coche = coche;
     const registroGuardado = await getCustomRepository(RegistroRepository).save(registro);
-    Stream.emit('push','message',registroGuardado);
+    Stream.emit('push','message',await getCustomRepository(TurnoRepository).liveTurnos());
 }
 
 export const _delete = async(registroId:any):Promise<void>=>{

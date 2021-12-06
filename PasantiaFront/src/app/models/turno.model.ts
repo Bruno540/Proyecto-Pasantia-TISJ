@@ -44,10 +44,10 @@ export class Turno {
 
     horaLlegada?: string;
 
-    tipo: Turno | number;
+    tipo: any;
 
     registros: Registro[];
 
-    empresa: Empresa | number;
+    empresa: any;
 
 }

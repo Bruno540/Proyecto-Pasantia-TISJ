@@ -10,6 +10,8 @@ const upload = multer({storage:empresaStorage()});
 
 router.get("/", handleRequest(EmpresaController.getAll));
 
+router.get("/coches/:id", handleRequest(EmpresaController.getCoches));
+
 router.get("/:id", handleRequest(EmpresaController.getById));
 
 router.post("/", upload.single("imagen"),handleRequest(EmpresaController.create));

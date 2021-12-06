@@ -6,9 +6,8 @@ import { Usuario } from "../models/usuario.model";
 export class UsuarioRepository extends Repository<Usuario> {
 
     findByEmail(email: string) {
-        return this.findOne({
-            where: { email },
-            relations: ["rol", "empresa"]
+        return this.find({
+            where: { email }
         });
     }
 

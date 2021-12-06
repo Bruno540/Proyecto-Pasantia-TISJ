@@ -72,3 +72,8 @@ export const getProximos = async (request: Request, response: Response): Promise
     const result = await getCustomRepository(TurnoRepository).findProximos();
     return response.status(200).json(result);
 }
+
+export const getTurnosLive = async (request: Request, response: Response): Promise<Response> => {
+    const result = await getCustomRepository(TurnoRepository).liveTurnos();
+    return response.status(200).json(result);
+}

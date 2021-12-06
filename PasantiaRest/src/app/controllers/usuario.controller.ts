@@ -20,13 +20,9 @@ export const getById = async (request: Request, response: Response): Promise<Res
 }
 
 export const create = async (request: Request, response: Response): Promise<Response> => {
-    if (typeof request.body.email != "string") throw ApiError.badRequestError("Falta el email del usuario");
-    if (typeof request.body.password != "string") throw ApiError.badRequestError("Falta la contraseña del usuario");
-    if (typeof request.body.nombre != "string") throw ApiError.badRequestError("Falta el nombre del usuario");
-    if (typeof request.body.apellido != "string") throw ApiError.badRequestError("Falta el apellido del usuario");
+    if(!request.body.email) throw new ApiError("Falta el rut de la empresa");
+    if(!request.body.password) throw new ApiError("Falta la razon social de la empresa");
     if (!validator.isEmail(request.body.email)) throw ApiError.badRequestError("El email ingresado no es valido");
-
-    console.log(request.body);
 
     if (await usuariosService.getByEmail(request.body.email)) throw ApiError.badRequestError("Ya existe un usuario con el email ingresado");
 

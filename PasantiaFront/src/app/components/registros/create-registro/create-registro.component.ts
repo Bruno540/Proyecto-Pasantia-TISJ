@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Coche } from 'src/app/models/coche.model';
 import { Turno } from 'src/app/models/turno.model';
 import { CocheService } from 'src/app/services/coches/coche.service';
+import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { RegistrosService } from 'src/app/services/registros/registros.service';
 import { TurnosService } from 'src/app/services/turnos/turnos.service';
 
@@ -20,21 +21,27 @@ export class CreateRegistroComponent implements OnInit {
   turnos: any;
   selectorTurnos = true;
   cantTurnos: string = 'Todos'
+  selectorCoches = true;
+  empresaId: any;
 
   constructor(private FormBuilder: FormBuilder,
     private RegistroService: RegistrosService,
     private CocheService: CocheService,
     private TurnoService: TurnosService,
+    private EmpresaService: EmpresasService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getCoches();
+    //this.getCoches();
     this.getTurnos();
     this.registrosForm = this.FormBuilder.group({
       turnoId:['', [Validators.required]],
-      cocheId:['', [Validators.required]],
+      cocheId:[{
+        value: '',
+        disabled: this.selectorCoches
+      }, [Validators.required]],
       observaciones:['']
     })
 
@@ -65,6 +72,7 @@ export class CreateRegistroComponent implements OnInit {
     }else{
       this.cantTurnos = 'Proximos'
     }
+    this.registrosForm.get('turnoId')?.setValue('');
     this.getTurnos();
   }
 
@@ -80,6 +88,19 @@ export class CreateRegistroComponent implements OnInit {
         this.turnos = data
       })
     }
+  }
+
+  obtenerCochesEmpresa(turno : Turno){
+    //console.log(turno.empresa);
+    const coche = this.registrosForm.get('cocheId');
+    coche?.enable();
+    coche?.setValue('');
+    this.empresaId = turno.empresa.id;
+    this.EmpresaService.getCoches(this.empresaId).subscribe(data=>{
+      //console.log(data);
+      this.coches = data;
+      this.selectorCoches = false;
+    })
   }
 
   submit() {
@@ -106,13 +127,13 @@ export class CreateRegistroComponent implements OnInit {
   }
 
   getCochesBusqueda(filter: string): void{
-    if(filter===''){
-      this.getCoches();
-    }else{
-      this.CocheService.getCochesBusqueda(filter).subscribe(data=>{
+    // if(filter===''){
+    //   this.getCoches();
+    // }else{
+      this.CocheService.getCochesBusqueda(filter, this.empresaId).subscribe(data=>{
         this.coches = data;
       });
-    }
+  //  }
   }
 
 }

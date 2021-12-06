@@ -14,7 +14,7 @@ export class DiaSemana {
                 return 'viernes'
             case 6:
                 return 'sabado'
-            case 7:
+            case 0:
                 return 'domingo'
             default:
                 return ''

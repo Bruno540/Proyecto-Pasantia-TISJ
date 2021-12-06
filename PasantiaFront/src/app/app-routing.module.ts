@@ -14,7 +14,6 @@ import { RegistrosComponent } from './components/registros/registros.component';
 import { CreateRegistroComponent } from './components/registros/create-registro/create-registro.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { TieneRolGuard } from './guards/tiene-rol/tiene-rol.guard';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
 import { IndexComponent } from './components/index/index.component';
 import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
