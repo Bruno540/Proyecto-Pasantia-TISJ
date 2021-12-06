@@ -1,4 +1,4 @@
-import { now } from "moment";
+import moment, { now } from "moment";
 import { Between, EntityRepository, getRepository, Repository } from "typeorm";
 import { Turno } from "../models/turno/turno.model";
 
@@ -15,8 +15,10 @@ export class TurnoRepository extends Repository<Turno> {
 
     findProximos = async (): Promise<Turno[] | undefined> => {
         // mas menos 10 minutos en milisegundos
-        var arriba =new Date(new Date().getTime() + 600000).toLocaleTimeString();
-        var abajo = new Date(new Date().getTime() - 600000).toLocaleTimeString();
+        //var arriba =new Date(new Date().getTime() + 600000).toLocaleTimeString();
+        //var abajo = new Date(new Date().getTime() - 600000).toLocaleTimeString();
+        const arriba = moment().add(2,'hours');
+        const abajo = moment().startOf('day');
         return await getRepository(Turno).find({
             where: 
                 {

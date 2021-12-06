@@ -22,6 +22,10 @@ export class TurnosService {
     return this.Http.get<TipoTurno[]>(this.Url + "/tipos");
   }
 
+  getProximos() {
+    return this.Http.get<Turno[]>(this.Url + "/tools/proximos");
+  }
+
   get(id: number) {
     return this.Http.get<Turno>(this.Url + `/${id}`);
   }
@@ -37,4 +41,5 @@ export class TurnosService {
   _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
+  
 }

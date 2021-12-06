@@ -18,6 +18,7 @@ export class CreateRegistroComponent implements OnInit {
   registrosForm: FormGroup;
   coches: any;
   turnos: Turno[]=[];
+  userProfileForm: FormGroup;
 
   constructor(private FormBuilder: FormBuilder,
     private RegistroService: RegistrosService,
