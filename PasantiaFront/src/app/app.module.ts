@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +36,13 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
 import { NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { IndexComponent } from './components/index/index.component';
+import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
+import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import { AuthInterceptor } from './middlewares/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,6 +69,9 @@ import { NgxMatNativeDateModule } from '@angular-material-components/datetime-pi
     HomeComponent,
     NotFoundComponent,
     RegistroLiveComponent,
+    IndexComponent,
+    DiasEspecialesComponent,
+    CreateDiasEspecialesComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,12 +82,27 @@ import { NgxMatNativeDateModule } from '@angular-material-components/datetime-pi
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-
+    NgxMatTimepickerModule,
+    MomentDateModule
     //SocketIoModule.forRoot(config)
-
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['L'],
+        },
+        display: {
+          dateInput: 'L',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
     ReactiveFormsModule,
     MatSelectModule,
     NgxMatNativeDateModule

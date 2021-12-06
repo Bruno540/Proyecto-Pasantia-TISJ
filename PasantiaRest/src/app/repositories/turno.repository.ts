@@ -50,8 +50,8 @@ export class TurnoRepository extends Repository<Turno> {
         const dia = moment().day();
         const diaSemana = DiaSemana.obtenerDia(dia);
         if(!diaSemana) throw new ApiError("No existe el dia de la semana"); 
-        const arriba = moment().add(2,'hours').format("HH:mm:ss");
-        const abajo = moment().subtract(12,'hours').format('HH:mm:ss');
+        const arriba = moment().add(2,'hours').format("HH:mm");
+        const abajo = moment().subtract(12,'hours').format('HH:mm');
         const turnos = await getRepository(Turno).find({
             where: 
                 {

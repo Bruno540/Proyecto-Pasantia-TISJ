@@ -10,20 +10,31 @@
         </mat-toolbar>
 
         <mat-nav-list>
-            <mat-list-item routerLink="/empresas" (click)="sidenav.toggle()">
-                Empresas
-            </mat-list-item>
-            <mat-list-item routerLink="/coches" (click)="sidenav.toggle()">
-                Coches
-            </mat-list-item>
-            <mat-list-item routerLink="/usuarios" (click)="sidenav.toggle()">
-                Usuarios
-            </mat-list-item>
-            <mat-list-item routerLink="/turnos" (click)="sidenav.toggle()">
-                Turnos
-            </mat-list-item>
-            <mat-list-item routerLink="/registros" (click)="sidenav.toggle()">
-                Registros
+            <ng-container *ngIf="tokenService.getToken()">
+                <mat-list-item routerLink="/coches" (click)="sidenav.toggle()">
+                    Coches
+                </mat-list-item>
+                <ng-container *ngIf="tokenService.getRoleName() == 'Administrador'">
+                    <mat-list-item routerLink="/usuarios" (click)="sidenav.toggle()">
+                        Usuarios
+                    </mat-list-item>
+                    <mat-list-item routerLink="/dias-especiales" (click)="sidenav.toggle()">
+                        Dias Especiales
+                    </mat-list-item>
+                    <mat-list-item routerLink="/empresas" (click)="sidenav.toggle()">
+                        Empresas
+                    </mat-list-item>
+                    <mat-list-item routerLink="/registros" (click)="sidenav.toggle()">
+                        Registros
+                    </mat-list-item>
+                </ng-container>
+                <mat-list-item routerLink="/turnos" (click)="sidenav.toggle()">
+                    Turnos
+                </mat-list-item>
+            </ng-container>
+
+            <mat-list-item routerLink="/registros/live" (click)="sidenav.toggle()">
+                Registros en vivo
             </mat-list-item>
         </mat-nav-list>
 

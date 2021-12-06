@@ -15,7 +15,7 @@ export class TurnosService {
   ) { }
 
   getAll() {
-    return this.Http.get<[Turno[], number]>(this.Url);
+    return this.Http.get<Turno[]>(this.Url);
   }
 
   getLive(){
@@ -24,10 +24,6 @@ export class TurnosService {
 
   getTipos() {
     return this.Http.get<TipoTurno[]>(this.Url + "/tipos");
-  }
-
-  getProximos() {
-    return this.Http.get<Turno[]>(this.Url + "/tools/proximos");
   }
 
   get(id: number) {
@@ -46,4 +42,7 @@ export class TurnosService {
     return this.Http.delete(this.Url + `/${id}`);
   }
   
+  getProximos() {
+    return this.Http.get<Turno[]>(this.Url + "/tools/proximos");
+  }
 }

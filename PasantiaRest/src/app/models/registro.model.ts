@@ -23,10 +23,10 @@ export class Registro extends ApiBaseEntity {
     // })
     // estado: EstadoRegistro;
 
-    @ManyToOne(() => Turno, turno => turno.registros)
+    @ManyToOne(() => Turno, turno => turno.registros, { onDelete: 'CASCADE' })
     turno: Turno;
 
-    @ManyToOne(() => Coche, coche => coche.registros)
+    @ManyToOne(() => Coche, coche => coche.registros, { onDelete: "SET NULL" })
     coche: Coche;
 
 
