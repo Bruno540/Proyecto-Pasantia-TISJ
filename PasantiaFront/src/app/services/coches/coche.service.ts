@@ -34,8 +34,8 @@ export class CocheService {
     return this.Http.delete(this.Url + `/${id}`);
   }
 
-  getCochesBusqueda(filter: string){
+  getCochesBusqueda(filter: string, empresaId:any){
     console.log("estoy en el servicio")
-    return this.Http.get<Coche[]>(this.Url + '/filtro/buscar?filter='+ filter);
+    return this.Http.get<Coche[]>(this.Url + '/filtro/buscar?filter='+ filter + '&empresaId=' + empresaId);
   }
 }

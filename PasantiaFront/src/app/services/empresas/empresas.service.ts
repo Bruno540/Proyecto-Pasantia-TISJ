@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Coche } from 'src/app/models/coche.model';
 import { Empresa } from 'src/app/models/empresa.model';
 import { ProyecConfig } from 'src/environments/proyect-config';
 
@@ -20,6 +21,10 @@ export class EmpresasService {
 
   get(id: number) {
     return this.Http.get<Empresa>(this.Url + `/${id}`);
+  }
+
+  getCoches(id: number) {
+    return this.Http.get<Coche[]>(this.Url + `/coches/${id}`);
   }
 
   create(empresa: Empresa, file:File) {

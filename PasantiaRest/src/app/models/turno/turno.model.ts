@@ -4,6 +4,15 @@ import { Empresa } from "../empresa.model";
 import { Registro } from "../registro.model";
 import { TipoTurno } from "./tipo-turno.model";
 
+
+export enum EstadoRegistro {
+    ARRIBO = "ARRIBO",
+    PARTIO = "PARTIO",
+    RETRASADO = "RETRASADO",
+    NOARRIBO = "NO ARRIBO",
+    NOPARTIO = "NO PARTIO"
+}
+
 @Entity('turnos')
 export class Turno extends ApiBaseEntity {
 
@@ -63,6 +72,8 @@ export class Turno extends ApiBaseEntity {
 
     @ManyToOne(() => Empresa, empresa => empresa.turnos)
     empresa: Empresa;
+
+    estado?: EstadoRegistro;
     
 }
 
