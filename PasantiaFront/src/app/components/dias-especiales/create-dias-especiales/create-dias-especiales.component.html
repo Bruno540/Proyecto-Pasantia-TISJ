@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex.lt-sm="100" fxFlex.gt-sm="40" fxFlex.gt-lg="25" class="card">
+
+        <mat-card-content>
+            <form [formGroup]="diaForm">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="number" formControlName="nombre">
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="fecha">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                      </mat-form-field>
+
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button onclick="history.back(-1)" mat-raised-button type="button" color="primary">Cancelar</button>
+            <button (click)="submit()" [disabled]="diaForm.invalid" mat-raised-button type="submit"
+                color="primary">Confirmar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

@@ -3,6 +3,7 @@ import EmpresasRoutes from "./empresa.routes";
 import AuthRoutes from "./authentication.routes";
 import UsuariosRoutes from "./usuario.routes";
 import CochesRoutes from "./coche.routes";
+import DiasEspecialesRoutes from "./dias-especiales.routes";
 import TurnosRoutes from "./turno.routes";
 import RegistroRoutes from "./registro.routes";
 import { isLoggedIn } from "../middlewares/isLoggedIn";
@@ -15,6 +16,8 @@ router.use("/empresas", [isLoggedIn, tieneRol(["Administrador"])], EmpresasRoute
 router.use("/authentication", AuthRoutes);
 
 router.use("/usuarios", [isLoggedIn, tieneRol(["Administrador"])], UsuariosRoutes);
+
+router.use("/dias-especiales", [isLoggedIn, tieneRol(["Administrador"])], DiasEspecialesRoutes);
 
 router.use("/coches", [isLoggedIn, tieneRol(["Administrador", "Empresa"])], CochesRoutes);
 

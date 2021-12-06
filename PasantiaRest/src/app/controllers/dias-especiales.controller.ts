@@ -20,7 +20,7 @@ export const getById = async (request: Request, response: Response): Promise<Res
 export const create = async (request: Request, response: Response): Promise<Response> => {
     if (request.body.nombre && typeof request.body.nombre != "string") throw new ApiError("Nombre invalido");
     if (typeof request.body.fecha != "string") throw new ApiError("Fecha invalida o no ingresada");
-    if (!moment(request.body.fecha, 'yyyy-mm-dd', true).isValid()) throw ApiError.badRequestError("Formato de fecha invalido");
+    if (!moment(request.body.fecha, 'YYYY-MM-DD', true).isValid()) throw ApiError.badRequestError("Formato de fecha invalido");
 
     return response.status(201).json(await DiasEspecialesService.create(request.body));
 }
@@ -40,7 +40,7 @@ export const update = async (request: Request, response: Response): Promise<Resp
     if (request.body.nombre && typeof request.body.nombre != "string") throw new ApiError("Nombre invalido");
     if (request.body.fecha) {
         if (typeof request.body.fecha != "string") throw new ApiError("Fecha invalida o no ingresada");
-        if (!moment(request.body.fecha, 'yyyy-mm-dd', true).isValid()) throw ApiError.badRequestError("Formato de fecha invalido");
+        if (!moment(request.body.fecha, 'YYYY-MM-DD', true).isValid()) throw ApiError.badRequestError("Formato de fecha invalido");
     }
 
     const dia = await DiasEspecialesService.getById(Number(request.params.id));

@@ -17,6 +17,8 @@ import { HomeComponent } from './components/home/home.component';
 import { TieneRolGuard } from './guards/tiene-rol/tiene-rol.guard';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
 import { IndexComponent } from './components/index/index.component';
+import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
+import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -47,6 +49,9 @@ const routes: Routes = [
       { path: "registros", component: RegistrosComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
       { path: "registros/create", component: CreateRegistroComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
       { path: "registros/update/:id", component: CreateRegistroComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+
+      { path: "dias-especiales", component: DiasEspecialesComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
+      { path: "dias-especiales/create", component: CreateDiasEspecialesComponent, canActivate: [AuthGuard, TieneRolGuard], data: { roles: ['Administrador'] } },
     ]
   },
 

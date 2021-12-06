@@ -38,6 +38,10 @@ import { RegistroLiveComponent } from './components/registro-live/registro-live.
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { IndexComponent } from './components/index/index.component';
+import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
+import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -65,6 +69,8 @@ import { IndexComponent } from './components/index/index.component';
     NotFoundComponent,
     RegistroLiveComponent,
     IndexComponent,
+    DiasEspecialesComponent,
+    CreateDiasEspecialesComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,11 +82,26 @@ import { IndexComponent } from './components/index/index.component';
     FormsModule,
     ReactiveFormsModule,
     NgxMatTimepickerModule,
+    MomentDateModule
     //SocketIoModule.forRoot(config)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: 'LOCALSTORAGE', useValue: window.localStorage },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['L'],
+        },
+        display: {
+          dateInput: 'L',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
     ReactiveFormsModule,
     MatSelectModule
   ],
