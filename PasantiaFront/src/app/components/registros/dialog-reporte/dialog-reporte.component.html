@@ -20,6 +20,9 @@
                 <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
                     {{tipo.nombre}}
                 </mat-option>
+                <mat-option [value]="0">
+                    Todos
+                </mat-option>
             </mat-select>
         </mat-form-field>
     </form>

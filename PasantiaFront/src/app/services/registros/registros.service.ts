@@ -40,4 +40,8 @@ export class RegistrosService {
   reportes(fechaDesde: any, fechaHasta:any, tipoid:any) {
     return this.Http.get<Registro[]>(this.Url + `/tools/reportes?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}&tipoid=${tipoid}` );
   }
+
+  allreportes(fechaDesde: any, fechaHasta:any) {
+    return this.Http.get<Registro[]>(this.Url + `/tools/TodosReportes?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`);
+  }
 }

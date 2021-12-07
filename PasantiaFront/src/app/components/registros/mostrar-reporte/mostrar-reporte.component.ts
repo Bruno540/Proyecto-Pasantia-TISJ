@@ -26,9 +26,17 @@ export class MostrarReporteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.reportes(this.fechaDesde,this.fechaHasta, this.tipoid).subscribe(data=>{
-      this.registros = data;
-    })
+    console.log('estamos aca', this.tipoid);
+    if(this.tipoid==="0"){
+      
+      this.service.allreportes(this.fechaDesde,this.fechaHasta).subscribe(data=>{
+        this.registros = data;
+      })
+    }else{
+      this.service.reportes(this.fechaDesde,this.fechaHasta, this.tipoid).subscribe(data=>{
+        this.registros = data;
+      })
+    }
   }
 
   print(){

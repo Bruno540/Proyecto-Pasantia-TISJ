@@ -45,6 +45,8 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
 import { AuthInterceptor } from './middlewares/auth.interceptor';
 import { DialogReporteComponent } from './components/registros/dialog-reporte/dialog-reporte.component';
 import { MostrarReporteComponent } from './components/registros/mostrar-reporte/mostrar-reporte.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -88,8 +90,13 @@ import { MostrarReporteComponent } from './components/registros/mostrar-reporte/
     FormsModule,
     ReactiveFormsModule,
     NgxMatTimepickerModule,
-    MomentDateModule
+    MomentDateModule,
+    MatPaginatorModule,
+    MatSortModule
     //SocketIoModule.forRoot(config)
+  ],
+  exports:[
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

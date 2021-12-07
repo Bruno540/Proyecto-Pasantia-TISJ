@@ -45,4 +45,21 @@ export class RegistroRepository extends Repository<Registro> {
             order:{'toqueAnden':'DESC'}
         });
     }
+
+    AllRegistros = async (fechaDesde: any, fechaHasta: any): Promise<Registro[] | undefined> => {
+        if(!fechaDesde && !fechaHasta){
+            fechaDesde =  moment().startOf('day');
+            fechaHasta =  moment().endOf('day');
+        }else{
+            fechaDesde = moment(fechaDesde).startOf('day');
+            fechaHasta = moment(fechaHasta).endOf('day');
+        }
+        return await getRepository(Registro).find({
+            where: {
+                createdDate: Between(fechaDesde,fechaHasta),
+            },
+            relations: ["turno","turno.empresa","coche", "turno.tipo"],
+            order:{'toqueAnden':'DESC'}
+        });
+    }
 }
