@@ -47,7 +47,8 @@ export const create = async (turnoId:any, cocheId:any, observaciones:string, Str
     const registroCheck = await getCustomRepository(RegistroRepository).find({
         where: {
             toqueAnden: Between(fechaDesde,fechaHasta),
-            turno: turno.id 
+            turno: turno.id,
+            coche: coche.id, 
         },
     })
 

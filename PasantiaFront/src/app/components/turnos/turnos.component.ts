@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { Turno } from 'src/app/models/turno.model';
 import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
@@ -13,8 +16,12 @@ import { DialogTurnoComponent } from './dialog-turno/dialog-turno.component';
 })
 export class TurnosComponent implements OnInit {
 
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
+
   displayedColumns: string[] = ['id', 'hora', 'activo', 'descripcion', 'tipo' ,'actions'];
-  dataSource: Turno[] = [];
+  //dataSource: Turno[] = [];
+  dataSource: any;
 
   constructor(
     private titleService: Title,
@@ -32,7 +39,10 @@ export class TurnosComponent implements OnInit {
     
     this.TurnosService.getAll().subscribe(
       ok => {
-        this.dataSource = ok;
+        //this.dataSource = ok;
+        this.dataSource = new MatTableDataSource<Turno>(ok);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     );
   }
