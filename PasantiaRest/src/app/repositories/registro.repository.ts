@@ -12,9 +12,6 @@ export class RegistroRepository extends Repository<Registro> {
     }
 
     findUltimos = async (): Promise<Registro[] | undefined> => {
-        // mas menos 10 minutos en milisegundos
-        //var arriba = new Date(new Date().getTime());
-        //var abajo = new Date(new Date().getTime() - 1200000);
         var arriba = moment().toDate()
         var abajo = moment().subtract(20,'minutes').toDate()
         return await getRepository(Registro).find({
@@ -22,6 +19,23 @@ export class RegistroRepository extends Repository<Registro> {
                 toqueAnden: Between(abajo,arriba)
             },
             relations: ["turno","turno.empresa","coche"],
+            order:{'toqueAnden':'DESC'}
+        });
+    }
+
+    filtrarRegistros = async (fechaDesde: any, fechaHasta: any): Promise<Registro[] | undefined> => {
+        if(!fechaDesde && !fechaHasta){
+            fechaDesde =  moment().startOf('day');
+            fechaHasta =  moment().endOf('day');
+        }else{
+            fechaDesde = moment(fechaDesde).startOf('day');
+            fechaHasta = moment(fechaHasta).endOf('day');
+        }
+        return await getRepository(Registro).find({
+            where: {
+                createdDate: Between(fechaDesde,fechaHasta)
+            },
+            relations: ["turno","turno.empresa","coche", "turno.tipo"],
             order:{'toqueAnden':'DESC'}
         });
     }

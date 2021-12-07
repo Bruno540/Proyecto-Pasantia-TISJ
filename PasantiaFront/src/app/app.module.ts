@@ -41,6 +41,9 @@ import { DiasEspecialesComponent } from './components/dias-especiales/dias-espec
 import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { AuthInterceptor } from './middlewares/auth.interceptor';
+import { DialogReporteComponent } from './components/registros/dialog-reporte/dialog-reporte.component';
+import { MostrarReporteComponent } from './components/registros/mostrar-reporte/mostrar-reporte.component';
+
 
 @NgModule({
   declarations: [
@@ -70,6 +73,8 @@ import { AuthInterceptor } from './middlewares/auth.interceptor';
     IndexComponent,
     DiasEspecialesComponent,
     CreateDiasEspecialesComponent,
+    DialogReporteComponent,
+    MostrarReporteComponent,
   ],
   imports: [
     BrowserModule,

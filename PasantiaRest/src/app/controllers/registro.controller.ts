@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { EventEmitter } from "stream";
 import validator from "validator";
 import { ApiError } from "../../config/api-error";
+import { validateFechas } from "../libraries/validation.library";
 import * as registroService from "../services/registro.service";
 const Stream = new EventEmitter();
 
@@ -47,4 +48,9 @@ export const _delete = async (request: Request, response: Response): Promise<Res
 export const update = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del registro");
     return response.status(204).json(await registroService.update(request.params.id,request.body));
+}
+
+export const verReportes = async (request: Request, response: Response): Promise<Response> => {
+    if(request.query.fechaDesde || request.query.fechaHasta) await validateFechas(request.query);
+    return response.json(await registroService.verReportes(request.query.fechaDesde, request.query.fechaHasta));
 }

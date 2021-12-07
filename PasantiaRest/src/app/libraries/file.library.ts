@@ -5,9 +5,10 @@ import { baseDir } from "../application";
 import { ApiError } from "../../config/api-error";
 
 export const empresaStorage = () => {
+    const regExp = new RegExp("/jpeg|jpg|png|gif/");
     return multer.diskStorage({
         destination: (request, file, callback) => {
-            if (file.mimetype == "image/jpeg") {
+            if (regExp.test(file.mimetype)) {
                 return callback(null, "uploads/empresa");
             }
             else {
