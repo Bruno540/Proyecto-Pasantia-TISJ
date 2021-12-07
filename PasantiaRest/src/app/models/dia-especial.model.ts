@@ -7,7 +7,7 @@ export class DiaEspecial extends ApiBaseEntity {
     @Column({ nullable: true })
     nombre: string;
 
-    @Column()
+    @Column({ type: 'date' })
     fecha: Date;
 
 }

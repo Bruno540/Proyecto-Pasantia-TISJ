@@ -1,9 +1,10 @@
 import moment, { now } from "moment";
-import { Between, EntityRepository, getRepository, Repository } from "typeorm";
+import { Between, EntityRepository, getConnection, getRepository, In, Repository } from "typeorm";
 import { EstadoRegistro, Turno } from "../models/turno/turno.model";
 import { DiaSemana } from "../util/obtenerDia";
 import { ApiError } from "../../config/api-error";
 import { Registro } from "../models/registro.model";
+import { DiaEspecial } from "../models/dia-especial.model";
 
 
 @EntityRepository(Turno)
@@ -48,20 +49,35 @@ export class TurnoRepository extends Repository<Turno> {
 
     liveTurnos = async (): Promise<Turno[] | undefined> => {
         const dia = moment().day();
+        let diaNormal;
+        let diasEspeciales: any = [!!await getRepository(DiaEspecial).findOne({
+            where:{
+                fecha:moment().format("YYYY-MM-DD")
+            }
+        })];
+        if(!diasEspeciales[0]){
+            diaNormal = [true];
+            diasEspeciales = [true, false]
+        }
+        else{
+            diaNormal = [true,false]
+        }
         const diaSemana = DiaSemana.obtenerDia(dia);
         if(!diaSemana) throw new ApiError("No existe el dia de la semana"); 
         const arriba = moment().add(2,'hours').format("HH:mm");
         const abajo = moment().subtract(12,'hours').format('HH:mm');
         const turnos = await getRepository(Turno).find({
-            where: 
-                {
-                    hora: Between(abajo,arriba),
-                    activo: true,
-                    [diaSemana] : true
-                },
+            where:{
+                hora: Between(abajo,arriba),
+                activo: true,
+                [diaSemana] : true,
+                diasEspeciales: In(diasEspeciales),
+                diaNormal:In(diaNormal)
+            },
             relations: ["empresa", "tipo"],
             order:{'hora':'DESC'}
         });
+ 
         for(const turno of turnos){
             const horaTurno = moment(turno.hora, ['H:m']);
             const toqueArriba = moment(turno.hora, ['H:m']).add(10,'hours').toDate();
