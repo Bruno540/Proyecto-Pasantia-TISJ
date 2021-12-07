@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { Coche } from 'src/app/models/coche.model';
 import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
@@ -13,8 +16,12 @@ import { DialogCocheComponent } from './dialog-coche/dialog-coche.component';
 })
 export class CochesComponent implements OnInit {
 
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
+
   displayedColumns: string[] = ['id', 'numero', 'matricula', 'actions'];
-  dataSource: Coche[] = [];
+  //dataSource: Coche[] = [];
+  dataSource: any;
 
   constructor(
     private CocheService: CocheService,
@@ -32,7 +39,10 @@ export class CochesComponent implements OnInit {
 
     this.CocheService.getAll().subscribe(
       ok => {
-        this.dataSource = ok;
+        //this.dataSource = ok;
+        this.dataSource = new MatTableDataSource<Coche>(ok);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     );
   }

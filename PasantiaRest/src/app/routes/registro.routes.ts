@@ -20,4 +20,6 @@ router.get('/sse/stablish',handleRequest(RegistroController.sseStablish));
 
 router.get("/tools/reportes", handleRequest(RegistroController.verReportes));
 
+router.get("/tools/TodosReportes", handleRequest(RegistroController.vertodosReportes));
+
 export default router;
