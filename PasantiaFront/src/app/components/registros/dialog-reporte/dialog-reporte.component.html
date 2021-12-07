@@ -1,20 +1,31 @@
 <mat-dialog-content>
-    <mat-form-field appearance="fill">
-        <mat-label>Fecha desde</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaDesde">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <form [formGroup]="turnoForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha desde</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaDesde">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Fecha hasta</mat-label>
-        <input matInput [matDatepicker]="picker1" [(ngModel)]="fechaHasta">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha hasta</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="fechaHasta">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo de Turno</mat-label>
+            <mat-select matSelect formControlName="tipo">
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+                    {{tipo.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-flat-button [mat-dialog-close]="true" color="primary" (click)="filtrar()">Generar</button>
+    <button mat-flat-button [mat-dialog-close]="true" color="primary" (click)="filtrar()" [disabled]="turnoForm.invalid">Generar</button>
     <button mat-flat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
 </mat-dialog-actions>
 

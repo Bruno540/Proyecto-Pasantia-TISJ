@@ -15,16 +15,18 @@ export class MostrarReporteComponent implements OnInit {
   fechaDesde: any;
   fechaHasta: any;
   registros: any[] = []
+  tipoid: any;
 
   constructor(private service: RegistrosService, private router: ActivatedRoute) { 
     this.router.queryParams.subscribe(data=>{
       this.fechaDesde = moment(data.fechaDesde).format('YYYY-MM-DD');
       this.fechaHasta = moment(data.fechaHasta).format('YYYY-MM-DD');
+      this.tipoid = data.tipoTurno;
     })
   }
 
   ngOnInit(): void {
-    this.service.reportes(this.fechaDesde,this.fechaHasta).subscribe(data=>{
+    this.service.reportes(this.fechaDesde,this.fechaHasta, this.tipoid).subscribe(data=>{
       this.registros = data;
     })
   }

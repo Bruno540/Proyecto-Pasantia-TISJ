@@ -1,4 +1,4 @@
-import {getCustomRepository, getRepository} from "typeorm";
+import {Between, getCustomRepository, getRepository} from "typeorm";
 import {ApiError} from "../../config/api-error";
 import {Registro} from "../models/registro.model";
 import {RegistroRepository} from "../repositories/registro.repository";
@@ -40,20 +40,25 @@ export const create = async (turnoId:any, cocheId:any, observaciones:string, Str
     const coche = await getCustomRepository(CocheRepository).findOne(cocheId);
     if(!coche) throw new ApiError("No existe el coche ingresado");
     const registro = new Registro();
-    // switch (turno.tipo.nombre){
-    //     case "Salida":{
-    //         registro.estado = EstadoRegistro.PARTIO;
-    //         break;
-    //     }
-    //     case "Llegada":{
-    //         registro.estado = EstadoRegistro.ARRIBO;
-    //         break;
-    //     }
-    //     case "Pasada":{
-    //         registro.estado = EstadoRegistro.ARRIBO;
-    //         break;
-    //     }
-    // }
+
+    const fechaDesde =  moment().startOf('day');
+    const fechaHasta =  moment().endOf('day');
+    
+    const registroCheck = await getCustomRepository(RegistroRepository).find({
+        where: {
+            toqueAnden: Between(fechaDesde,fechaHasta),
+            turno: turno.id 
+        },
+    })
+
+    if(turno.tipo.nombre==="Salida" || turno.tipo.nombre==="Llegada"){
+        if(registroCheck.length === 1) throw new ApiError("Ya hay un registro para el turno en el dia de hoy");
+    }else{
+        if(turno.tipo.nombre==="Pasada"){
+            if(registroCheck.length >= 2) throw new ApiError("Ya se hicieron los registros para el turno en el dia de hoy");
+        }
+    }
+
     registro.toqueAnden = new Date();
     registro.observaciones = observaciones;
     registro.turno = turno;
@@ -76,6 +81,6 @@ export const update = async(registroId:any, datos:any): Promise<void>=>{
      await getCustomRepository(RegistroRepository).save(datos);
 }
 
-export const verReportes = async (fechaDesde: any, fechaHasta: any): Promise<Registro[] | undefined> =>{
-    return await getCustomRepository(RegistroRepository).filtrarRegistros(fechaDesde, fechaHasta);
+export const verReportes = async (fechaDesde: any, fechaHasta: any, tipoid: any): Promise<Registro[] | undefined> =>{
+    return await getCustomRepository(RegistroRepository).filtrarRegistros(fechaDesde, fechaHasta,tipoid);
 }

@@ -37,7 +37,7 @@ export class RegistrosService {
     return this.Http.delete(this.Url + `/${id}`);
   }
 
-  reportes(fechaDesde: any, fechaHasta:any) {
-    return this.Http.get<Registro[]>(this.Url + `/tools/reportes?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}` );
+  reportes(fechaDesde: any, fechaHasta:any, tipoid:any) {
+    return this.Http.get<Registro[]>(this.Url + `/tools/reportes?fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}&tipoid=${tipoid}` );
   }
 }

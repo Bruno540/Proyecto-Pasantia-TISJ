@@ -52,5 +52,6 @@ export const update = async (request: Request, response: Response): Promise<Resp
 
 export const verReportes = async (request: Request, response: Response): Promise<Response> => {
     if(request.query.fechaDesde || request.query.fechaHasta) await validateFechas(request.query);
-    return response.json(await registroService.verReportes(request.query.fechaDesde, request.query.fechaHasta));
+    if(!request.query.tipoid) throw new ApiError("Falta el id del tipo");
+    return response.json(await registroService.verReportes(request.query.fechaDesde, request.query.fechaHasta, request.query.tipoid));
 }
