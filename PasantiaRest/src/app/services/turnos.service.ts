@@ -50,17 +50,19 @@ export const getFiltered = async (fecha?: string, hora?: string): Promise<Turno[
 
     if (fecha) {
         const dia = DiaSemana.obtenerDia(moment(fecha).day());
+        console.log(dia);
+        
         query.andWhere(`turno.${dia} = :dia`, { dia: true })
 
         if (await DiasEspecialesService.esDiaEspecial(fecha)) {
-            query.where("turno.diasEspeciales = :diasEspeciales", { diasEspeciales: true });
+            query.andWhere("turno.diasEspeciales = :diasEspeciales", { diasEspeciales: true });
         } else {
-            query.where("turno.diaNormal = :diaNormal", { diaNormal: true });
+            query.andWhere("turno.diaNormal = :diaNormal", { diaNormal: true });
         }
     }
 
     if (hora) {
-        query.where("turno.hora = :hora", { hora });
+        query.andWhere("turno.hora = :hora", { hora });
     }
 
     return await query.getRawMany();
