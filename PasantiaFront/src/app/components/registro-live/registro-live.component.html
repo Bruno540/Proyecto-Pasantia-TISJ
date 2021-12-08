@@ -5,35 +5,38 @@
         <ng-container matColumnDef="fotoEmpresa">
             <th mat-header-cell *matHeaderCellDef> Foto </th>
             
-            <td mat-cell *matCellDef="let element"> <img  mat-card-lg-image [src]='backendUrl + element.empresa_imagen' alt=""> </td>
+            <td mat-cell *matCellDef="let element"> <img  mat-card-lg-image [src]='backendUrl + element.empresa.imagen' alt=""> </td>
         </ng-container>
 
         <ng-container matColumnDef="empresa">
             <th mat-header-cell *matHeaderCellDef> Empresa</th>
-            <td mat-cell *matCellDef="let element"> {{element.empresa_razonSocial  | uppercase}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.empresa.razonSocial  | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="origen">
             <th mat-header-cell *matHeaderCellDef> Origen</th>
-            <td mat-cell *matCellDef="let element"> {{element.turno_salidaDesde  | uppercase}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.salidaDesde  | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="destino">
             <th mat-header-cell *matHeaderCellDef> Destino</th>
-            <td mat-cell *matCellDef="let element"> {{element.turno_destino  | uppercase}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.destino  | uppercase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="coche">
+            <th mat-header-cell *matHeaderCellDef> Coche</th>
+            <td mat-cell *matCellDef="let element"> {{element.coche.numero  | uppercase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="horaTurno">
             <th mat-header-cell *matHeaderCellDef> Hora </th>
-            <td mat-cell *matCellDef="let element"> {{element.turno_hora}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
         </ng-container>
-
 
         <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef> Estado </th>
             <td mat-cell *matCellDef="let element"> <b>{{element.estado | uppercase}}</b> </td>
         </ng-container>
-
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns;"  [ngClass]="{gray: even}"></tr>

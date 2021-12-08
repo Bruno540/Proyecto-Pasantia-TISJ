@@ -50,35 +50,35 @@ export class TurnoRepository extends Repository<Turno> {
         if(!diaSemana) throw new ApiError("No existe el dia de la semana"); 
         const arriba = moment().add(2,'hours').format("HH:mm");
         const abajo = moment().subtract(12,'hours').format('HH:mm');
-        // const turnos = await getRepository(Turno).find({
-        //     where: 
-        //         {
-        //             hora: Between(abajo,arriba),
-        //             activo: true,
-        //             [diaSemana] : true
-        //         },
-        //     relations: ["empresa", "tipo"],
-        //     order:{'hora':'DESC'}
-        // });
+        const turnos = await getRepository(Turno).find({
+            where: 
+                {
+                    hora: Between(abajo,arriba),
+                    activo: true,
+                    [diaSemana] : true
+                },
+            relations: ["empresa", "tipo"],
+            order:{'hora':'DESC'}
+        });
 
-        const turnos = await getRepository(Turno)
-            .createQueryBuilder("turno").leftJoinAndSelect("turno.registros", "registro").leftJoinAndSelect("turno.tipo", "tipo").leftJoinAndSelect("turno.empresa", "empresa").groupBy("turno.id").addGroupBy("registro.id").addGroupBy("tipo.id").addGroupBy("empresa.id").getRawMany();
+        // const turnos = await getRepository(Turno)
+        //     .createQueryBuilder("turno").leftJoinAndSelect("turno.registros", "registro").leftJoinAndSelect("turno.tipo", "tipo").leftJoinAndSelect("turno.empresa", "empresa").groupBy("turno.id").addGroupBy("registro.id").addGroupBy("tipo.id").addGroupBy("empresa.id").getRawMany();
 
         for(const turno of turnos){
-            const horaTurno = moment(turno.turno_hora, ['H:m']);
-            const toqueArriba = moment(turno.turno_hora, ['H:m']).add(10,'hours').toDate();
-            const toqueAbajo = moment(turno.turno_hora, ['H:m']).subtract(10,'hours').toDate();
+            const horaTurno = moment(turno.hora, ['H:m']);
+            const toqueArriba = moment(turno.hora, ['H:m']).add(10,'hours').toDate();
+            const toqueAbajo = moment(turno.hora, ['H:m']).subtract(10,'hours').toDate();
             const registro = await getRepository(Registro).find({
                 where: {
-                    turno: turno.turno_id,
+                    turno: turno.id,
                     toqueAnden: Between(toqueAbajo, toqueArriba)
                 }
             })
-            if(turno.tipo_nombre === "Salida"){
+            if(turno.tipo.nombre === "Salida"){
                 if(registro.length === 1){
                     turno.estado = EstadoRegistro.PARTIO
                 }else{
-                    if(registro.length === 0){
+                    if(registro.length === 0){ 
                         if(horaTurno < moment()){
                             turno.estado = EstadoRegistro.RETRASADO
                         }else{
@@ -88,7 +88,7 @@ export class TurnoRepository extends Repository<Turno> {
                 }
             }
 
-            if(turno.tipo_nombre === "Llegada"){
+            if(turno.tipo.nombre === "Llegada"){
                 if(registro.length === 1){
                     turno.estado = EstadoRegistro.ARRIBO
                 }else{
@@ -102,7 +102,7 @@ export class TurnoRepository extends Repository<Turno> {
                 }
             }
 
-            if(turno.tipo_nombre === "Pasada"){
+            if(turno.tipo.nombre === "Pasada"){
                 if(registro.length === 1){
                     turno.estado = EstadoRegistro.ARRIBO;
                 }else{
@@ -118,8 +118,34 @@ export class TurnoRepository extends Repository<Turno> {
                 }
             }
         }
-
+        turnos.sort()
         return turnos;
+    }
+
+    cloneTurno = (turno: Turno) => {
+        const newTurno = new Turno();
+        newTurno.hora = turno.hora;
+        newTurno.horaLlegada = turno.horaLlegada;
+        newTurno.horaSalida = turno.horaSalida;
+        newTurno.id = turno.id;
+        newTurno.lunes = turno.lunes;
+        newTurno.martes = turno.martes;
+        newTurno.miercoles = turno.miercoles;
+        newTurno.jueves = turno.jueves;
+        newTurno.viernes = turno.viernes;
+        newTurno.sabado = turno.sabado;
+        newTurno.domingo = turno.domingo;
+        newTurno.empresa = turno.empresa;
+        newTurno.estado = turno.estado;
+        newTurno.salidaDesde = turno.salidaDesde;
+        newTurno.destino = turno.destino;
+        newTurno.diaNormal = turno.diaNormal;
+        newTurno.diasEspeciales = turno.diasEspeciales;
+        newTurno.activo = turno.activo;
+        newTurno.tipo = turno.tipo;
+        newTurno.registros= turno.registros;
+        newTurno.descripcion = turno.descripcion
+        return newTurno;
     }
     
 }
