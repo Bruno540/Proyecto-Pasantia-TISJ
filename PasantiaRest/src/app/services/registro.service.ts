@@ -70,18 +70,20 @@ export const create = async (turnoId: any, cocheId: any, observaciones: string, 
     Stream.emit('push', 'message', await getCustomRepository(TurnoRepository).liveTurnos());
 }
 
-export const _delete = async (registroId: any): Promise<void> => {
+export const _delete = async (registroId: any, Stream: EventEmitter): Promise<void> => {
     const registro = await getCustomRepository(RegistroRepository).findOne(registroId);
     if (!registro) throw new ApiError("No existe el registro");
 
     await getCustomRepository(RegistroRepository).delete(registroId);
+    Stream.emit('push', 'message', await getCustomRepository(TurnoRepository).liveTurnos());
 }
 
-export const update = async (registroId: any, datos: any): Promise<void> => {
+export const update = async (registroId: any, datos: any,Stream: EventEmitter): Promise<void> => {
     const registro = await getCustomRepository(RegistroRepository).findOne(registroId);
     if (!registro) throw new ApiError("No existe el registro");
     datos.id = registro.id
     await getCustomRepository(RegistroRepository).save(datos);
+    Stream.emit('push', 'message', await getCustomRepository(TurnoRepository).liveTurnos());
 }
 
 export const verReportes = async (fechaDesde: any, fechaHasta: any, tipoid: any): Promise<Registro[] | undefined> => {
