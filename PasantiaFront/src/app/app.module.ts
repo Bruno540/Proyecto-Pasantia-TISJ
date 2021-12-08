@@ -46,6 +46,7 @@ import { MostrarReporteComponent } from './components/registros/mostrar-reporte/
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import { ClockComponent } from './components/clock/clock.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     CreateDiasEspecialesComponent,
     DialogReporteComponent,
     MostrarReporteComponent,
+    ClockComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,3 +24,11 @@ export const update = async (id: number, body: DeepPartial<DiaEspecial>): Promis
 export const _delete = async (id: number): Promise<void> => {
     await getRepository(DiaEspecial).softDelete(id);
 }
+
+export const esDiaEspecial = async (date: string): Promise<DiaEspecial | undefined> => {
+    return await getRepository(DiaEspecial).findOne({
+        where: {
+            fecha: date
+        }
+    });
+}

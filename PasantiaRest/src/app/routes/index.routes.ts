@@ -21,7 +21,7 @@ router.use("/dias-especiales", [isLoggedIn, tieneRol(["Administrador"])], DiasEs
 
 router.use("/coches", [isLoggedIn, tieneRol(["Administrador", "Empresa"])], CochesRoutes);
 
-router.use("/turnos", [isLoggedIn, tieneRol(["Administrador", "Empresa"])], TurnosRoutes);
+router.use("/turnos", TurnosRoutes);
 
 router.use("/registros", RegistroRoutes);
 
