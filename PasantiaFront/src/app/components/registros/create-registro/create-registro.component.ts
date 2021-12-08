@@ -17,6 +17,7 @@ import { TurnosService } from 'src/app/services/turnos/turnos.service';
 export class CreateRegistroComponent implements OnInit {
 
   registrosForm: FormGroup;
+  hora?: any;
   coches: Coche[];
   turnos: Turno[];
   selectorTurnos = true;
@@ -59,6 +60,10 @@ export class CreateRegistroComponent implements OnInit {
     }
   }
 
+  test(){
+    console.log("Hora: ", this.hora);
+  }
+
   getCoches():void{
     this.CocheService.getAll().subscribe(data=>{
       this.coches=data;
@@ -83,7 +88,7 @@ export class CreateRegistroComponent implements OnInit {
         this.turnos = data
       })
     }else{
-      this.TurnoService.getProximos().subscribe(data=>{
+      this.TurnoService.getProximos().subscribe((data: any)=>{
         console.log('proximos', data);
         this.turnos = data
       })

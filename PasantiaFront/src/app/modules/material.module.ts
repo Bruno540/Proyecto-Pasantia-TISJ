@@ -17,8 +17,9 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from "@angular-material-components/datetime-picker";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -41,6 +42,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
         MatDatepickerModule,
         MatNativeDateModule,
         MatCheckboxModule,
+        NgxMatTimepickerModule,
+        MatDatepickerModule,
+        MatInputModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule,
         MatSlideToggleModule,
         MatGridListModule
     ],
@@ -63,11 +70,17 @@ import { MatGridListModule } from '@angular/material/grid-list';
         MatDatepickerModule,
         MatNativeDateModule,
         MatCheckboxModule,
+        NgxMatTimepickerModule,
+        MatDatepickerModule,
+        MatInputModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule,
         MatSlideToggleModule,
         MatGridListModule
     ],
     providers: [
-        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } }
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },
     ]
 })
 export class MaterialModule { }
