@@ -39,15 +39,14 @@ import { NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-materia
 import { IndexComponent } from './components/index/index.component';
 import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
 import { CreateDiasEspecialesComponent } from './components/dias-especiales/create-dias-especiales/create-dias-especiales.component';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AuthInterceptor } from './middlewares/auth.interceptor';
 import { DialogReporteComponent } from './components/registros/dialog-reporte/dialog-reporte.component';
 import { MostrarReporteComponent } from './components/registros/mostrar-reporte/mostrar-reporte.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { ClockComponent } from './components/clock/clock.component';
-
 
 @NgModule({
   declarations: [
@@ -96,7 +95,7 @@ import { ClockComponent } from './components/clock/clock.component';
     MatSortModule,
     //SocketIoModule.forRoot(config)
   ],
-  exports:[
+  exports: [
     MatPaginatorModule
   ],
   providers: [
@@ -118,8 +117,8 @@ import { ClockComponent } from './components/clock/clock.component';
     },
     ReactiveFormsModule,
     MatSelectModule,
-    NgxMatNativeDateModule
-
+    NgxMatNativeDateModule,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   bootstrap: [AppComponent]
 })
