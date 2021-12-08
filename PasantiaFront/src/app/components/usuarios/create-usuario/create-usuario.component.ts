@@ -50,6 +50,8 @@ export class CreateUsuarioComponent implements OnInit {
       this.UsuariosService.get(IdFromRoute).subscribe(
         ok => {
           this.usuarioForm.addControl("id", new FormControl('', [Validators.required]));
+          this.usuarioForm.get("password")?.clearValidators();
+          this.usuarioForm.get("password")?.updateValueAndValidity();
 
           if (ok.empresa && typeof ok.empresa != "number") {
             ok.empresa = ok.empresa.id;

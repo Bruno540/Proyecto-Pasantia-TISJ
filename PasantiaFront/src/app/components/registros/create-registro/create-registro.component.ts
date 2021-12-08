@@ -54,6 +54,11 @@ export class CreateRegistroComponent implements OnInit {
         ok => {
           this.registrosForm.addControl("id", new FormControl('', [Validators.required]));
 
+          ok.cocheId = ok.coche.id;
+          ok.turnoId = ok.turno.id;
+
+          this.obtenerCochesEmpresa(ok.turno);
+
           this.registrosForm.patchValue(ok);
         }
       );

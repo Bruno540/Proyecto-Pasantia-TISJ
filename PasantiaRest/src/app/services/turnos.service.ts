@@ -1,6 +1,9 @@
-import { DeepPartial, getRepository } from "typeorm";
+import moment from "moment";
+import { DeepPartial, FindConditions, getRepository } from "typeorm";
 import { TipoTurno } from "../models/turno/tipo-turno.model";
 import { Turno } from "../models/turno/turno.model";
+import * as DiasEspecialesService from "../services/dias-especiales.service";
+import { DiaSemana } from "../util/obtenerDia";
 
 export const getAll = async (): Promise<Turno[]> => {
     return await getRepository(Turno).find({
@@ -38,3 +41,28 @@ export const update = async (id: number, body: DeepPartial<Turno>): Promise<Turn
 export const _delete = async (id: number): Promise<void> => {
     await getRepository(Turno).softDelete(id);
 }
+
+export const getFiltered = async (fecha?: string, hora?: string): Promise<Turno[]> => {
+    let query = getRepository(Turno).createQueryBuilder("turno").leftJoinAndSelect("turno.registros", "registro").leftJoinAndSelect("turno.tipo", "tipo").leftJoinAndSelect("turno.empresa", "empresa").groupBy("turno.id").addGroupBy("registro.id").addGroupBy("tipo.id").addGroupBy("empresa.id");
+
+    query.where("turno.activo = :activo", { activo: true });
+
+
+    if (fecha) {
+        const dia = DiaSemana.obtenerDia(moment(fecha).day());
+        query.andWhere(`turno.${dia} = :dia`, { dia: true })
+
+        if (await DiasEspecialesService.esDiaEspecial(fecha)) {
+            query.where("turno.diasEspeciales = :diasEspeciales", { diasEspeciales: true });
+        } else {
+            query.where("turno.diaNormal = :diaNormal", { diaNormal: true });
+        }
+    }
+
+    if (hora) {
+        query.where("turno.hora = :hora", { hora });
+    }
+
+    return await query.getRawMany();
+}
+

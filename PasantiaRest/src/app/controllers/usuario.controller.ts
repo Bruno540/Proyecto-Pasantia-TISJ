@@ -61,17 +61,21 @@ export const update = async (request: Request, response: Response): Promise<Resp
     const usuario = await usuariosService.getById(Number(request.params.id));
     if (!usuario) throw ApiError.badRequestError("No existe el usuario");
 
-    if (request.body.password && typeof request.body.password == "string") {
+    if (typeof request.body.password == "string" && request.body.password != "") {
         request.body.password = await encryptPassword(request.body.password);
+    } else {
+        request.body.password = undefined;
     }
 
     if (request.body.empresa) {
         if (typeof request.body.empresa != "number") throw ApiError.badRequestError("Falta la empresa del usuario");
-        if (await usuariosService.getByEmpresa(request.body.empresa)) throw ApiError.badRequestError("Ya existe un usuario con la empresa seleccionada");
+        if (request.body.empresa != usuario.empresa.id) {
+            if (await usuariosService.getByEmpresa(request.body.empresa)) throw ApiError.badRequestError("Ya existe un usuario con la empresa seleccionada");
 
-        const empresa = await empresasService.getById(request.body.empresa);
-        if (!empresa) throw ApiError.badRequestError("Empresa no encontrada");
-        request.body.empresa = empresa;
+            const empresa = await empresasService.getById(request.body.empresa);
+            if (!empresa) throw ApiError.badRequestError("Empresa no encontrada");
+            request.body.empresa = empresa;
+        }
     }
 
     return response.status(204).json(await usuariosService.update(usuario.id, request.body));

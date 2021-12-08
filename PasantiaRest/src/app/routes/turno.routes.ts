@@ -8,6 +8,8 @@ router.get('/tipos', handleRequest(TurnoController.getTipos));
 
 router.get('/', handleRequest(TurnoController.get));
 
+router.get('/filtered', handleRequest(TurnoController.getTurnosFiltered));
+
 router.get('/:id', handleRequest(TurnoController.getById));
 
 router.get('/tools/proximos', handleRequest(TurnoController.getProximos));

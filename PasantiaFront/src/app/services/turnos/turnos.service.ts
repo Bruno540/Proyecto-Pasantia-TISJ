@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 import { TipoTurno, Turno } from 'src/app/models/turno.model';
 import { ProyecConfig } from 'src/environments/proyect-config';
 
@@ -18,7 +19,18 @@ export class TurnosService {
     return this.Http.get<Turno[]>(this.Url);
   }
 
-  getLive(){
+  getFiltered(fecha?: Date, hora?: string) {
+    let params = {};
+
+    if (fecha) Object.assign(params, { fecha: moment(fecha).format("YYYY-MM-DD") });
+    if (hora) Object.assign(params, { hora });
+
+    return this.Http.get<Turno[]>(this.Url + "/filtered", {
+      params
+    });
+  }
+
+  getLive() {
     return this.Http.get<Turno[]>(this.Url + "/tools/live");
   }
 
@@ -41,7 +53,7 @@ export class TurnosService {
   _delete(id: number) {
     return this.Http.delete(this.Url + `/${id}`);
   }
-  
+
   getProximos() {
     return this.Http.get<Turno[]>(this.Url + "/tools/proximos");
   }
