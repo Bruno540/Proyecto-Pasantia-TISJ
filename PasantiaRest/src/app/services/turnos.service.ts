@@ -42,29 +42,37 @@ export const _delete = async (id: number): Promise<void> => {
     await getRepository(Turno).softDelete(id);
 }
 
-export const getFiltered = async (fecha?: string, hora?: string): Promise<Turno[]> => {
+export const getFiltered = async (fecha?: string, horaDesde?: string, horaHasta?: string): Promise<Turno[]> => {
     let query = getRepository(Turno).createQueryBuilder("turno").leftJoinAndSelect("turno.registros", "registro").leftJoinAndSelect("turno.tipo", "tipo").leftJoinAndSelect("turno.empresa", "empresa").groupBy("turno.id").addGroupBy("registro.id").addGroupBy("tipo.id").addGroupBy("empresa.id");
 
     query.where("turno.activo = :activo", { activo: true });
 
+    if (!fecha) {
+        fecha = moment().format("YYYY-MM-DD");
+    }
 
-    if (fecha) {
-        const dia = DiaSemana.obtenerDia(moment(fecha).day());
-        console.log(dia);
-        
-        query.andWhere(`turno.${dia} = :dia`, { dia: true })
+    const dia = DiaSemana.obtenerDia(moment(fecha).day());
 
-        if (await DiasEspecialesService.esDiaEspecial(fecha)) {
-            query.andWhere("turno.diasEspeciales = :diasEspeciales", { diasEspeciales: true });
-        } else {
-            query.andWhere("turno.diaNormal = :diaNormal", { diaNormal: true });
+    query.andWhere(`turno.${dia} = :dia`, { dia: true })
+
+    if (await DiasEspecialesService.esDiaEspecial(fecha)) {
+        query.andWhere("turno.diasEspeciales = :diasEspeciales", { diasEspeciales: true });
+    } else {
+        query.andWhere("turno.diaNormal = :diaNormal", { diaNormal: true });
+    }
+
+    if (horaHasta && horaDesde) {
+        query.andWhere("turno.hora BETWEEN :horaDesde AND :horaHasta", { horaDesde, horaHasta });
+    } else {
+        if (horaDesde) {
+            query.andWhere("turno.hora = :horaDesde", { horaDesde });
+        }
+
+        if (horaHasta) {
+            query.andWhere("turno.hora = :horaHasta", { horaHasta });
         }
     }
 
-    if (hora) {
-        query.andWhere("turno.hora = :hora", { hora });
-    }
-
-    return await query.getRawMany();
+    return await query.getMany();
 }
 
