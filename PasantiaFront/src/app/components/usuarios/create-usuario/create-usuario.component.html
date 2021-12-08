@@ -1,0 +1,45 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex.lt-sm="100" fxFlex.gt-sm="40" fxFlex.gt-lg="25" class="card">
+
+        <mat-card-content>
+            <form [formGroup]="usuarioForm">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput formControlName="apellido">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-top: 8px;">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput formControlName="password">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" *ngIf="!admin">
+                        <mat-label>Empresa</mat-label>
+                        <mat-select matSelect formControlName="empresa">
+                          <mat-option *ngFor="let empresa of dataSource" [value]="empresa.id">
+                            {{empresa.razonSocial}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button onclick="history.back(-1)" mat-raised-button type="button" color="primary">Cancelar</button>
+            <button (click)="submit()" [disabled]="usuarioForm.invalid" mat-raised-button type="submit"
+                color="primary">Confirmar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{data.email}}</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+    <p><strong>Nombre: </strong> {{data.nombre}}</p>
+    <p><strong>Apellido: </strong> {{data.apellido}}</p>
+    <p><strong>Rol: </strong> {{data.rol ? data.rol.nombre : "-"}}</p>
+    <p><strong>Empresa: </strong> {{ data.empresa ? data.empresa.razonSocial : "-"}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" class="boton" [routerLink]="'/usuarios/update/'+ data.id" color="accent">Editar</button>
+    <button mat-button [mat-dialog-close]="true" class="boton" color="warn" (click)="_delete(data.id)">Eliminar</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</mat-dialog-actions>

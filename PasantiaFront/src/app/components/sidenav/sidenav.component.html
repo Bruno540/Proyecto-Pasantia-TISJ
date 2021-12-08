@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [ngStyle.xs]="{'width': '90%'}" [ngStyle]="{'width': '20%'}">
+
+        <mat-toolbar>
+            <span class="title" [routerLink]="['/']" (click)="sidenav.toggle()"> Terminal </span>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <ng-container *ngIf="tokenService.getToken()">
+                <mat-list-item routerLink="/coches" (click)="sidenav.toggle()">
+                    Coches
+                </mat-list-item>
+                <ng-container *ngIf="tokenService.getRoleName() == 'Administrador'">
+                    <mat-list-item routerLink="/usuarios" (click)="sidenav.toggle()">
+                        Usuarios
+                    </mat-list-item>
+                    <mat-list-item routerLink="/dias-especiales" (click)="sidenav.toggle()">
+                        Dias Especiales
+                    </mat-list-item>
+                    <mat-list-item routerLink="/empresas" (click)="sidenav.toggle()">
+                        Empresas
+                    </mat-list-item>
+                    <mat-list-item routerLink="/registros" (click)="sidenav.toggle()">
+                        Registros
+                    </mat-list-item>
+                </ng-container>
+                <mat-list-item routerLink="/turnos" (click)="sidenav.toggle()">
+                    Turnos
+                </mat-list-item>
+            </ng-container>
+
+            <mat-list-item routerLink="/registros/live" (click)="sidenav.toggle()">
+                Registros en vivo
+            </mat-list-item>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-navbar [mobile]="isMobile.getMobile()" (showSidenavEvent)="sidenav.toggle()"></app-navbar>
+
+        <div class="container">
+            <ng-content></ng-content>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

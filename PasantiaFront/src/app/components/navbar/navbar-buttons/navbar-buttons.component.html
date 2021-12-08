@@ -1,0 +1,12 @@
+<div *ngIf="!this.service.getToken(); else sesioniniciada">
+    <button mat-button [routerLink]="['/login']">Iniciar Sesion</button>
+</div>
+
+<ng-template #sesioniniciada>
+    <button mat-button routerLink="">
+        {{service.getUserEmail()}}
+    </button>
+    <button mat-button (click)="cerrarSesion()">
+        Salir
+    </button>
+</ng-template>

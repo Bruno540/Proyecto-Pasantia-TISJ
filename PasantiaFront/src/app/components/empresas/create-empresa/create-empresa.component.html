@@ -1,0 +1,37 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex.lt-sm="100" fxFlex.gt-sm="40" fxFlex.gt-lg="25" class="card">
+
+        <mat-card-content>
+            <form [formGroup]="empresaForm">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+                    <h1 color>Empresa</h1>
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Rut</mat-label>
+                        <input matInput formControlName="rut">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="margin-top: 8px;">
+                        <mat-label>Razon Social</mat-label>
+                        <input matInput formControlName="razonSocial">
+                    </mat-form-field>
+                    
+                    <img  mat-card-lg-image class="foto" *ngIf="imagen" [src]='imagen' alt=""> 
+            
+                    <button mat-raised-button type="button" color="primary" (click)="imageInput.click()">
+                        <mat-icon>add</mat-icon>AGREGAR IMAGEN
+                    </button>
+                    <input type="file" name="imagen" hidden="true" (change)="onFileSelect($event)" #imageInput />
+
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button onclick="history.back(-1)" mat-raised-button type="button" color="primary">Cancelar</button>
+            <button (click)="submit()" [disabled]="empresaForm.invalid" mat-raised-button type="submit"
+                color="primary">Confirmar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>
