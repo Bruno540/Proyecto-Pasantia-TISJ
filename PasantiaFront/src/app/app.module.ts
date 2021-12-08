@@ -34,7 +34,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RegistroLiveComponent } from './components/registro-live/registro-live.component';
-import { NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import { NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 //const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 import { IndexComponent } from './components/index/index.component';
 import { DiasEspecialesComponent } from './components/dias-especiales/dias-especiales.component';
@@ -45,6 +45,7 @@ import { DialogReporteComponent } from './components/registros/dialog-reporte/di
 import { MostrarReporteComponent } from './components/registros/mostrar-reporte/mostrar-reporte.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 
 @NgModule({

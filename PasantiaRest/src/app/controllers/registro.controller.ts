@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { EventEmitter } from "stream";
+import { getCustomRepository } from "typeorm";
 import validator from "validator";
 import { ApiError } from "../../config/api-error";
 import { validateFechas } from "../libraries/validation.library";
+import { TurnoRepository } from "../repositories/turno.repository";
 import * as registroService from "../services/registro.service";
 const Stream = new EventEmitter();
 
@@ -10,7 +12,7 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
     return response.json(await registroService.getAll());
 }
 
-export const sseStablish = (request: Request, response: Response) =>{
+export const sseStablish = async (request: Request, response: Response) =>{
     response.writeHead(200,{
         'Content-Type':'text/event-stream',
         'Cache-Control':'no-cache',
@@ -19,6 +21,12 @@ export const sseStablish = (request: Request, response: Response) =>{
     Stream.on('push',(event,data)=>{
         response.write('event: '+String(event) +'\n'+ 'data: ' + JSON.stringify(data) + '\n\n')
     })
+    Stream.on('start',(event,data)=>{
+        setInterval(()=>{
+            response.write('event: '+String(event) +'\n'+ 'data: ' + JSON.stringify(data) + '\n\n');
+        },300000)
+    });
+    Stream.emit('start','message',await getCustomRepository(TurnoRepository).liveTurnos());
 }
 
 export const getAllOrderByToqueAnden = async (request: Request, response: Response): Promise<Response> => {

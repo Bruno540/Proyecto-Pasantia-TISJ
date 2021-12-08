@@ -8,7 +8,7 @@
         "password": "1234",
         "database": "terminal",
         "synchronize": true,
-        "logging": true,
+        "logging": false,
         "entities": [
             "dist/app/models/**/*.js"
         ]

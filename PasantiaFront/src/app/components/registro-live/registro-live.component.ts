@@ -16,7 +16,7 @@ export class RegistroLiveComponent implements OnInit {
   backendUrl = ProyecConfig.rutaImagen;
   sseUrl = ProyecConfig.sseUrl;
   imagen?: any;
-  displayedColumns: string[] = ['fotoEmpresa', 'empresa', 'origen','destino', 'horaTurno', 'estado'];
+  displayedColumns: string[] = ['fotoEmpresa', 'empresa', 'origen','destino','coche', 'horaTurno', 'estado'];
   dataSource: Turno[] = [];
   constructor(private SocketService: SocketServiceService, private zone: NgZone, private registroService: RegistrosService, private turnoService: TurnosService) { }
 
