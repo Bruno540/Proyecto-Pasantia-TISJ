@@ -50,12 +50,12 @@ export const create = async (request: Request, response: Response): Promise<Resp
 
 export const _delete = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del registro");
-    return response.status(204).json(await registroService._delete(request.params.id));
+    return response.status(204).json(await registroService._delete(request.params.id, Stream));
 }
 
 export const update = async (request: Request, response: Response): Promise<Response> => {
     if(!request.params.id || !validator.isInt(request.params.id)) throw new ApiError("Falta el id del registro");
-    return response.status(204).json(await registroService.update(request.params.id,request.body));
+    return response.status(204).json(await registroService.update(request.params.id,request.body, Stream));
 }
 
 export const verReportes = async (request: Request, response: Response): Promise<Response> => {

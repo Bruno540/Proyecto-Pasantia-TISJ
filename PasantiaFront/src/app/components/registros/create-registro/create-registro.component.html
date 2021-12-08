@@ -7,9 +7,14 @@
                     <mat-divider [inset]="true"></mat-divider>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Observaciones</mat-label>
-                        <input matInput formControlName="observaciones">
+                        <mat-label>Turno</mat-label>
+                        <mat-select matSelect formControlName="turnoId">
+                          <mat-option *ngFor="let turno of turnos" [value]="turno.id" (click)="obtenerCochesEmpresa(turno)">
+                            {{turno.hora}} a {{turno.destino}} desde {{turno.salidaDesde}} ({{turno.empresa.razonSocial}})
+                          </mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <mat-slide-toggle  (click)="cambiarTurnos()">Turnos: {{cantTurnos}}</mat-slide-toggle>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Buscar coche</mat-label>
@@ -24,19 +29,16 @@
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    
+
                     <mat-form-field appearance="fill">
-                        <mat-label>Turno</mat-label>
-                        <mat-select matSelect formControlName="turnoId">
-                          <mat-option *ngFor="let turno of turnos" [value]="turno.id" (click)="obtenerCochesEmpresa(turno)">
-                            {{turno.hora}} a {{turno.destino}} desde {{turno.salidaDesde}}
-                          </mat-option>
-                        </mat-select>
+                        <mat-label>Observaciones</mat-label>
+                        <input matInput formControlName="observaciones">
                     </mat-form-field>
+
+               
 
                 </div>
             </form>
-            <mat-slide-toggle  (click)="cambiarTurnos()">Turnos: {{cantTurnos}}</mat-slide-toggle>
         </mat-card-content>
 
         <mat-card-actions align="end">

@@ -31,22 +31,22 @@
                 </mat-card-content>
             </mat-card>
         </a>
+        <a href="/registros/live">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Monitor terminal</mat-card-title>
+                    <mat-card-subtitle>Acceso a la pantalla de monitoreo de turnos</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="./assets/imagenes/pantalla.jpg" alt="Imagen de bus">
+                <mat-card-content>
+                    <p>
+                        Acceso directo a la pantalla ubicada en la terminal. Se visualizan los turnos y su estatus actual.
+                        Informacion para los usuarios.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
     </ng-container>
-    <a href="/registros/live">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Monitor terminal</mat-card-title>
-                <mat-card-subtitle>Acceso a la pantalla de monitoreo de turnos</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="./assets/imagenes/pantalla.jpg" alt="Imagen de bus">
-            <mat-card-content>
-                <p>
-                    Acceso directo a la pantalla ubicada en la terminal. Se visualizan los turnos y su estatus actual.
-                    Informacion para los usuarios.
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </a>
 </div>
 <ng-container *ngIf="tokenService.getToken()">
     <div class="contenedor2">
@@ -97,3 +97,20 @@
         </a>
     </div>
 </ng-container>
+<div class="contenedor">
+    <a href="/registros/live" *ngIf="!tokenService.getToken()">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Horarios</mat-card-title>
+                <mat-card-subtitle>Consulte los horarios de la terminal</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="./assets/imagenes/pantalla.jpg" alt="Imagen de bus">
+            <mat-card-content>
+                <p>
+                    Acceso directo a la pantalla ubicada en la terminal. Se visualizan los turnos y su estatus actual.
+                    Informacion para los usuarios.
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </a>
+</div>

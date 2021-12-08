@@ -48,6 +48,6 @@ export class Turno {
 
     registros: Registro[];
 
-    empresa: Empresa | number;
+    empresa: any;
 
 }

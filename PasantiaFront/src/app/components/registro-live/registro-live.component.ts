@@ -8,6 +8,7 @@ import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokensto
 import { RegistrosService } from 'src/app/services/registros/registros.service';
 import { SocketServiceService } from 'src/app/services/socket/socket-service.service';
 import { TurnosService } from 'src/app/services/turnos/turnos.service';
+import { environment } from 'src/environments/environment';
 import { ProyecConfig } from 'src/environments/proyect-config';
 
 @Component({
@@ -23,6 +24,7 @@ export class RegistroLiveComponent implements OnInit {
   displayedColumns: string[] = ['fotoEmpresa', 'empresa', 'origen', 'destino', 'coche', 'horaTurno', 'estado'];
   dataSource: Turno[] = [];
   searchForm: FormGroup;
+  link: string;
 
   constructor(
     private SocketService: SocketServiceService,
@@ -35,7 +37,7 @@ export class RegistroLiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
-
+    this.link = environment.url;
     this.searchForm = this.formBuilder.group({
       horaDesde: [""],
       horaHasta: [""],

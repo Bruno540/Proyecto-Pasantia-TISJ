@@ -1,13 +1,18 @@
+
 <mat-toolbar class="navbar" color="primary">
     <mat-toolbar-row>
         <span class="title" [routerLink]="['/']"> Terminal </span>
     </mat-toolbar-row>
     <mat-toolbar-row class="shadow">
-        <span>Turnos</span>
-        <span class="spacer"></span>
-        <span>
-            <app-clock></app-clock>
-        </span>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" class="block" fxLayoutAlign="space-between start">
+            <span>Turnos</span>
+            <span class="spacer"></span>
+            <span *ngIf="tokenService.getToken()"><h3 >Por mas informacion visitar: {{link}}</h3></span>
+            <span class="spacer"></span>
+            <span>
+                <app-clock></app-clock>
+            </span>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -71,7 +76,7 @@
 
         <ng-container matColumnDef="coche">
             <th mat-header-cell *matHeaderCellDef> Coche</th>
-            <td mat-cell *matCellDef="let element">COCHE {{element.coche}} </td>
+            <td mat-cell *matCellDef="let element"> <span *ngIf="element.coche">COCHE</span> {{element.coche ?? "---"}} </td>
         </ng-container>
 
         <ng-container matColumnDef="horaTurno">
