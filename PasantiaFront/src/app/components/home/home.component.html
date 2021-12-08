@@ -1,34 +1,37 @@
 <div class="contenedor">
-    <a href="/registros">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Registros</mat-card-title>
-                <mat-card-subtitle>Registros de toque de anden</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="./assets/imagenes/stop.jpg" alt="Imagen de bus">
-            <mat-card-content>
-                <p>
-                Registro de los toques de anden de los turnos. Se registran aqui todos los toques de anden para turnos de salida, llegada o pasada.
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </a>
+    <ng-container *ngIf="tokenService.getToken()">
+        <a href="/registros" *ngIf="tokenService.getRoleName() == 'Administrador'">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Registros</mat-card-title>
+                    <mat-card-subtitle>Registros de toque de anden</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="./assets/imagenes/stop.jpg" alt="Imagen de bus">
+                <mat-card-content>
+                    <p>
+                        Registro de los toques de anden de los turnos. Se registran aqui todos los toques de anden para
+                        turnos de salida, llegada o pasada.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
 
-    <a href="/turnos">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Turnos</mat-card-title>
-                <mat-card-subtitle>Alta, baja y modificación de nuevos turnos</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="./assets/imagenes/buses.jpg" alt="Imagen de bus">
-            <mat-card-content>
-                <p>
-                Desde aqui podrá registrar nuevos turnos en el sistema, detallados por empresa, hora, tipo de turno, dias operativo y más.
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </a>
-
+        <a href="/turnos">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Turnos</mat-card-title>
+                    <mat-card-subtitle>Alta, baja y modificación de nuevos turnos</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="./assets/imagenes/buses.jpg" alt="Imagen de bus">
+                <mat-card-content>
+                    <p>
+                        Desde aqui podrá registrar nuevos turnos en el sistema, detallados por empresa, hora, tipo de
+                        turno, dias operativo y más.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
+    </ng-container>
     <a href="/registros/live">
         <mat-card class="example-card">
             <mat-card-header>
@@ -38,62 +41,59 @@
             <img mat-card-image src="./assets/imagenes/pantalla.jpg" alt="Imagen de bus">
             <mat-card-content>
                 <p>
-                Acceso directo a la pantalla ubicada en la terminal. Se visualizan los turnos y su estatus actual. Informacion para los usuarios.
+                    Acceso directo a la pantalla ubicada en la terminal. Se visualizan los turnos y su estatus actual.
+                    Informacion para los usuarios.
                 </p>
             </mat-card-content>
         </mat-card>
     </a>
 </div>
-<div class="contenedor2">
-    <a href="/coches">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Coches</mat-card-title>
-                <mat-card-subtitle>Alta, baja y modificación de coches </mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="./assets/imagenes/bus.jpg" alt="Imagen de bus">
-            <mat-card-content>
-                <p>
-                Registre nuevos coches en el sistema, los coches estaran asociados a una empresa y serán referenciados en los toques de anden.
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </a>
+<ng-container *ngIf="tokenService.getToken()">
+    <div class="contenedor2">
+        <a href="/coches">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Coches</mat-card-title>
+                    <mat-card-subtitle>Alta, baja y modificación de coches </mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="./assets/imagenes/bus.jpg" alt="Imagen de bus">
+                <mat-card-content>
+                    <p>
+                        Registre nuevos coches en el sistema, los coches estaran asociados a una empresa y serán
+                        referenciados en los toques de anden.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
 
-    <a href="/empresas">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Empresas</mat-card-title>
-                <mat-card-subtitle>Alta, baja y modificación de empresas</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="./assets/imagenes/driver.jpg" alt="Imagen de bus">
-            <mat-card-content>
-                <p>
-                Registro de las empresas que operan en la terminal. 
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </a>
+        <a href="/empresas" *ngIf="tokenService.getRoleName() == 'Administrador'">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Empresas</mat-card-title>
+                    <mat-card-subtitle>Alta, baja y modificación de empresas</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="./assets/imagenes/driver.jpg" alt="Imagen de bus">
+                <mat-card-content>
+                    <p>
+                        Registro de las empresas que operan en la terminal.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
 
-    <a href="/usuarios">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Usuarios</mat-card-title>
-                <mat-card-subtitle>Alta, baja y modificación de usuarios</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="./assets/imagenes/users.png" alt="Imagen de bus">
-            <mat-card-content>
-                <p>
-                Desde aqui podra crear nuevos usuarios del sistema.
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </a>
-</div>
-
-
-
-
-
-
-  
+        <a href="/usuarios" *ngIf="tokenService.getRoleName() == 'Administrador'">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Usuarios</mat-card-title>
+                    <mat-card-subtitle>Alta, baja y modificación de usuarios</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="./assets/imagenes/users.png" alt="Imagen de bus">
+                <mat-card-content>
+                    <p>
+                        Desde aqui podra crear nuevos usuarios del sistema.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </a>
+    </div>
+</ng-container>
