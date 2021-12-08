@@ -91,7 +91,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     NgxMatTimepickerModule,
     MomentDateModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
     //SocketIoModule.forRoot(config)
   ],
   exports:[
