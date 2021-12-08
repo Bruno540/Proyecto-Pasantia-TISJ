@@ -19,11 +19,12 @@ export class TurnosService {
     return this.Http.get<Turno[]>(this.Url);
   }
 
-  getFiltered(fecha?: Date, hora?: string) {
+  getFiltered(fecha?: Date, horaDesde?: string, horaHasta?: string) {
     let params = {};
 
     if (fecha) Object.assign(params, { fecha: moment(fecha).format("YYYY-MM-DD") });
-    if (hora) Object.assign(params, { hora });
+    if (horaDesde) Object.assign(params, { horaDesde });
+    if (horaHasta) Object.assign(params, { horaHasta });
 
     return this.Http.get<Turno[]>(this.Url + "/filtered", {
       params

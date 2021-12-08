@@ -79,6 +79,6 @@ export const getTurnosLive = async (request: Request, response: Response): Promi
 }
 
 export const getTurnosFiltered = async (request: Request, response: Response): Promise<Response> => {
-    const { fecha, hora } = request.query;
-    return response.status(200).json(await TurnosService.getFiltered(fecha as string, hora as string));
+    const { fecha, horaDesde, horaHasta } = request.query;
+    return response.status(200).json(await TurnosService.getFiltered(fecha as string, horaDesde as string, horaHasta as string));
 }

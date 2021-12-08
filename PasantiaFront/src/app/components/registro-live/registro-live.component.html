@@ -13,12 +13,17 @@
 
 <mat-card class="mat-elevation-z0">
 
-    <ng-container>
+    <ng-container *ngIf="!tokenService.getToken()">
         <form [formGroup]="searchForm" (submit)="submit()" >
             <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px" fxLayoutAlign="space-between center">
                 <mat-form-field appearance="fill">
-                    <mat-label>Hora</mat-label>
-                    <input matInput type="time" name="hora" formControlName="hora">
+                    <mat-label>Hora Desde</mat-label>
+                    <input matInput type="time" name="horaDesde" formControlName="horaDesde">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Hora Hasta</mat-label>
+                    <input matInput type="time" name="horaHasta" formControlName="horaHasta">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">

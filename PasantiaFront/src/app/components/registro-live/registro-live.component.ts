@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { Registro } from 'src/app/models/registro.model';
 import { Turno } from 'src/app/models/turno.model';
+import { TokenStorageService } from 'src/app/services/auth/tokenstorage/tokenstorage.service';
 import { RegistrosService } from 'src/app/services/registros/registros.service';
 import { SocketServiceService } from 'src/app/services/socket/socket-service.service';
 import { TurnosService } from 'src/app/services/turnos/turnos.service';
@@ -19,7 +20,7 @@ export class RegistroLiveComponent implements OnInit {
   backendUrl = ProyecConfig.rutaImagen;
   sseUrl = ProyecConfig.sseUrl;
   imagen?: any;
-  displayedColumns: string[] = ['fotoEmpresa', 'empresa', 'origen','destino','coche', 'horaTurno', 'estado'];
+  displayedColumns: string[] = ['fotoEmpresa', 'empresa', 'origen', 'destino', 'coche', 'horaTurno', 'estado'];
   dataSource: Turno[] = [];
   searchForm: FormGroup;
 
@@ -28,14 +29,16 @@ export class RegistroLiveComponent implements OnInit {
     private zone: NgZone,
     private registroService: RegistrosService,
     private turnoService: TurnosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public tokenService: TokenStorageService,
   ) { }
 
   ngOnInit(): void {
     this.init();
 
     this.searchForm = this.formBuilder.group({
-      hora: [""],
+      horaDesde: [""],
+      horaHasta: [""],
       fecha: [""]
     });
   }
@@ -71,11 +74,11 @@ export class RegistroLiveComponent implements OnInit {
   }
 
   submit() {
-    const { fecha, hora } = this.searchForm.value;
-    this.turnoService.getFiltered(fecha, hora).subscribe(
+    const { fecha, horaDesde, horaHasta } = this.searchForm.value;
+    this.turnoService.getFiltered(fecha, horaDesde, horaHasta).subscribe(
       ok => {
         console.log(ok);
-        
+
         this.dataSource = ok;
       }
     );
