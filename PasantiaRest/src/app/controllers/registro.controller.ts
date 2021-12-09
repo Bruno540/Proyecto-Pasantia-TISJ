@@ -21,12 +21,9 @@ export const sseStablish = async (request: Request, response: Response) =>{
     Stream.on('push',(event,data)=>{
         response.write('event: '+String(event) +'\n'+ 'data: ' + JSON.stringify(data) + '\n\n')
     })
-    Stream.on('start',(event,data)=>{
-        setInterval(()=>{
-            response.write('event: '+String(event) +'\n'+ 'data: ' + JSON.stringify(data) + '\n\n');
-        },300000)
-    });
-    Stream.emit('start','message',await getCustomRepository(TurnoRepository).liveTurnos());
+    setInterval(async ()=>{
+        Stream.emit('push','message',await getCustomRepository(TurnoRepository).liveTurnos());
+    },60000)
 }
 
 export const getAllOrderByToqueAnden = async (request: Request, response: Response): Promise<Response> => {
