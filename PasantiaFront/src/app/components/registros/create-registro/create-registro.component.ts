@@ -20,8 +20,8 @@ export class CreateRegistroComponent implements OnInit {
   hora?: any;
   coches: Coche[];
   turnos: Turno[];
-  selectorTurnos = true;
-  cantTurnos: string = 'Todos'
+  selectorTurnos = false;
+  cantTurnos: string = 'Proximos'
   selectorCoches = true;
   empresaId: any;
 

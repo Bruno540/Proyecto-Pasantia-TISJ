@@ -24,6 +24,18 @@ export class RegistroRepository extends Repository<Registro> {
         });
     }
 
+    getDia = async (): Promise<Registro[] | undefined> => {
+        var abajo = moment().startOf('day').toDate();
+        var arriba = moment().endOf('day').toDate()
+        return await getRepository(Registro).find({
+            where: {
+                toqueAnden: Between(abajo,arriba)
+            },
+            relations: ["turno", "coche", "coche.empresa", "turno.empresa"],
+            order:{'toqueAnden':'DESC'}
+        });
+    }
+
     filtrarRegistros = async (fechaDesde: any, fechaHasta: any, tipoid:number): Promise<Registro[] | undefined> => {
         if(!fechaDesde && !fechaHasta){
             fechaDesde =  moment().startOf('day');

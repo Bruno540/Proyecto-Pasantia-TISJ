@@ -14,6 +14,10 @@ export const getAll = async (): Promise<Registro[] | undefined> => {
     });
 }
 
+export const getDia = async (): Promise<Registro[] | undefined> => {
+    return await getCustomRepository(RegistroRepository).getDia();
+}
+
 export const getAllOrderByToqueAnden = async (): Promise<Registro[] | undefined> => {
     return await getCustomRepository(RegistroRepository).find({
         relations: ["turno", "coche", "coche.empresa", "turno.empresa"],

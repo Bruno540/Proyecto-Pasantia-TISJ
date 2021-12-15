@@ -16,6 +16,7 @@ export class MostrarReporteComponent implements OnInit {
   fechaHasta: any;
   registros: any[] = []
   tipoid: any;
+  total: any;
 
   constructor(private service: RegistrosService, private router: ActivatedRoute) { 
     this.router.queryParams.subscribe(data=>{
@@ -31,10 +32,12 @@ export class MostrarReporteComponent implements OnInit {
       
       this.service.allreportes(this.fechaDesde,this.fechaHasta).subscribe(data=>{
         this.registros = data;
+        this.total = this.registros.length;
       })
     }else{
       this.service.reportes(this.fechaDesde,this.fechaHasta, this.tipoid).subscribe(data=>{
         this.registros = data;
+        this.total = this.registros.length;
       })
     }
   }

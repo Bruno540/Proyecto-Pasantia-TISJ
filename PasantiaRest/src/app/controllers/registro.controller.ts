@@ -12,6 +12,10 @@ export const getAll = async (request: Request, response: Response): Promise<Resp
     return response.json(await registroService.getAll());
 }
 
+export const getDia = async (request: Request, response: Response): Promise<Response> => {
+    return response.json(await registroService.getDia());
+}
+
 export const sseStablish = async (request: Request, response: Response) =>{
     response.writeHead(200,{
         'Content-Type':'text/event-stream',

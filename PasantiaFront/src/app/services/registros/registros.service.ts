@@ -16,6 +16,10 @@ export class RegistrosService {
     return this.Http.get<Registro[]>(this.Url);
   }
 
+  getDia() {
+    return this.Http.get<Registro[]>(this.Url + '/deldia');
+  }
+
   findUltimos() {
     return this.Http.get<Registro[]>(this.Url+'/tools/ultimos');
   }

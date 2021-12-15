@@ -6,6 +6,8 @@ const router = Router();
 
 router.get("/", handleRequest(RegistroController.getAll));
 
+router.get("/deldia", handleRequest(RegistroController.getDia));
+
 router.get("/tools/ultimos", handleRequest(RegistroController.findUltimos));
 
 router.get("/:id", handleRequest(RegistroController.getById));

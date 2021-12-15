@@ -27,7 +27,7 @@ export class RegistrosComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle("Registros");
-    this.RegistroService.getAll().subscribe(ok=>{
+    this.RegistroService.getDia().subscribe(ok=>{
       this.dataSource = new MatTableDataSource<Registro>(ok);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
