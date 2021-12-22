@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  postgres-db:
+    image: "postgres:12"
+    container_name: postgres-db
+    volumes:
+      - terminal-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: terminal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+
+  backend:
+    build: ./PasantiaRest
+    image: agu458/terminal-back
+    container_name: backend
+    environment:
+      - HOST=host.docker.internal
+    ports:
+      - '3000:3000'
+    links:
+      - postgres-db
+
+  frontend:
+    build: ./PasantiaFront
+    image: agu458/terminal-front
+    container_name: frontend
+    ports:
+      - '80:80'
+    links:
+      - backend
+
+volumes:
+  terminal-data:

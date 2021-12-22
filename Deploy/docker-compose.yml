@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  postgres-db:
+      image: "postgres:12"
+      container_name: postgres-db
+      volumes:
+        - terminal-data:/var/lib/postgresql/data
+      ports:
+        - 5432:5432
+      environment:
+        POSTGRES_DB: terminal
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: root
+  
+  server:
+    image: agu458/terminal-back
+    container_name: server
+    environment:
+      - HOST=DNS
+    networks:
+      - traefik-public
+    volumes:
+      - terminal-server
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.backend.rule=Host(`DNS`)"
+        - "traefik.http.routers.backend.entrypoints=http"
+        - "traefik.http.routers.backend-secured.rule=Host(`DNS`)"
+        - "traefik.http.routers.backend-secured.entrypoints=https"
+        - "traefik.http.routers.backend-secured.tls.certresolver=le"
+        - "traefik.http.services.backend.loadbalancer.server.port=3000"
+        - "traefik.http.routers.backend.middlewares=backend-redirect"
+        - "traefik.http.middlewares.backend-redirect.redirectscheme.scheme=https"
+        - "traefik.constraint-label=traefik-public"
+      replicas: 1
+      placement:
+        constraints:
+          - node.platform.os == linux
+      restart_policy:
+        condition: on-failure
+
+  client:
+    image: agu458/terminal-front
+    container_name: client
+    networks:
+      - traefik-public
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.frontend.rule=Host(`DNS`)"
+        - "traefik.http.routers.frontend.entrypoints=http"
+        - "traefik.http.routers.frontend-secured.rule=Host(`DNS`)"
+        - "traefik.http.routers.frontend-secured.entrypoints=https"
+        - "traefik.http.routers.frontend-secured.tls.certresolver=le"
+        - "traefik.http.services.frontend.loadbalancer.server.port=80"
+        - "traefik.http.routers.frontend.middlewares=frontend-redirect"
+        - "traefik.http.middlewares.frontend-redirect.redirectscheme.scheme=https"
+        - "traefik.constraint-label=traefik-public"
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  terminal-data:
+  terminal-server:
+
+networks:
+  traefik-public:
+    external: true
