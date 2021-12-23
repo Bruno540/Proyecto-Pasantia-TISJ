@@ -5,7 +5,7 @@ services:
       image: "postgres:12"
       container_name: postgres-db
       volumes:
-        - terminal-data:/var/lib/postgresql/data
+        - db-data:/var/lib/postgresql/data
       ports:
         - 5432:5432
       environment:
@@ -16,12 +16,12 @@ services:
   server:
     image: agu458/terminal-back
     container_name: server
+    volumes:
+      - server-data:/app/uploads
     environment:
       - HOST=DNS
     networks:
       - traefik-public
-    volumes:
-      - terminal-server
     deploy:
       labels:
         - "traefik.enable=true"
@@ -62,8 +62,8 @@ services:
         condition: on-failure
 
 volumes:
-  terminal-data:
-  terminal-server:
+  db-data:
+  server-data:
 
 networks:
   traefik-public:

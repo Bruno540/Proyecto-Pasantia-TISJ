@@ -11,3 +11,5 @@
 - sudo docker-compose up -d
 - sudo docker-compose push
 - sudo docker-compose down
+
+- sudo docker exec -it <NAME> /bin/bash
