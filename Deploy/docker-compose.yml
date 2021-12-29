@@ -19,15 +19,15 @@ services:
     volumes:
       - server-data:/app/uploads
     environment:
-      - HOST=DNS
+      - HOST=DNS-BASEDATOS
     networks:
       - traefik-public
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.backend.rule=Host(`DNS`)"
+        - "traefik.http.routers.backend.rule=Host(`DNS-BACK`)"
         - "traefik.http.routers.backend.entrypoints=http"
-        - "traefik.http.routers.backend-secured.rule=Host(`DNS`)"
+        - "traefik.http.routers.backend-secured.rule=Host(`DNS-BACK`)"
         - "traefik.http.routers.backend-secured.entrypoints=https"
         - "traefik.http.routers.backend-secured.tls.certresolver=le"
         - "traefik.http.services.backend.loadbalancer.server.port=3000"
@@ -49,9 +49,9 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(`DNS`)"
+        - "traefik.http.routers.frontend.rule=Host(`DNS-FRONT`)"
         - "traefik.http.routers.frontend.entrypoints=http"
-        - "traefik.http.routers.frontend-secured.rule=Host(`DNS`)"
+        - "traefik.http.routers.frontend-secured.rule=Host(`DNS-FRONT`)"
         - "traefik.http.routers.frontend-secured.entrypoints=https"
         - "traefik.http.routers.frontend-secured.tls.certresolver=le"
         - "traefik.http.services.frontend.loadbalancer.server.port=80"
